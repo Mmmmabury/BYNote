@@ -9,7 +9,11 @@
 /* Begin PBXBuildFile section */
 		22601E221CF4764E00E2150A /* 123.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 22601E211CF4764E00E2150A /* 123.JPG */; };
 		22601E241CF476B000E2150A /* 12.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 22601E231CF476B000E2150A /* 12.JPG */; };
-		22655B171D027A6F008DA0AC /* BYNCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 22655B161D027A6F008DA0AC /* BYNCollectionCell.m */; };
+		227DF2941D032206004DDC15 /* MainNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 227DF2931D032206004DDC15 /* MainNavigation.m */; };
+		228165BB1D050A6D00A29D54 /* ProfileSliderMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 228165BA1D050A6D00A29D54 /* ProfileSliderMenu.m */; };
+		228166031D05179800A29D54 /* BYNCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 228165FE1D05179800A29D54 /* BYNCollectionCell.m */; };
+		228166041D05179800A29D54 /* BYNCollectionFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 228166001D05179800A29D54 /* BYNCollectionFlowLayout.m */; };
+		228166051D05179800A29D54 /* BYNCollectionFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 228166021D05179800A29D54 /* BYNCollectionFlowView.m */; };
 		22CFB4DA1CF4374300C38ED7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4D91CF4374300C38ED7 /* main.m */; };
 		22CFB4DD1CF4374300C38ED7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4DC1CF4374300C38ED7 /* AppDelegate.m */; };
 		22CFB4E01CF4374300C38ED7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4DF1CF4374300C38ED7 /* ViewController.m */; };
@@ -18,8 +22,6 @@
 		22CFB4E81CF4374300C38ED7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22CFB4E61CF4374300C38ED7 /* LaunchScreen.storyboard */; };
 		22CFB4F31CF4374300C38ED7 /* BYNoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4F21CF4374300C38ED7 /* BYNoteTests.m */; };
 		22CFB4FE1CF4374300C38ED7 /* BYNoteUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4FD1CF4374300C38ED7 /* BYNoteUITests.m */; };
-		22CFB5201CF4469200C38ED7 /* BYNCollectionFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB51F1CF4469200C38ED7 /* BYNCollectionFlowLayout.m */; };
-		22CFB5231CF446E800C38ED7 /* BYNCollectionFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB5211CF446E800C38ED7 /* BYNCollectionFlowView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,8 +44,17 @@
 /* Begin PBXFileReference section */
 		22601E211CF4764E00E2150A /* 123.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 123.JPG; sourceTree = "<group>"; };
 		22601E231CF476B000E2150A /* 12.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 12.JPG; sourceTree = "<group>"; };
-		22655B151D027A6F008DA0AC /* BYNCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYNCollectionCell.h; sourceTree = "<group>"; };
-		22655B161D027A6F008DA0AC /* BYNCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYNCollectionCell.m; sourceTree = "<group>"; };
+		227DF2921D032206004DDC15 /* MainNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainNavigation.h; path = BYNote/MainNavigation.h; sourceTree = SOURCE_ROOT; };
+		227DF2931D032206004DDC15 /* MainNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainNavigation.m; path = BYNote/MainNavigation.m; sourceTree = SOURCE_ROOT; };
+		228165B91D050A6D00A29D54 /* ProfileSliderMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileSliderMenu.h; sourceTree = "<group>"; };
+		228165BA1D050A6D00A29D54 /* ProfileSliderMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileSliderMenu.m; sourceTree = "<group>"; };
+		228165FC1D05179800A29D54 /* BYNCELLSIZE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYNCELLSIZE.h; sourceTree = "<group>"; };
+		228165FD1D05179800A29D54 /* BYNCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYNCollectionCell.h; sourceTree = "<group>"; };
+		228165FE1D05179800A29D54 /* BYNCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYNCollectionCell.m; sourceTree = "<group>"; };
+		228165FF1D05179800A29D54 /* BYNCollectionFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYNCollectionFlowLayout.h; sourceTree = "<group>"; };
+		228166001D05179800A29D54 /* BYNCollectionFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYNCollectionFlowLayout.m; sourceTree = "<group>"; };
+		228166011D05179800A29D54 /* BYNCollectionFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYNCollectionFlowView.h; sourceTree = "<group>"; };
+		228166021D05179800A29D54 /* BYNCollectionFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYNCollectionFlowView.m; sourceTree = "<group>"; };
 		22CFB4D51CF4374300C38ED7 /* BYNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BYNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22CFB4D91CF4374300C38ED7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		22CFB4DB1CF4374300C38ED7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -60,10 +71,6 @@
 		22CFB4F91CF4374300C38ED7 /* BYNoteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BYNoteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22CFB4FD1CF4374300C38ED7 /* BYNoteUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BYNoteUITests.m; sourceTree = "<group>"; };
 		22CFB4FF1CF4374300C38ED7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22CFB51E1CF4469200C38ED7 /* BYNCollectionFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYNCollectionFlowLayout.h; sourceTree = "<group>"; };
-		22CFB51F1CF4469200C38ED7 /* BYNCollectionFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYNCollectionFlowLayout.m; sourceTree = "<group>"; };
-		22CFB5211CF446E800C38ED7 /* BYNCollectionFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYNCollectionFlowView.m; sourceTree = "<group>"; };
-		22CFB5221CF446E800C38ED7 /* BYNCollectionFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYNCollectionFlowView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +98,67 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		227DF2911D0321E0004DDC15 /* public */ = {
+			isa = PBXGroup;
+			children = (
+				227DF2921D032206004DDC15 /* MainNavigation.h */,
+				227DF2931D032206004DDC15 /* MainNavigation.m */,
+			);
+			name = public;
+			path = BYFlowLayout;
+			sourceTree = "<group>";
+		};
+		228165B81D05098700A29D54 /* ProfileSliderMenu */ = {
+			isa = PBXGroup;
+			children = (
+				228165B91D050A6D00A29D54 /* ProfileSliderMenu.h */,
+				228165BA1D050A6D00A29D54 /* ProfileSliderMenu.m */,
+			);
+			name = ProfileSliderMenu;
+			sourceTree = "<group>";
+		};
+		228165FB1D05179800A29D54 /* BYFlowCollection */ = {
+			isa = PBXGroup;
+			children = (
+				228165FC1D05179800A29D54 /* BYNCELLSIZE.h */,
+				228165FD1D05179800A29D54 /* BYNCollectionCell.h */,
+				228165FE1D05179800A29D54 /* BYNCollectionCell.m */,
+				228165FF1D05179800A29D54 /* BYNCollectionFlowLayout.h */,
+				228166001D05179800A29D54 /* BYNCollectionFlowLayout.m */,
+				228166011D05179800A29D54 /* BYNCollectionFlowView.h */,
+				228166021D05179800A29D54 /* BYNCollectionFlowView.m */,
+			);
+			path = BYFlowCollection;
+			sourceTree = "<group>";
+		};
+		228166071D0517D000A29D54 /* MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				228166091D0517FF00A29D54 /* View */,
+				228166081D0517EA00A29D54 /* Controller */,
+			);
+			name = MainViewController;
+			sourceTree = "<group>";
+		};
+		228166081D0517EA00A29D54 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				22CFB4DE1CF4374300C38ED7 /* ViewController.h */,
+				22CFB4DF1CF4374300C38ED7 /* ViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		228166091D0517FF00A29D54 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				22CFB4E11CF4374300C38ED7 /* Main.storyboard */,
+				228165FB1D05179800A29D54 /* BYFlowCollection */,
+				228165B81D05098700A29D54 /* ProfileSliderMenu */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		22CFB4CC1CF4374300C38ED7 = {
 			isa = PBXGroup;
 			children = (
@@ -114,14 +182,12 @@
 		22CFB4D71CF4374300C38ED7 /* BYNote */ = {
 			isa = PBXGroup;
 			children = (
-				22CFB51D1CF4469200C38ED7 /* BYFlowLayout */,
+				228166071D0517D000A29D54 /* MainViewController */,
+				227DF2911D0321E0004DDC15 /* public */,
 				22CFB4DB1CF4374300C38ED7 /* AppDelegate.h */,
 				22601E231CF476B000E2150A /* 12.JPG */,
 				22601E211CF4764E00E2150A /* 123.JPG */,
 				22CFB4DC1CF4374300C38ED7 /* AppDelegate.m */,
-				22CFB4DE1CF4374300C38ED7 /* ViewController.h */,
-				22CFB4DF1CF4374300C38ED7 /* ViewController.m */,
-				22CFB4E11CF4374300C38ED7 /* Main.storyboard */,
 				22CFB4E41CF4374300C38ED7 /* Assets.xcassets */,
 				22CFB4E61CF4374300C38ED7 /* LaunchScreen.storyboard */,
 				22CFB4E91CF4374300C38ED7 /* Info.plist */,
@@ -154,19 +220,6 @@
 				22CFB4FF1CF4374300C38ED7 /* Info.plist */,
 			);
 			path = BYNoteUITests;
-			sourceTree = "<group>";
-		};
-		22CFB51D1CF4469200C38ED7 /* BYFlowLayout */ = {
-			isa = PBXGroup;
-			children = (
-				22CFB5221CF446E800C38ED7 /* BYNCollectionFlowView.h */,
-				22CFB5211CF446E800C38ED7 /* BYNCollectionFlowView.m */,
-				22CFB51E1CF4469200C38ED7 /* BYNCollectionFlowLayout.h */,
-				22CFB51F1CF4469200C38ED7 /* BYNCollectionFlowLayout.m */,
-				22655B151D027A6F008DA0AC /* BYNCollectionCell.h */,
-				22655B161D027A6F008DA0AC /* BYNCollectionCell.m */,
-			);
-			path = BYFlowLayout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,12 +357,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22CFB5201CF4469200C38ED7 /* BYNCollectionFlowLayout.m in Sources */,
-				22655B171D027A6F008DA0AC /* BYNCollectionCell.m in Sources */,
-				22CFB5231CF446E800C38ED7 /* BYNCollectionFlowView.m in Sources */,
+				227DF2941D032206004DDC15 /* MainNavigation.m in Sources */,
+				228166041D05179800A29D54 /* BYNCollectionFlowLayout.m in Sources */,
+				228166051D05179800A29D54 /* BYNCollectionFlowView.m in Sources */,
+				228166031D05179800A29D54 /* BYNCollectionCell.m in Sources */,
 				22CFB4E01CF4374300C38ED7 /* ViewController.m in Sources */,
 				22CFB4DD1CF4374300C38ED7 /* AppDelegate.m in Sources */,
 				22CFB4DA1CF4374300C38ED7 /* main.m in Sources */,
+				228165BB1D050A6D00A29D54 /* ProfileSliderMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +507,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = BYNote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cby.BYNote;
@@ -463,6 +519,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = BYNote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cby.BYNote;

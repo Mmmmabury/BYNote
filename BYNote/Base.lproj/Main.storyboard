@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Main Navigation-->
         <scene sceneID="zWo-hg-k5I">
             <objects>
-                <navigationController id="Ksb-qI-4lE" sceneMemberID="viewController">
+                <navigationController id="Ksb-qI-4lE" customClass="MainNavigation" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dXU-I2-DoZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -11,4 +11,6 @@
 @interface BYNCollectionCell : UICollectionViewCell
 
 @property (nonatomic, copy) NSString *text;
+@property (nonatomic, copy) UIImage *image;
+@property (nonatomic, assign) CGRect itemFrame;
 @end

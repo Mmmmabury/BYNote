@@ -34,23 +34,16 @@
     _itemsCount = [[self collectionView] numberOfItemsInSection:0];
 }
 
-+ (Class)layoutAttributesClass{
-    
-    Class cla = [super layoutAttributesClass];
-    NSLog(@"layout");
-    
-    return cla;
-}
-
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     UICollectionViewLayoutAttributes *attribute = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
     NSInteger index = indexPath.item;
     
-    attribute.frame = [_frames[index % 2][index / 2] CGRectValue];
+    CGRect frame = [_frames[index % 2][index / 2] CGRectValue];
+    
+    attribute.frame = frame;
     return attribute;
 }
-
 
 - (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect{
     
