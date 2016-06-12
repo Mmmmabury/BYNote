@@ -43,13 +43,14 @@
         lastFrame = CGRectZero;
         for (int i = row; i < self.texts.count; i += numberOfRow) {
             
-            NSAttributedString *attriString = [[NSAttributedString alloc] initWithString:self.texts[i] attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15.0f]}];
+            NSAttributedString *attriString = [[NSAttributedString alloc] initWithString:self.texts[i] attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:20.0f]}];
+            // 根据字符串的特性计算每行高度
             CGRect rect = [attriString boundingRectWithSize:CGSizeMake(cellWidth - 8, SCREEN_HEIGHT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin context:nil];
             
             CGFloat height = ceil(rect.size.height);
             CGFloat cellY = lastFrame.origin.y + lastFrame.size.height + itemInset;
             CGFloat cellX = itemInset * (row + 1) + cellWidth * row;
-            CGRect frame = CGRectMake(cellX, cellY, cellWidth, height + itemInset + timeLabelHeight);
+            CGRect frame = CGRectMake(cellX, cellY, cellWidth, height + itemInset + timeLabelHeight + 20);
             
             lastFrame = frame;
             
@@ -100,12 +101,13 @@
                    @"hehesdajfasihsnjcasdf",
                    @"ajeinfdadfdaksjjekgfas",
                    @"dsaiesjfakl;sdtfgajdlfk"];
-    self.colors = @[[UIColor colorWithRed:0.0 green:0.5373 blue:0.9137 alpha:1.0],
-                    [UIColor colorWithRed:0.1686 green:0.3098 blue:0.6078 alpha:1.0],
-                    [UIColor colorWithRed:0.8353 green:0.2824 blue:0.1647 alpha:1.0],
-                    [UIColor colorWithRed:0.0863 green:0.6314 blue:0.1059 alpha:1.0],
-                    [UIColor colorWithRed:0.2588 green:0.698 blue:0.9373 alpha:1.0],
-                    [UIColor colorWithRed:0.3294 green:0.1686 blue:0.698 alpha:1.0]];
+//    self.colors = @[[UIColor colorWithRed:0.0 green:0.5373 blue:0.9137 alpha:1.0],
+//                    [UIColor colorWithRed:0.1686 green:0.3098 blue:0.6078 alpha:1.0],
+//                    [UIColor colorWithRed:0.8353 green:0.2824 blue:0.1647 alpha:1.0],
+//                    [UIColor colorWithRed:0.0863 green:0.6314 blue:0.1059 alpha:1.0],
+//                    [UIColor colorWithRed:0.2588 green:0.698 blue:0.9373 alpha:1.0],
+//                    [UIColor colorWithRed:0.3294 green:0.1686 blue:0.698 alpha:1.0]];
+    self.colors = @[[UIColor colorWithRed:0.8672 green:0.8672 blue:0.8672 alpha:1.0]];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -114,7 +116,7 @@
     NSValue *value = self.frames[indexPath.item % 2][indexPath.item / 2];
     cell.text = self.texts[indexPath.item];
     cell.itemFrame = [value CGRectValue];
-    cell.backgroundColor = self.colors[indexPath.item % 6];
+    cell.backgroundColor = self.colors[indexPath.item % self.colors.count];
 //    cell.backgroundColor = [UIColor colorWithRed:0.2039 green:0.5098 blue:0.7922 alpha:1.0];
 //    NSLog(@"%@", [self.collectionViewLayout layoutAttributesForItemAtIndexPath:indexPath]);
 //    [cell applyLayoutAttributes:]

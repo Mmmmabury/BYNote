@@ -42,11 +42,12 @@
 - (void) initFrames{
     
     _textFrame = self.bounds;
-    _textFrame.origin.x += 5;
-    _textFrame.size.width -= 10;
-    _textFrame.size.height -= timeLabelHeight;
+    _textFrame.origin.x += 10;
+    _textFrame.origin.y += 0;
+    _textFrame.size.width -= 20;
+    _textFrame.size.height -= timeLabelHeight + 10;
     
-    _timeFrame = CGRectMake(0, self.bounds.size.height - timeLabelHeight, self.bounds.size.width, timeLabelHeight);
+    _timeFrame = CGRectMake(0, self.bounds.size.height - timeLabelHeight - 10, self.bounds.size.width - 10, timeLabelHeight);
 }
 
 - (void) createSubViews{
@@ -56,18 +57,19 @@
     }else{
         self.label = [[UILabel alloc] initWithFrame:_textFrame];
         self.label.numberOfLines = 0;
-        self.label.textColor = [UIColor whiteColor];
+        self.label.textColor = [UIColor blackColor];
+        self.label.font = [UIFont fontWithName:@"monaco" size:20.0f];
         [self.contentView addSubview:self.label];
     }
     
     _timeLabel = [[UILabel alloc] initWithFrame:_timeFrame];
     _timeLabel.text = @"06-01 10:10";
-    _timeLabel.font = [UIFont systemFontOfSize:8.0f];
+    _timeLabel.font = [UIFont systemFontOfSize:10.0f];
     _timeLabel.textAlignment = NSTextAlignmentRight;
     _timeLabel.alpha = 0.8;
     //        timeLabel.backgroundColor = [UIColor colorWithRed:0.1961 green:0.3176 blue:0.4353 alpha:1.0];
     _timeLabel.backgroundColor = [UIColor clearColor];
-    _timeLabel.textColor = [UIColor colorWithRed:0.9904 green:0.9808 blue:1.0 alpha:0.8];
+    _timeLabel.textColor = [UIColor colorWithRed:0.2507 green:0.247 blue:0.2544 alpha:0.8];
     [self.contentView addSubview:_timeLabel];
     
     UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
@@ -106,7 +108,6 @@
         _text = text;
     }
     self.label.text = text;
-    self.label.font = [UIFont systemFontOfSize:15.0f];
 }
 
 /**
