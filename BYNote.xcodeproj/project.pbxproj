@@ -14,6 +14,7 @@
 		228166031D05179800A29D54 /* BYNCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 228165FE1D05179800A29D54 /* BYNCollectionCell.m */; };
 		228166041D05179800A29D54 /* BYNCollectionFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 228166001D05179800A29D54 /* BYNCollectionFlowLayout.m */; };
 		228166051D05179800A29D54 /* BYNCollectionFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 228166021D05179800A29D54 /* BYNCollectionFlowView.m */; };
+		2281660C1D0522F700A29D54 /* ProfileSliderMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281660B1D0522F700A29D54 /* ProfileSliderMenuButton.m */; };
 		22CFB4DA1CF4374300C38ED7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4D91CF4374300C38ED7 /* main.m */; };
 		22CFB4DD1CF4374300C38ED7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4DC1CF4374300C38ED7 /* AppDelegate.m */; };
 		22CFB4E01CF4374300C38ED7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4DF1CF4374300C38ED7 /* ViewController.m */; };
@@ -22,6 +23,7 @@
 		22CFB4E81CF4374300C38ED7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22CFB4E61CF4374300C38ED7 /* LaunchScreen.storyboard */; };
 		22CFB4F31CF4374300C38ED7 /* BYNoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4F21CF4374300C38ED7 /* BYNoteTests.m */; };
 		22CFB4FE1CF4374300C38ED7 /* BYNoteUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4FD1CF4374300C38ED7 /* BYNoteUITests.m */; };
+		D935FAF49087FCE30EEE4402 /* libPods-BYNote.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B56F9D3FA69CAA2BE87C8F3A /* libPods-BYNote.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		228166001D05179800A29D54 /* BYNCollectionFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYNCollectionFlowLayout.m; sourceTree = "<group>"; };
 		228166011D05179800A29D54 /* BYNCollectionFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYNCollectionFlowView.h; sourceTree = "<group>"; };
 		228166021D05179800A29D54 /* BYNCollectionFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYNCollectionFlowView.m; sourceTree = "<group>"; };
+		2281660A1D0522F700A29D54 /* ProfileSliderMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileSliderMenuButton.h; sourceTree = "<group>"; };
+		2281660B1D0522F700A29D54 /* ProfileSliderMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileSliderMenuButton.m; sourceTree = "<group>"; };
 		22CFB4D51CF4374300C38ED7 /* BYNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BYNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22CFB4D91CF4374300C38ED7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		22CFB4DB1CF4374300C38ED7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -71,6 +75,9 @@
 		22CFB4F91CF4374300C38ED7 /* BYNoteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BYNoteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22CFB4FD1CF4374300C38ED7 /* BYNoteUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BYNoteUITests.m; sourceTree = "<group>"; };
 		22CFB4FF1CF4374300C38ED7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8028F1DAB2A8BBD037EBD314 /* Pods-BYNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BYNote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BYNote/Pods-BYNote.debug.xcconfig"; sourceTree = "<group>"; };
+		95F3A9C2800E208A0FFDDE7B /* Pods-BYNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BYNote.release.xcconfig"; path = "Pods/Target Support Files/Pods-BYNote/Pods-BYNote.release.xcconfig"; sourceTree = "<group>"; };
+		B56F9D3FA69CAA2BE87C8F3A /* libPods-BYNote.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BYNote.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D935FAF49087FCE30EEE4402 /* libPods-BYNote.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +121,8 @@
 			children = (
 				228165B91D050A6D00A29D54 /* ProfileSliderMenu.h */,
 				228165BA1D050A6D00A29D54 /* ProfileSliderMenu.m */,
+				2281660A1D0522F700A29D54 /* ProfileSliderMenuButton.h */,
+				2281660B1D0522F700A29D54 /* ProfileSliderMenuButton.m */,
 			);
 			name = ProfileSliderMenu;
 			sourceTree = "<group>";
@@ -166,6 +176,8 @@
 				22CFB4F11CF4374300C38ED7 /* BYNoteTests */,
 				22CFB4FC1CF4374300C38ED7 /* BYNoteUITests */,
 				22CFB4D61CF4374300C38ED7 /* Products */,
+				39AAE53289E0C9F989DBBF4D /* Pods */,
+				34C77EE454323C983894FD6E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -222,6 +234,23 @@
 			path = BYNoteUITests;
 			sourceTree = "<group>";
 		};
+		34C77EE454323C983894FD6E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B56F9D3FA69CAA2BE87C8F3A /* libPods-BYNote.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		39AAE53289E0C9F989DBBF4D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8028F1DAB2A8BBD037EBD314 /* Pods-BYNote.debug.xcconfig */,
+				95F3A9C2800E208A0FFDDE7B /* Pods-BYNote.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -229,9 +258,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22CFB5021CF4374300C38ED7 /* Build configuration list for PBXNativeTarget "BYNote" */;
 			buildPhases = (
+				FAE6C82BBBAE0E22A859E4A1 /* [CP] Check Pods Manifest.lock */,
 				22CFB4D11CF4374300C38ED7 /* Sources */,
 				22CFB4D21CF4374300C38ED7 /* Frameworks */,
 				22CFB4D31CF4374300C38ED7 /* Resources */,
+				9E5AE399621953203816385F /* [CP] Embed Pods Frameworks */,
+				69F4B84E10191FCD87D83282 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -352,6 +384,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		69F4B84E10191FCD87D83282 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BYNote/Pods-BYNote-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9E5AE399621953203816385F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BYNote/Pods-BYNote-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FAE6C82BBBAE0E22A859E4A1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		22CFB4D11CF4374300C38ED7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -359,6 +439,7 @@
 			files = (
 				227DF2941D032206004DDC15 /* MainNavigation.m in Sources */,
 				228166041D05179800A29D54 /* BYNCollectionFlowLayout.m in Sources */,
+				2281660C1D0522F700A29D54 /* ProfileSliderMenuButton.m in Sources */,
 				228166051D05179800A29D54 /* BYNCollectionFlowView.m in Sources */,
 				228166031D05179800A29D54 /* BYNCollectionCell.m in Sources */,
 				22CFB4E01CF4374300C38ED7 /* ViewController.m in Sources */,
@@ -505,6 +586,7 @@
 		};
 		22CFB5031CF4374300C38ED7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8028F1DAB2A8BBD037EBD314 /* Pods-BYNote.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -517,6 +599,7 @@
 		};
 		22CFB5041CF4374300C38ED7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 95F3A9C2800E208A0FFDDE7B /* Pods-BYNote.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

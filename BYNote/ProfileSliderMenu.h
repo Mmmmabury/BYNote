@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ProfileSliderMenu : UIView
-- (void) triggle;
 
+- (void) triggle;
 @end
