@@ -21,11 +21,32 @@
         
         [self setTitle:title forState:UIControlStateNormal];
         [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self setBackgroundColor: [UIColor lightGrayColor]];
+        self.status = SliderButtonNormal;
     }
     return self;
 }
 
+- (void)setStatus:(NSInteger)status{
+    
+    _status = status;
+    switch (status) {
+        case SliderButtonNotActive:
+            
+            [self setBackgroundColor:[UIColor colorWithRed:0.8706 green:0.2118 blue:0.1843 alpha:1.0]];
+            break;
+        case SliderButtonActive:
+            
+            [self setBackgroundColor:[UIColor colorWithRed:0.1451 green:0.6353 blue:0.3059 alpha:1.0]];
+            break;
+        case SliderButtonNormal:
+            
+            [self setBackgroundColor:[UIColor lightGrayColor]];
+            break;
+        default:
+            break;
+    }
+        
+}
 /*
 - (void)drawRect:(CGRect)rect{
     

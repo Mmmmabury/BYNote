@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		22174C1E1D0D63EE00DBA117 /* Edit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22174C1D1D0D63EE00DBA117 /* Edit.storyboard */; };
 		22174C211D0D93A600DBA117 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22174C231D0D93A600DBA117 /* Localizable.strings */; };
+		22174CA31D0E8FFA00DBA117 /* Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22174CA11D0E8FFA00DBA117 /* Data.xcdatamodeld */; };
+		22174CA81D0EC4B500DBA117 /* BottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22174CA71D0EC4B500DBA117 /* BottomView.m */; };
+		22174CAB1D0EC8CF00DBA117 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22174CAA1D0EC8CF00DBA117 /* CoreDataManager.m */; };
+		22174CB01D0EC95000DBA117 /* Note+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 22174CAD1D0EC95000DBA117 /* Note+CoreDataProperties.m */; };
+		22174CB11D0EC95000DBA117 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 22174CAF1D0EC95000DBA117 /* Note.m */; };
 		22601E221CF4764E00E2150A /* 123.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 22601E211CF4764E00E2150A /* 123.JPG */; };
 		22601E241CF476B000E2150A /* 12.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 22601E231CF476B000E2150A /* 12.JPG */; };
 		227DF2941D032206004DDC15 /* MainNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 227DF2931D032206004DDC15 /* MainNavigation.m */; };
@@ -50,6 +55,15 @@
 		22174C1D1D0D63EE00DBA117 /* Edit.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Edit.storyboard; sourceTree = "<group>"; };
 		22174C221D0D93A600DBA117 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		22174C241D0D93B200DBA117 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		22174CA21D0E8FFA00DBA117 /* Data.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Data.xcdatamodel; sourceTree = "<group>"; };
+		22174CA61D0EC4B500DBA117 /* BottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottomView.h; sourceTree = "<group>"; };
+		22174CA71D0EC4B500DBA117 /* BottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomView.m; sourceTree = "<group>"; };
+		22174CA91D0EC8CF00DBA117 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
+		22174CAA1D0EC8CF00DBA117 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
+		22174CAC1D0EC95000DBA117 /* Note+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Note+CoreDataProperties.h"; sourceTree = "<group>"; };
+		22174CAD1D0EC95000DBA117 /* Note+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Note+CoreDataProperties.m"; sourceTree = "<group>"; };
+		22174CAE1D0EC95000DBA117 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
+		22174CAF1D0EC95000DBA117 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		22601E211CF4764E00E2150A /* 123.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 123.JPG; sourceTree = "<group>"; };
 		22601E231CF476B000E2150A /* 12.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 12.JPG; sourceTree = "<group>"; };
 		227DF2921D032206004DDC15 /* MainNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainNavigation.h; path = BYNote/MainNavigation.h; sourceTree = SOURCE_ROOT; };
@@ -116,13 +130,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		227DF2911D0321E0004DDC15 /* public */ = {
+		22174CA01D0E8FDA00DBA117 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				22174CA11D0E8FFA00DBA117 /* Data.xcdatamodeld */,
+				22174CA91D0EC8CF00DBA117 /* CoreDataManager.h */,
+				22174CAA1D0EC8CF00DBA117 /* CoreDataManager.m */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		22174CA41D0EA70400DBA117 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		22174CA51D0EC49C00DBA117 /* BottomView */ = {
+			isa = PBXGroup;
+			children = (
+				22174CA61D0EC4B500DBA117 /* BottomView.h */,
+				22174CA71D0EC4B500DBA117 /* BottomView.m */,
+			);
+			name = BottomView;
+			sourceTree = "<group>";
+		};
+		227DF2911D0321E0004DDC15 /* Public */ = {
 			isa = PBXGroup;
 			children = (
 				227DF2921D032206004DDC15 /* MainNavigation.h */,
 				227DF2931D032206004DDC15 /* MainNavigation.m */,
 			);
-			name = public;
+			name = Public;
 			path = BYFlowLayout;
 			sourceTree = "<group>";
 		};
@@ -154,6 +194,7 @@
 		228166071D0517D000A29D54 /* MainViewController */ = {
 			isa = PBXGroup;
 			children = (
+				22174CA41D0EA70400DBA117 /* Model */,
 				228166091D0517FF00A29D54 /* View */,
 				228166081D0517EA00A29D54 /* Controller */,
 			);
@@ -172,6 +213,7 @@
 		228166091D0517FF00A29D54 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				22174CA51D0EC49C00DBA117 /* BottomView */,
 				22CFB4E11CF4374300C38ED7 /* Main.storyboard */,
 				228165FB1D05179800A29D54 /* BYFlowCollection */,
 				228165B81D05098700A29D54 /* ProfileSliderMenu */,
@@ -209,6 +251,10 @@
 		228166DF1D0D4A8B00A29D54 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				22174CAC1D0EC95000DBA117 /* Note+CoreDataProperties.h */,
+				22174CAD1D0EC95000DBA117 /* Note+CoreDataProperties.m */,
+				22174CAE1D0EC95000DBA117 /* Note.h */,
+				22174CAF1D0EC95000DBA117 /* Note.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -238,9 +284,10 @@
 		22CFB4D71CF4374300C38ED7 /* BYNote */ = {
 			isa = PBXGroup;
 			children = (
+				22174CA01D0E8FDA00DBA117 /* Data */,
 				228166D91D0D4A2300A29D54 /* EditNoteViewController */,
 				228166071D0517D000A29D54 /* MainViewController */,
-				227DF2911D0321E0004DDC15 /* public */,
+				227DF2911D0321E0004DDC15 /* Public */,
 				22174C231D0D93A600DBA117 /* Localizable.strings */,
 				22601E231CF476B000E2150A /* 12.JPG */,
 				22601E211CF4764E00E2150A /* 123.JPG */,
@@ -485,16 +532,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22174CB11D0EC95000DBA117 /* Note.m in Sources */,
 				227DF2941D032206004DDC15 /* MainNavigation.m in Sources */,
+				22174CAB1D0EC8CF00DBA117 /* CoreDataManager.m in Sources */,
 				228166041D05179800A29D54 /* BYNCollectionFlowLayout.m in Sources */,
 				228166DC1D0D4A4F00A29D54 /* EditNoteViewController.m in Sources */,
 				2281660C1D0522F700A29D54 /* ProfileSliderMenuButton.m in Sources */,
 				228166051D05179800A29D54 /* BYNCollectionFlowView.m in Sources */,
 				228166031D05179800A29D54 /* BYNCollectionCell.m in Sources */,
+				22174CA31D0E8FFA00DBA117 /* Data.xcdatamodeld in Sources */,
 				22CFB4E01CF4374300C38ED7 /* ViewController.m in Sources */,
+				22174CB01D0EC95000DBA117 /* Note+CoreDataProperties.m in Sources */,
 				22CFB4DD1CF4374300C38ED7 /* AppDelegate.m in Sources */,
 				22CFB4DA1CF4374300C38ED7 /* main.m in Sources */,
 				228165BB1D050A6D00A29D54 /* ProfileSliderMenu.m in Sources */,
+				22174CA81D0EC4B500DBA117 /* BottomView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -756,6 +808,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		22174CA11D0E8FFA00DBA117 /* Data.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				22174CA21D0E8FFA00DBA117 /* Data.xcdatamodel */,
+			);
+			currentVersion = 22174CA21D0E8FFA00DBA117 /* Data.xcdatamodel */;
+			path = Data.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 22CFB4CD1CF4374300C38ED7 /* Project object */;
 }

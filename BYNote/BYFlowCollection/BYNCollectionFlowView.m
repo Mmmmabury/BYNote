@@ -10,6 +10,7 @@
 #import "BYNCollectionFlowLayout.h"
 #import "BYNCollectionCell.h"
 #import "BYNCELLSIZE.h"
+#import "EditNoteViewController.h"
 
 @interface BYNCollectionFlowView()<UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -80,6 +81,7 @@
         
         self.delegate = self;
         self.dataSource = self;
+        self.backgroundColor = [UIColor clearColor];
         self.showsVerticalScrollIndicator = NO;
 //        self.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT * 64);
     }
@@ -129,4 +131,11 @@
     return self.texts.count;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    EditNoteViewController *editNote = nil;
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Edit" bundle:[NSBundle mainBundle]];
+    editNote = [sb instantiateViewControllerWithIdentifier:@"editViewController"];
+    [_containedVC presentViewController:editNote animated:YES completion:nil];
+}
 @end

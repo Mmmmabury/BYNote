@@ -9,7 +9,11 @@
 #import "ViewController.h"
 #import "BYNCollectionFlowView.h"
 #import "ProfileSliderMenu.h"
+#import "ProfileSliderMenuButton.h"
 #import "EditNoteViewController.h"
+#import "BottomView.h"
+
+#import <MessageUI/MessageUI.h>
 #import <ENSDKAdvanced.h>
 #import <ENSDK.h>
 #import <EDAM.h>
@@ -17,7 +21,7 @@
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 
-@interface ViewController () <SliderButtonAction>
+@interface ViewController () <SliderButtonAction, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) ProfileSliderMenu *profileMenu;
 @end
@@ -28,11 +32,15 @@
     [super viewDidLoad];
 //     Do any additional setup after loading the view, typically from a nib.
     self.title = @"便签";
-//    self.view.backgroundColor = [UIColor colorWithRed:0.0039 green:0.0863 blue:0.2275 alpha:1.0];
-//    self.view.backgroundColor = [UIColor colorWithRed:0.2235 green:0.6 blue:0.8549 alpha:1.0];
     
     [self createMainView];
     [self initNavigationItems];
+    UIScreenEdgePanGestureRecognizer *edgePanGuesture = [[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(edgePan:)];
+    edgePanGuesture.maximumNumberOfTouches = 1;
+    edgePanGuesture.minimumNumberOfTouches = 1;
+    edgePanGuesture.edges = UIRectEdgeLeft;
+    edgePanGuesture.delegate = self;
+    [self.view addGestureRecognizer:edgePanGuesture];
 //    [self presentEditNoteViewController];
 }
 
@@ -58,50 +66,21 @@
     UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:blur];
     blurView.frame = self.view.bounds;
-    
-    //    UIVibrancyEffect *vibrancy = [UIVibrancyEffect effectForBlurEffect:blur];
-    //    UIVisualEffectView *vibrancyView = [[UIVisualEffectView alloc] initWithEffect:vibrancy];
-    //    vibrancyView.frame = self.view.bounds;
-    //    [blurView.contentView addSubview:vibrancyView];
-    
     [self.view addSubview:blurView];
     
     BYNCollectionFlowView *collectionView = [[BYNCollectionFlowView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - 20)];
-    collectionView.backgroundColor = [UIColor clearColor];
+    collectionView.containedVC = self;
     [self.view addSubview:collectionView];
-    //    [vibrancyView addSubview:collectionView];
-    //    self.navigationController.navigationBarHidden = YES;
+    
     _profileMenu = [[ProfileSliderMenu alloc]init];
     _profileMenu.delegate = self;
     
     
     // 底部的子视图
-    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 64, SCREEN_WIDTH, 64)];
-    bottomView.backgroundColor = [UIColor clearColor];
+    BottomView *bottomView = [[BottomView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 64, SCREEN_WIDTH, 64) andVC:self];
     [self.view addSubview:bottomView];
     
-    UIButton *profileButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [profileButton setTitle:@"我" forState:UIControlStateNormal];
-    [profileButton setTitleColor:[UIColor colorWithRed:0.2235 green:0.6 blue:0.8549 alpha:1.0] forState:UIControlStateNormal];
-    profileButton.frame = CGRectMake(0, 0, 60, 60);
-    profileButton.center = CGPointMake(profileButton.center.x, 32);
-    [profileButton addTarget:self action:@selector(profile:) forControlEvents:UIControlEventTouchUpInside];
-    [bottomView addSubview:profileButton];
-    
-    UIButton *presentEditView = [UIButton buttonWithType:UIButtonTypeCustom];
-    presentEditView.frame = CGRectMake(0, 0, 50, 50);
-    presentEditView.center = CGPointMake(SCREEN_WIDTH / 2, 32);
-//    presentEditView.layer.cornerRadius = 25;
-    presentEditView.layer.shadowColor = [UIColor blackColor].CGColor;
-    presentEditView.layer.shadowOffset = CGSizeMake(1.0f, 2.0f);
-    presentEditView.layer.shadowOpacity = 0.6f;
-    [presentEditView addTarget:self action:@selector(presentEditNoteViewController) forControlEvents:UIControlEventTouchUpInside];
-//    presentEditView.backgroundColor = [UIColor colorWithRed:0.2078 green:0.5882 blue:0.8588 alpha:1.0];
-    presentEditView.backgroundColor = [UIColor colorWithRed:0.2235 green:0.6 blue:0.8549 alpha:1.0];
-    [presentEditView setTitle:@"记" forState:UIControlStateNormal];
-    [presentEditView setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [bottomView addSubview:presentEditView];
-//    ➞
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -114,6 +93,14 @@
     [_profileMenu triggle];
 }
 
+- (void)edgePan: (UIScreenEdgePanGestureRecognizer *)gr {
+    
+    if (gr.state == UIGestureRecognizerStateEnded){
+        
+        [_profileMenu triggle];
+    }
+}
+
 - (void)presentEditNoteViewController{
 	
     EditNoteViewController *editNote = nil;
@@ -122,12 +109,31 @@
     [self presentViewController:editNote animated:YES completion:nil];
 }
 
+#pragma mark  侧边栏按钮事件代理
 
-//  侧边栏按钮事件代理
-- (void)linkToEverNote {
+// 连接印象笔记
+- (void)linkToEverNote: (ProfileSliderMenuButton *) sender {
     
     ENSession *session = [ENSession sharedSession];
     if (session.isAuthenticated) {
+        
+        [_profileMenu triggle];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"logoutTitle", nil) message:NSLocalizedString(@"logoutMessage", nil) preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *confirm = [UIAlertAction actionWithTitle:NSLocalizedString(@"confirmLogOut", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            
+            [session unauthenticate];
+            [sender setStatus:SliderButtonNotActive];
+            [sender setTitle:NSLocalizedString(@"login", nil) forState:UIControlStateNormal];
+            [_profileMenu triggle];
+            
+        }];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+            [_profileMenu triggle];
+        }];
+        [alert addAction:confirm];
+        [alert addAction:cancel];
+        [self presentViewController:alert animated:YES completion:nil];
         
         return;
     }
@@ -136,13 +142,42 @@
             // authentication failed
             // show an alert, etc
             // ...
-            NSLog(@"绑定失败");
+            NSLog(@"印象笔记绑定失败");
+            [sender setStatus:SliderButtonNotActive];
+            [sender setTitle:NSLocalizedString(@"login", nil) forState:UIControlStateNormal];
+            [_profileMenu triggle];
         } else {
             // authentication succeeded
             // do something now that we're authenticated
             // ...
-            NSLog(@"绑定成功");
+            NSLog(@"印象笔记绑定成功");
+            [sender setStatus:SliderButtonActive];
+            [sender setTitle:NSLocalizedString(@"logout", nil) forState:UIControlStateNormal];
+            [_profileMenu triggle];
         }
+    }];
+    [_profileMenu triggle];
+}
+
+// feedback
+- (void)sendEmailAction
+{
+    [_profileMenu triggle];
+    MFMailComposeViewController *mailCompose = [[MFMailComposeViewController alloc] init];
+    
+    [mailCompose setMailComposeDelegate:self];
+    [mailCompose setSubject:@"Feedback"];
+    [mailCompose setToRecipients:@[@"admin@qq.com"]];
+    
+    // 弹出邮件发送视图
+    [self presentViewController:mailCompose animated:YES completion:nil];
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+        [_profileMenu triggle];
     }];
 }
 @end

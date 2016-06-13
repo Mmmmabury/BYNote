@@ -7,15 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ProfileSliderMenuButton.h"
 
 @protocol SliderButtonAction <NSObject>
 
-- (void)linkToEverNote;
+- (void)linkToEverNote: (ProfileSliderMenuButton *) sender;
+- (void)sendEmailAction;
 @end
 
 @interface ProfileSliderMenu : UIView
 
-@property (nonatomic, strong) id<SliderButtonAction> delegate;
+@property (nonatomic, weak) id<SliderButtonAction> delegate;
 
 - (void) triggle;
 @end

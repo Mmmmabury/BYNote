@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum{
+    SliderButtonNotActive,
+    SliderButtonActive,
+    SliderButtonNormal
+}buttonStatus;
+
 @interface ProfileSliderMenuButton : UIButton
 
+@property (nonatomic, assign) NSInteger status;
 - (instancetype)initWithFrame:(CGRect)frame andTitle: (NSString *) title;
 @end

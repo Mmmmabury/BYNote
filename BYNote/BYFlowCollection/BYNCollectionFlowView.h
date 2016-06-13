@@ -10,4 +10,5 @@
 
 @interface BYNCollectionFlowView : UICollectionView
 
+@property (nonatomic, weak) UIViewController *containedVC;
 @end

@@ -1,16 +1,31 @@
-/* 
-  Localizable.strings
-  BYNote
+/*
+ Localizable.strings
+ BYNote
+ 
+ Created by cby on 16/6/12.
+ Copyright © 2016年 cby. All rights reserved.
+ */
 
-  Created by cby on 16/6/12.
-  Copyright © 2016年 cby. All rights reserved.
-*/
+//"evernote" = "Evernote";
+//"icloud" = "iCloud";
+//"clipboard" = "Clipboard";
+//"finger" = "Finger";
+//"password" = "Password";
+//"rating" = "Rating";
+//"feedback" = "Feedback";
 
-
-"evernote" = "印象笔记";
+"login" = "连接印象笔记";
+"logout" = "登出印象笔记";
 "icloud" = "iCloud";
 "clipboard" = "从剪贴板复制";
 "finger" = "指纹设置";
 "password" = "密码设置";
 "rating" = "评分";
 "feedback" = "反馈";
+
+
+"confirmLogOut" = "确定登出";
+"cancel" = "取消";
+
+"logoutTitle" = "警告";
+"logoutMessage" = "将要登出印象笔记";
