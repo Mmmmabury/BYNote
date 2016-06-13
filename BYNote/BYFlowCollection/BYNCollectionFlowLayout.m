@@ -7,6 +7,7 @@
 //
 
 #import "BYNCollectionFlowLayout.h"
+#import "BYNCELLSIZE.h"
 
 @interface BYNCollectionFlowLayout ()
 
@@ -58,5 +59,31 @@
 //    NSLog(@"%@", a);
 //    return [super layoutAttributesForElementsInRect:rect];
     return [attributes copy];
+}
+
+- (CGSize)collectionViewContentSize{
+    
+    CGFloat height = 0;
+    CGFloat maxHeight = 0;
+    for (NSArray *row in self.frames) {
+        
+        for (NSValue *v in row) {
+            
+            CGRect rect = [v CGRectValue];
+            height += rect.size.height;
+        }
+        if (height > maxHeight) {
+            
+            maxHeight = height;
+        }
+        height = 0;
+    }
+    maxHeight += itemInset * (self.frames.count ) + 84;
+    if (maxHeight < SCREEN_HEIGHT) {
+        
+        maxHeight = SCREEN_HEIGHT;
+    }
+    CGSize contentSize = CGSizeMake(SCREEN_WIDTH, maxHeight);
+    return contentSize;
 }
 @end

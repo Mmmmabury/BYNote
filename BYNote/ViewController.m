@@ -10,11 +10,14 @@
 #import "BYNCollectionFlowView.h"
 #import "ProfileSliderMenu.h"
 #import "EditNoteViewController.h"
+#import <ENSDKAdvanced.h>
+#import <ENSDK.h>
+#import <EDAM.h>
 
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 
-@interface ViewController ()
+@interface ViewController () <SliderButtonAction>
 
 @property (nonatomic, strong) ProfileSliderMenu *profileMenu;
 @end
@@ -63,12 +66,13 @@
     
     [self.view addSubview:blurView];
     
-    BYNCollectionFlowView *collectionView = [[BYNCollectionFlowView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+    BYNCollectionFlowView *collectionView = [[BYNCollectionFlowView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - 20)];
     collectionView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:collectionView];
     //    [vibrancyView addSubview:collectionView];
     //    self.navigationController.navigationBarHidden = YES;
     _profileMenu = [[ProfileSliderMenu alloc]init];
+    _profileMenu.delegate = self;
     
     
     // 底部的子视图
@@ -118,4 +122,27 @@
     [self presentViewController:editNote animated:YES completion:nil];
 }
 
+
+//  侧边栏按钮事件代理
+- (void)linkToEverNote {
+    
+    ENSession *session = [ENSession sharedSession];
+    if (session.isAuthenticated) {
+        
+        return;
+    }
+    [session authenticateWithViewController:self preferRegistration:NO completion:^(NSError *error) {
+        if (error) {
+            // authentication failed
+            // show an alert, etc
+            // ...
+            NSLog(@"绑定失败");
+        } else {
+            // authentication succeeded
+            // do something now that we're authenticated
+            // ...
+            NSLog(@"绑定成功");
+        }
+    }];
+}
 @end

@@ -42,11 +42,20 @@
         
         _isTriggle = NO;
         [keyWindow addSubview:self];
-        NSArray *s = @[@"hehe", @"heqqw", @"hifaw"];
+//        NSArray *s = @[@"印象笔记", @"iCloud", @"从剪贴板复制", @"指纹设置", @"密码设置", @"评分", @"反馈"];
+        NSArray *s = @[NSLocalizedString(@"evernote", nil),
+                       NSLocalizedString(@"icloud", nil),
+                       NSLocalizedString(@"clipboard", nil),
+                       NSLocalizedString(@"finger", nil),
+                       NSLocalizedString(@"password", nil),
+                       NSLocalizedString(@"rating", nil),
+                       NSLocalizedString(@"feedback", nil),];
         for (int i = 0; i < s.count; i++) {
             
-            ProfileSliderMenuButton *button = [[ProfileSliderMenuButton alloc] initWithFrame:CGRectMake(20, 50 + i * 50, SCREEN_WIDTH / 2 - 40, 40) andTitle:s[i]];
-            button.backgroundColor = [UIColor clearColor];
+            CGRect frame = CGRectMake(20, 50 + i * 50, SCREEN_WIDTH / 2 - 40, 40);
+            ProfileSliderMenuButton *button = [[ProfileSliderMenuButton alloc] initWithFrame:frame andTitle:s[i]];
+            button.tag = 100 + i;
+            [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:button];
         }
     }
@@ -81,4 +90,23 @@
 	
     [self triggle];
 }
+
+- (void)buttonAction:(UIButton *)sender {
+	
+    switch (sender.tag) {
+        case 100:
+            [self triggle];
+            [_delegate linkToEverNote];
+            break;
+            
+        case 101:
+            
+            break;
+            
+        default:
+            break;
+    }
+}
+
+
 @end

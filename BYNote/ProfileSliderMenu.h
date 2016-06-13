@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SliderButtonAction <NSObject>
+
+- (void)linkToEverNote;
+@end
+
 @interface ProfileSliderMenu : UIView
+
+@property (nonatomic, strong) id<SliderButtonAction> delegate;
 
 - (void) triggle;
 @end

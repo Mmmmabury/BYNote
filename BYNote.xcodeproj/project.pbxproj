@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		22174C1E1D0D63EE00DBA117 /* Edit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22174C1D1D0D63EE00DBA117 /* Edit.storyboard */; };
+		22174C211D0D93A600DBA117 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22174C231D0D93A600DBA117 /* Localizable.strings */; };
 		22601E221CF4764E00E2150A /* 123.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 22601E211CF4764E00E2150A /* 123.JPG */; };
 		22601E241CF476B000E2150A /* 12.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 22601E231CF476B000E2150A /* 12.JPG */; };
 		227DF2941D032206004DDC15 /* MainNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 227DF2931D032206004DDC15 /* MainNavigation.m */; };
@@ -47,6 +48,8 @@
 
 /* Begin PBXFileReference section */
 		22174C1D1D0D63EE00DBA117 /* Edit.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Edit.storyboard; sourceTree = "<group>"; };
+		22174C221D0D93A600DBA117 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		22174C241D0D93B200DBA117 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		22601E211CF4764E00E2150A /* 123.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 123.JPG; sourceTree = "<group>"; };
 		22601E231CF476B000E2150A /* 12.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 12.JPG; sourceTree = "<group>"; };
 		227DF2921D032206004DDC15 /* MainNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainNavigation.h; path = BYNote/MainNavigation.h; sourceTree = SOURCE_ROOT; };
@@ -238,9 +241,10 @@
 				228166D91D0D4A2300A29D54 /* EditNoteViewController */,
 				228166071D0517D000A29D54 /* MainViewController */,
 				227DF2911D0321E0004DDC15 /* public */,
-				22CFB4DB1CF4374300C38ED7 /* AppDelegate.h */,
+				22174C231D0D93A600DBA117 /* Localizable.strings */,
 				22601E231CF476B000E2150A /* 12.JPG */,
 				22601E211CF4764E00E2150A /* 123.JPG */,
+				22CFB4DB1CF4374300C38ED7 /* AppDelegate.h */,
 				22CFB4DC1CF4374300C38ED7 /* AppDelegate.m */,
 				22CFB4E41CF4374300C38ED7 /* Assets.xcassets */,
 				22CFB4E61CF4374300C38ED7 /* LaunchScreen.storyboard */,
@@ -405,6 +409,7 @@
 				22CFB4E81CF4374300C38ED7 /* LaunchScreen.storyboard in Resources */,
 				22CFB4E51CF4374300C38ED7 /* Assets.xcassets in Resources */,
 				22601E241CF476B000E2150A /* 12.JPG in Resources */,
+				22174C211D0D93A600DBA117 /* Localizable.strings in Resources */,
 				22601E221CF4764E00E2150A /* 123.JPG in Resources */,
 				22174C1E1D0D63EE00DBA117 /* Edit.storyboard in Resources */,
 				22CFB4E31CF4374300C38ED7 /* Main.storyboard in Resources */,
@@ -525,6 +530,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		22174C231D0D93A600DBA117 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22174C221D0D93A600DBA117 /* zh-Hans */,
+				22174C241D0D93B200DBA117 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		22CFB4E11CF4374300C38ED7 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

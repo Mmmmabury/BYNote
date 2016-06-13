@@ -10,20 +10,23 @@
 
 @interface ProfileSliderMenuButton ()
 
-@property (nonatomic, copy) NSString *title;
 @end
 @implementation ProfileSliderMenuButton
 
 - (instancetype)initWithFrame:(CGRect)frame andTitle: (NSString *) title{
     
-    self = [super initWithFrame:frame];
+    self = [ProfileSliderMenuButton buttonWithType:UIButtonTypeCustom];
+    self.frame = frame;
     if (self) {
         
-        self.title = title;
+        [self setTitle:title forState:UIControlStateNormal];
+        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self setBackgroundColor: [UIColor lightGrayColor]];
     }
     return self;
 }
 
+/*
 - (void)drawRect:(CGRect)rect{
     
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -50,4 +53,5 @@
     
     [_title drawInRect:CGRectMake(rect.origin.x, rect.origin.y + differHeight / 2, rect.size.width, textRect.size.height) withAttributes: attributes];
 }
+ */
 @end

@@ -80,7 +80,8 @@
         
         self.delegate = self;
         self.dataSource = self;
-        self.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT * 1.5);
+        self.showsVerticalScrollIndicator = NO;
+//        self.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT * 64);
     }
     return self;
 }

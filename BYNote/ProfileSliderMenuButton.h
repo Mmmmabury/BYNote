@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ProfileSliderMenuButton : UIControl
+@interface ProfileSliderMenuButton : UIButton
 
 - (instancetype)initWithFrame:(CGRect)frame andTitle: (NSString *) title;
 @end

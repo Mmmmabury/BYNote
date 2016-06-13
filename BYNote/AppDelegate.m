@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <ENSDK.h>
 
 @interface AppDelegate ()
 
@@ -17,6 +18,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    NSString *SANDBOX_HOST = ENSessionHostSandbox;
+    
+    // To get an API key, visit http://dev.evernote.com/documentation/cloud/
+    NSString *CONSUMER_KEY = @"epapa";
+    NSString *CONSUMER_SECRET = @"e8b10439a76fa73d";
+    
+    [ENSession setSharedSessionConsumerKey:CONSUMER_KEY
+                            consumerSecret:CONSUMER_SECRET
+                              optionalHost:SANDBOX_HOST];
     return YES;
 }
 
