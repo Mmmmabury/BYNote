@@ -124,20 +124,23 @@
 
 - (void)buttonAction:(ProfileSliderMenuButton *)sender {
 	
-    NSURL *appStoreUrl =[NSURL URLWithString:@"http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=291586600&amp;amp;mt=8"];
+    NSURL *appStoreUrl =[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=414478124"];
     switch (sender.tag) {
+            // Evernote
         case 100:
             
             [_delegate linkToEverNote:sender];
             break;
-            
+            // iCloud
         case 101:
             
             break;
+            // rating
         case 105:
            
             [[UIApplication sharedApplication] openURL:appStoreUrl];
             break;
+            // feedback
         case 106:
             
 //            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto://admin@hzlzh.com"]];
