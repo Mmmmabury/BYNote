@@ -31,6 +31,7 @@
 		22CFB4E81CF4374300C38ED7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22CFB4E61CF4374300C38ED7 /* LaunchScreen.storyboard */; };
 		22CFB4F31CF4374300C38ED7 /* BYNoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4F21CF4374300C38ED7 /* BYNoteTests.m */; };
 		22CFB4FE1CF4374300C38ED7 /* BYNoteUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4FD1CF4374300C38ED7 /* BYNoteUITests.m */; };
+		22D92F0B1D125EC5006C6B89 /* EditBeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D92F0A1D125EC5006C6B89 /* EditBeta.m */; };
 		D935FAF49087FCE30EEE4402 /* libPods-BYNote.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B56F9D3FA69CAA2BE87C8F3A /* libPods-BYNote.a */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +100,8 @@
 		22CFB4F91CF4374300C38ED7 /* BYNoteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BYNoteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22CFB4FD1CF4374300C38ED7 /* BYNoteUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BYNoteUITests.m; sourceTree = "<group>"; };
 		22CFB4FF1CF4374300C38ED7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22D92F091D125EC5006C6B89 /* EditBeta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditBeta.h; sourceTree = "<group>"; };
+		22D92F0A1D125EC5006C6B89 /* EditBeta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditBeta.m; sourceTree = "<group>"; };
 		8028F1DAB2A8BBD037EBD314 /* Pods-BYNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BYNote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BYNote/Pods-BYNote.debug.xcconfig"; sourceTree = "<group>"; };
 		95F3A9C2800E208A0FFDDE7B /* Pods-BYNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BYNote.release.xcconfig"; path = "Pods/Target Support Files/Pods-BYNote/Pods-BYNote.release.xcconfig"; sourceTree = "<group>"; };
 		B56F9D3FA69CAA2BE87C8F3A /* libPods-BYNote.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BYNote.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -244,6 +247,8 @@
 			children = (
 				228166DA1D0D4A4F00A29D54 /* EditNoteViewController.h */,
 				228166DB1D0D4A4F00A29D54 /* EditNoteViewController.m */,
+				22D92F091D125EC5006C6B89 /* EditBeta.h */,
+				22D92F0A1D125EC5006C6B89 /* EditBeta.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -539,6 +544,7 @@
 				228166DC1D0D4A4F00A29D54 /* EditNoteViewController.m in Sources */,
 				2281660C1D0522F700A29D54 /* ProfileSliderMenuButton.m in Sources */,
 				228166051D05179800A29D54 /* BYNCollectionFlowView.m in Sources */,
+				22D92F0B1D125EC5006C6B89 /* EditBeta.m in Sources */,
 				228166031D05179800A29D54 /* BYNCollectionCell.m in Sources */,
 				22174CA31D0E8FFA00DBA117 /* Data.xcdatamodeld in Sources */,
 				22CFB4E01CF4374300C38ED7 /* ViewController.m in Sources */,
