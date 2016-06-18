@@ -76,10 +76,8 @@
 
 - (void)textViewDidChange:(UITextView *)textView{
     
-//    NSLog(@"%@", textView.text);
     [textView.text enumerateSubstringsInRange:NSMakeRange(0, textView.text.length) options:NSStringEnumerationByLines usingBlock:^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
         
-//        NSLog(@"substring:%@", substring);
 //        NSLog(@"substringRange:%@", NSStringFromRange(substringRange));
 //        NSLog(@"%@", NSStringFromRange(enclosingRange));
     }];
