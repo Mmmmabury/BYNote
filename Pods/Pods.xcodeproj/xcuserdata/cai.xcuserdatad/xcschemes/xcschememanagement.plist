@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>YYText.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>evernote-cloud-sdk-ios.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -17,12 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>013F40D4A21CB7D33B4BFB8F9EAF9308</key>
+		<key>03400407B32353EF7F79AED3AD93B807</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>68F75A62A5F8E4D88EBF20D17AC97945</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BFC79F49F9C69A6DEAD37A0FEB310463</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -6,11 +6,14 @@
 //  Copyright © 2016年 cby. All rights reserved.
 //
 
+#import <YYText/YYText.h>
 #import "EditBeta.h"
+#import "BetaTextView.h"
+#import "ToDoButton.h"
 
 @interface EditBeta () <UITextViewDelegate>
 
-@property (strong, nonatomic) UITextView *textView;
+@property (strong, nonatomic) BetaTextView *textView;
 @property (nonatomic, strong) NSTextContainer *textContainer;
 @property (nonatomic, strong) NSTextStorage *textStorage;
 
@@ -32,11 +35,11 @@
     _textContainer = [[NSTextContainer alloc] initWithSize:self.view.bounds.size];
     [layoutManage addTextContainer:_textContainer];
     
-    _textView = [[UITextView alloc] initWithFrame:textViewRect
+    _textView = [[BetaTextView alloc] initWithFrame:textViewRect
                                     textContainer:_textContainer];
     _textView.font = [UIFont systemFontOfSize:20.0f];
     _textView.text = @"hehheh沃尔法定的设计费lknzdadfeadafdujrifniajrf 爱是科技哦；asdobgieliadkjfhjdbafliuehgdalkjsaebgiulahe";
-    _textView.delegate = self;
+//    _textView.delegate = self;
 //    _textView.text = @"我 I asdfjzidijfoiaejf";
 //    [self bezierPath];
     
@@ -59,6 +62,15 @@
                                   NSParagraphStyleAttributeName : mParagraphStyle
                                   }
                           range:NSMakeRange(0, _textView.text.length)];
+
+    ToDoButton *button = [ToDoButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(0, 0, 19, 19);
+    NSMutableAttributedString *attachment = [NSMutableAttributedString yy_attachmentStringWithContent:button
+                                                                                          contentMode:UIViewContentModeBottom
+                                                                                       attachmentSize:CGSizeMake(19, 19)
+                                                                                          alignToFont:[UIFont systemFontOfSize:25.0f]
+                                                                                            alignment:YYTextVerticalAlignmentCenter];
+    [_textStorage insertAttributedString:attachment atIndex:5];
     [_textStorage endEditing];
     
 }
@@ -82,43 +94,5 @@
 //        NSLog(@"%@", NSStringFromRange(enclosingRange));
     }];
 }
-
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        
-        CGRect rect = [_textView caretRectForPosition:_textView.selectedTextRange.start];
-        CGFloat inset = 12.0f;
-        rect.origin.x = 5.0f;
-        rect.origin.y += inset / 2 + 2;
-        rect.size.height -= inset;
-        rect.size.width = rect.size.height;
-        UIView *view = [[UIView alloc] initWithFrame:rect];
-        view.backgroundColor = [UIColor blackColor];
-        [_textView addSubview:view];
-        
-        UIBezierPath *path = [UIBezierPath bezierPathWithRect: rect];
-        _textView.textContainer.exclusionPaths = @[path];
-        NSLog(@"%@", NSStringFromCGRect(rect));
-    });
-    
-    if ([text isEqualToString:@"\n"]) {
-        
-//        NSLog(@"dd");
-    }
-//    NSLog(@"%@", text);
-//    NSLog(@"%@", NSStringFromRange(range));
-    return YES;
-}
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

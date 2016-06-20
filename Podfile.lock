@@ -1,12 +1,15 @@
 PODS:
   - evernote-cloud-sdk-ios (2.0.5)
+  - YYText (1.0.5)
 
 DEPENDENCIES:
   - evernote-cloud-sdk-ios
+  - YYText
 
 SPEC CHECKSUMS:
   evernote-cloud-sdk-ios: 048cf5dcdc0c64069192d1336b7e121bc1a77e12
+  YYText: ac09660c9ccd9b817f409a20caa6f5587444d2ae
 
-PODFILE CHECKSUM: 408fbe4a180df74a3dde6c88da299956d3d57ac1
+PODFILE CHECKSUM: 5c2f728fde86da079be385ebee4be66ae9c0118f
 
 COCOAPODS: 1.0.1

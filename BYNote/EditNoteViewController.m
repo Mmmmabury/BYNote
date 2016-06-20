@@ -7,6 +7,8 @@
 //
 
 #import "EditNoteViewController.h"
+#import "YYText.h"
+#import "UIView+YYAdd.h"
 
 @interface EditNoteViewController ()
 
@@ -17,21 +19,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+ 
+    [self createTextView];
 }
+
+- (void) createTextView{
+    
+    YYTextView *textView = [[YYTextView alloc] initWithFrame:self.view.bounds];
+    textView.top += 20.0f;
+    textView.font = [UIFont systemFontOfSize:25.0f];
+    [self.view addSubview:textView];
+}
+
 
 - (IBAction)closeView:(UIButton *)sender {
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

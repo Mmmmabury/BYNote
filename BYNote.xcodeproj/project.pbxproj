@@ -14,9 +14,13 @@
 		22174CAB1D0EC8CF00DBA117 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22174CAA1D0EC8CF00DBA117 /* CoreDataManager.m */; };
 		22174CB01D0EC95000DBA117 /* Note+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 22174CAD1D0EC95000DBA117 /* Note+CoreDataProperties.m */; };
 		22174CB11D0EC95000DBA117 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 22174CAF1D0EC95000DBA117 /* Note.m */; };
+		222859B21D17C02600B3C53B /* BetaTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 222859B11D17C02600B3C53B /* BetaTextView.m */; };
+		222859B81D17CAA500B3C53B /* ToDoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 222859B71D17CAA500B3C53B /* ToDoButton.m */; };
 		22601E221CF4764E00E2150A /* 123.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 22601E211CF4764E00E2150A /* 123.JPG */; };
 		22601E241CF476B000E2150A /* 12.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 22601E231CF476B000E2150A /* 12.JPG */; };
 		227DF2941D032206004DDC15 /* MainNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 227DF2931D032206004DDC15 /* MainNavigation.m */; };
+		2280AC9D1D1805C900430126 /* EditBeta2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2280AC9C1D1805C900430126 /* EditBeta2.m */; };
+		2280ACA11D1807A600430126 /* UIView+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 2280ACA01D1807A600430126 /* UIView+YYAdd.m */; };
 		228165BB1D050A6D00A29D54 /* ProfileSliderMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 228165BA1D050A6D00A29D54 /* ProfileSliderMenu.m */; };
 		228166031D05179800A29D54 /* BYNCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 228165FE1D05179800A29D54 /* BYNCollectionCell.m */; };
 		228166041D05179800A29D54 /* BYNCollectionFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 228166001D05179800A29D54 /* BYNCollectionFlowLayout.m */; };
@@ -65,10 +69,18 @@
 		22174CAD1D0EC95000DBA117 /* Note+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Note+CoreDataProperties.m"; sourceTree = "<group>"; };
 		22174CAE1D0EC95000DBA117 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		22174CAF1D0EC95000DBA117 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
+		222859B01D17C02600B3C53B /* BetaTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BetaTextView.h; sourceTree = "<group>"; };
+		222859B11D17C02600B3C53B /* BetaTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BetaTextView.m; sourceTree = "<group>"; };
+		222859B61D17CAA500B3C53B /* ToDoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoButton.h; sourceTree = "<group>"; };
+		222859B71D17CAA500B3C53B /* ToDoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoButton.m; sourceTree = "<group>"; };
 		22601E211CF4764E00E2150A /* 123.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 123.JPG; sourceTree = "<group>"; };
 		22601E231CF476B000E2150A /* 12.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 12.JPG; sourceTree = "<group>"; };
 		227DF2921D032206004DDC15 /* MainNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainNavigation.h; path = BYNote/MainNavigation.h; sourceTree = SOURCE_ROOT; };
 		227DF2931D032206004DDC15 /* MainNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainNavigation.m; path = BYNote/MainNavigation.m; sourceTree = SOURCE_ROOT; };
+		2280AC9B1D1805C900430126 /* EditBeta2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditBeta2.h; sourceTree = "<group>"; };
+		2280AC9C1D1805C900430126 /* EditBeta2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditBeta2.m; sourceTree = "<group>"; };
+		2280AC9F1D1807A600430126 /* UIView+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YYAdd.h"; sourceTree = "<group>"; };
+		2280ACA01D1807A600430126 /* UIView+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YYAdd.m"; sourceTree = "<group>"; };
 		228165B91D050A6D00A29D54 /* ProfileSliderMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileSliderMenu.h; sourceTree = "<group>"; };
 		228165BA1D050A6D00A29D54 /* ProfileSliderMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileSliderMenu.m; sourceTree = "<group>"; };
 		228165FC1D05179800A29D54 /* BYNCELLSIZE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYNCELLSIZE.h; sourceTree = "<group>"; };
@@ -169,6 +181,15 @@
 			path = BYFlowLayout;
 			sourceTree = "<group>";
 		};
+		2280AC9E1D18078F00430126 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				2280AC9F1D1807A600430126 /* UIView+YYAdd.h */,
+				2280ACA01D1807A600430126 /* UIView+YYAdd.m */,
+			);
+			name = Framework;
+			sourceTree = "<group>";
+		};
 		228165B81D05098700A29D54 /* ProfileSliderMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +259,8 @@
 			isa = PBXGroup;
 			children = (
 				22174C1D1D0D63EE00DBA117 /* Edit.storyboard */,
+				222859B61D17CAA500B3C53B /* ToDoButton.h */,
+				222859B71D17CAA500B3C53B /* ToDoButton.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -249,6 +272,10 @@
 				228166DB1D0D4A4F00A29D54 /* EditNoteViewController.m */,
 				22D92F091D125EC5006C6B89 /* EditBeta.h */,
 				22D92F0A1D125EC5006C6B89 /* EditBeta.m */,
+				222859B01D17C02600B3C53B /* BetaTextView.h */,
+				222859B11D17C02600B3C53B /* BetaTextView.m */,
+				2280AC9B1D1805C900430126 /* EditBeta2.h */,
+				2280AC9C1D1805C900430126 /* EditBeta2.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -289,6 +316,7 @@
 		22CFB4D71CF4374300C38ED7 /* BYNote */ = {
 			isa = PBXGroup;
 			children = (
+				2280AC9E1D18078F00430126 /* Framework */,
 				22174CA01D0E8FDA00DBA117 /* Data */,
 				228166D91D0D4A2300A29D54 /* EditNoteViewController */,
 				228166071D0517D000A29D54 /* MainViewController */,
@@ -542,11 +570,15 @@
 				22174CAB1D0EC8CF00DBA117 /* CoreDataManager.m in Sources */,
 				228166041D05179800A29D54 /* BYNCollectionFlowLayout.m in Sources */,
 				228166DC1D0D4A4F00A29D54 /* EditNoteViewController.m in Sources */,
+				222859B21D17C02600B3C53B /* BetaTextView.m in Sources */,
 				2281660C1D0522F700A29D54 /* ProfileSliderMenuButton.m in Sources */,
 				228166051D05179800A29D54 /* BYNCollectionFlowView.m in Sources */,
+				2280ACA11D1807A600430126 /* UIView+YYAdd.m in Sources */,
 				22D92F0B1D125EC5006C6B89 /* EditBeta.m in Sources */,
+				2280AC9D1D1805C900430126 /* EditBeta2.m in Sources */,
 				228166031D05179800A29D54 /* BYNCollectionCell.m in Sources */,
 				22174CA31D0E8FFA00DBA117 /* Data.xcdatamodeld in Sources */,
+				222859B81D17CAA500B3C53B /* ToDoButton.m in Sources */,
 				22CFB4E01CF4374300C38ED7 /* ViewController.m in Sources */,
 				22174CB01D0EC95000DBA117 /* Note+CoreDataProperties.m in Sources */,
 				22CFB4DD1CF4374300C38ED7 /* AppDelegate.m in Sources */,

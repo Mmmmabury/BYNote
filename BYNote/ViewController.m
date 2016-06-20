@@ -35,13 +35,21 @@
     
     [self createMainView];
     [self initNavigationItems];
+    [self addGuesture];
+    [self presentEditNoteViewController];
+}
+
+/**
+ *  @brief 添加手势
+ */
+- (void) addGuesture{
+    
     UIScreenEdgePanGestureRecognizer *edgePanGuesture = [[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(edgePan:)];
     edgePanGuesture.maximumNumberOfTouches = 1;
     edgePanGuesture.minimumNumberOfTouches = 1;
     edgePanGuesture.edges = UIRectEdgeLeft;
     edgePanGuesture.delegate = self;
     [self.view addGestureRecognizer:edgePanGuesture];
-//    [self presentEditNoteViewController];
 }
 
 /**
