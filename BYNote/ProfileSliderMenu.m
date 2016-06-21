@@ -63,7 +63,8 @@
     ENSession *session = [ENSession sharedSession];
     NSString *logKey = session.isAuthenticated ? @"logout" : @"login";
     int logStatus = session.isAuthenticated ? SliderButtonActive : SliderButtonNotActive;
-    NSArray *s = @[NSLocalizedString(logKey, nil),
+    NSArray *s = @[NSLocalizedString(@"search", nil),
+                   NSLocalizedString(logKey, nil),
                    NSLocalizedString(@"icloud", nil),
                    NSLocalizedString(@"clipboard", nil),
                    NSLocalizedString(@"finger", nil),

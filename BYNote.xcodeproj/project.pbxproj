@@ -27,6 +27,7 @@
 		228166051D05179800A29D54 /* BYNCollectionFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 228166021D05179800A29D54 /* BYNCollectionFlowView.m */; };
 		2281660C1D0522F700A29D54 /* ProfileSliderMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281660B1D0522F700A29D54 /* ProfileSliderMenuButton.m */; };
 		228166DC1D0D4A4F00A29D54 /* EditNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 228166DB1D0D4A4F00A29D54 /* EditNoteViewController.m */; };
+		229817071D18C5960009256E /* Line.m in Sources */ = {isa = PBXBuildFile; fileRef = 229817061D18C5960009256E /* Line.m */; };
 		22CFB4DA1CF4374300C38ED7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4D91CF4374300C38ED7 /* main.m */; };
 		22CFB4DD1CF4374300C38ED7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4DC1CF4374300C38ED7 /* AppDelegate.m */; };
 		22CFB4E01CF4374300C38ED7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4DF1CF4374300C38ED7 /* ViewController.m */; };
@@ -96,6 +97,8 @@
 		228166D81D0D4A1300A29D54 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		228166DA1D0D4A4F00A29D54 /* EditNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditNoteViewController.h; sourceTree = "<group>"; };
 		228166DB1D0D4A4F00A29D54 /* EditNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditNoteViewController.m; sourceTree = "<group>"; };
+		229817051D18C5960009256E /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line.h; sourceTree = "<group>"; };
+		229817061D18C5960009256E /* Line.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Line.m; sourceTree = "<group>"; };
 		22CFB4D51CF4374300C38ED7 /* BYNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BYNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22CFB4D91CF4374300C38ED7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		22CFB4DB1CF4374300C38ED7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -287,6 +290,8 @@
 				22174CAD1D0EC95000DBA117 /* Note+CoreDataProperties.m */,
 				22174CAE1D0EC95000DBA117 /* Note.h */,
 				22174CAF1D0EC95000DBA117 /* Note.m */,
+				229817051D18C5960009256E /* Line.h */,
+				229817061D18C5960009256E /* Line.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -581,6 +586,7 @@
 				222859B81D17CAA500B3C53B /* ToDoButton.m in Sources */,
 				22CFB4E01CF4374300C38ED7 /* ViewController.m in Sources */,
 				22174CB01D0EC95000DBA117 /* Note+CoreDataProperties.m in Sources */,
+				229817071D18C5960009256E /* Line.m in Sources */,
 				22CFB4DD1CF4374300C38ED7 /* AppDelegate.m in Sources */,
 				22CFB4DA1CF4374300C38ED7 /* main.m in Sources */,
 				228165BB1D050A6D00A29D54 /* ProfileSliderMenu.m in Sources */,

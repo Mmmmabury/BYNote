@@ -2279,9 +2279,9 @@ typedef NS_ENUM(NSUInteger, YYTextMoveDirection) {
     
     [self _setSelectedRange:range.asRange];
     
-    if (!_state.insideUndoBlock) {
-        [self _resetUndoAndRedoStack];
-    }
+//    if (!_state.insideUndoBlock) {
+//        [self _resetUndoAndRedoStack];
+//    }
 }
 
 - (void)setHighlightable:(BOOL)highlightable {
@@ -3264,10 +3264,11 @@ typedef NS_ENUM(NSUInteger, YYTextMoveDirection) {
             range = extendRange.asRange;
         }
     }
-    if (!NSEqualRanges(_lastTypeRange, _selectedTextRange.asRange)) {
+//    if (!NSEqualRanges(_lastTypeRange, _selectedTextRange.asRange)) {
+    
         [self _saveToUndoStack];
         [self _resetRedoStack];
-    }
+//    }
     [self replaceRange:[YYTextRange rangeWithRange:range] withText:@""];
 }
 

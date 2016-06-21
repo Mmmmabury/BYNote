@@ -13,7 +13,7 @@
 //"password" = "Password";
 //"rating" = "Rating";
 //"feedback" = "Feedback";
-
+"search" = "搜索";
 "login" = "连接印象笔记";
 "logout" = "登出印象笔记";
 "icloud" = "iCloud";
@@ -29,3 +29,11 @@
 
 "logoutTitle" = "警告";
 "logoutMessage" = "将要登出印象笔记";
+
+"Mon" = "星期一";
+"Tues" = "星期二";
+"Wed" = "星期三";
+"Thurs" = "星期四";
+"Fri" = "星期五";
+"Sat" = "星期六";
+"Sun" = "星期日";

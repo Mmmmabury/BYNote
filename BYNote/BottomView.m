@@ -46,6 +46,7 @@
     [profileButton addTarget:_delegate action:@selector(profile:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:profileButton];
     
+    // 弹出编辑页面按钮
     UIButton *presentEditView = [UIButton buttonWithType:UIButtonTypeCustom];
     presentEditView.frame = CGRectMake(0, 0, 50, 50);
     presentEditView.center = CGPointMake(SCREEN_WIDTH / 2, 32);
