@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <LocalAuthentication/LocalAuthentication.h>
 #import <ENSDK.h>
 
 @interface AppDelegate ()
@@ -28,7 +29,36 @@
     [ENSession setSharedSessionConsumerKey:CONSUMER_KEY
                             consumerSecret:CONSUMER_SECRET
                               optionalHost:SANDBOX_HOST];
+    
+//    authenticationWithBiometrics
+    NSString *authBio = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationWithBiometrics"];
+    if (!authBio) {
+        
+        return YES;
+    }
+    if ([authBio boolValue]) {
+        
+//        [self authB];
+    }
     return YES;
+}
+
+// 指纹锁
+- (void) authB{
+    
+    LAContext *context = [LAContext new];
+    // 开始使用指纹识别
+    [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:@"请验证指纹" reply:^(BOOL success, NSError * _Nullable error) {
+        
+        if (success) {
+            
+        }
+        if (error) {
+            
+            
+        }
+        
+    }];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

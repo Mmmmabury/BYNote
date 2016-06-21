@@ -10,6 +10,7 @@
 #import <MessageUI/MessageUI.h>
 #import <ENSDK.h>
 
+
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 
@@ -140,6 +141,15 @@
         case 101:
             
             break;
+            // copy
+        case 102:
+            
+            break;
+            // finger
+        case 103:
+            
+            [_delegate authenticationWithFinger:sender];
+            break;
             // rating
         case 105:
            
@@ -155,6 +165,5 @@
             break;
     }
 }
-
 
 @end

@@ -10,7 +10,6 @@
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 
 #import "SearchViewController.h"
-#import "SearchResultTableViewController.h"
 
 @interface SearchViewController () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
 

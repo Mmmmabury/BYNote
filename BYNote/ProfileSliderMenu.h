@@ -14,6 +14,7 @@
 - (void)linkToEverNote: (ProfileSliderMenuButton *) sender;
 - (void)sendEmailAction;
 - (void)displaySearchView;
+- (void)authenticationWithFinger: (ProfileSliderMenuButton *) sender;
 @end
 
 @interface ProfileSliderMenu : UIView

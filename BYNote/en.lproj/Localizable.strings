@@ -19,6 +19,8 @@
 "icloud" = "iCloud";
 "clipboard" = "从剪贴板复制";
 "finger" = "指纹设置";
+"fingerStart" = "验证指纹用以打开指纹锁";
+"fingerClose" = "验证指纹用以关闭指纹锁";
 "password" = "密码设置";
 "rating" = "评分";
 "feedback" = "反馈";

@@ -17,6 +17,7 @@
 #import <ENSDKAdvanced.h>
 #import <ENSDK.h>
 #import <EDAM.h>
+#import <LocalAuthentication/LocalAuthentication.h>
 #import "SearchViewController.h"
 
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
@@ -199,4 +200,76 @@
 //    [self presentViewController:searchViewController animated:YES completion:nil];
     [self.navigationController pushViewController:searchViewController animated:YES];
 }
+
+// 指纹
+- (void) authenticationWithFinger: (ProfileSliderMenuButton *) sender{
+    
+    NSString *localizedStr = nil;
+    if (sender.status == SliderButtonNotActive) {
+        
+       localizedStr = @"fingerStart";
+    }else if(sender.status == SliderButtonActive){
+        
+       localizedStr = @"fingerClose";
+    }
+    
+    [_profileMenu triggle];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"朕知道了" style:UIAlertActionStyleDefault handler:nil];
+        
+    if ([UIDevice currentDevice].systemVersion.floatValue <= 8.0) {
+        
+        alert.message = @"系统版本太低，不支持指纹锁";
+        [alert addAction:yesAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    
+    LAContext *context = [LAContext new];
+    if (![context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil]) {
+        
+        NSLog(@"对不起, 指纹识别技术暂时不可用");
+        alert.message = @"对不起, 指纹识别技术暂时不可用";
+        [alert addAction:yesAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    // 开始使用指纹识别
+    [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:NSLocalizedString(localizedStr, nil) reply:^(BOOL success, NSError * _Nullable error) {
+        
+        if (success) {
+            NSLog(@"指纹识别成功");
+            // 指纹识别成功，回主线程更新UI,弹出提示框
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                if (sender.status == SliderButtonNotActive) {
+                    
+                    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"authenticationWithBiometrics"];
+                    alert.message = @"指纹识别成功, 指纹锁已经打开";
+                    sender.status = SliderButtonActive;
+                }else if(sender.status == SliderButtonActive){
+                    
+                    [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"authenticationWithBiometrics"];
+                    alert.message = @"指纹识别成功, 指纹锁已经关闭";
+                    sender.status = SliderButtonNotActive;
+                }
+                [alert addAction:yesAction];
+                [self presentViewController:alert animated:YES completion:nil];
+            });
+        }
+        if (error) {
+            
+            if (error.code == -2) {
+                
+                NSLog(@"用户取消了操作");
+            } else {
+                
+                NSLog(@"指纹锁发生错误: %@",error);
+            }
+            
+        }
+        
+    }];
+    
+}
+
 @end
