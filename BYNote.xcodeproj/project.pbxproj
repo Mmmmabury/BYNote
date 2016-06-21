@@ -12,14 +12,10 @@
 		22174CA31D0E8FFA00DBA117 /* Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22174CA11D0E8FFA00DBA117 /* Data.xcdatamodeld */; };
 		22174CA81D0EC4B500DBA117 /* BottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22174CA71D0EC4B500DBA117 /* BottomView.m */; };
 		22174CAB1D0EC8CF00DBA117 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22174CAA1D0EC8CF00DBA117 /* CoreDataManager.m */; };
-		22174CB01D0EC95000DBA117 /* Note+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 22174CAD1D0EC95000DBA117 /* Note+CoreDataProperties.m */; };
-		22174CB11D0EC95000DBA117 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 22174CAF1D0EC95000DBA117 /* Note.m */; };
-		222859B21D17C02600B3C53B /* BetaTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 222859B11D17C02600B3C53B /* BetaTextView.m */; };
 		222859B81D17CAA500B3C53B /* ToDoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 222859B71D17CAA500B3C53B /* ToDoButton.m */; };
 		22601E221CF4764E00E2150A /* 123.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 22601E211CF4764E00E2150A /* 123.JPG */; };
 		22601E241CF476B000E2150A /* 12.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 22601E231CF476B000E2150A /* 12.JPG */; };
 		227DF2941D032206004DDC15 /* MainNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 227DF2931D032206004DDC15 /* MainNavigation.m */; };
-		2280AC9D1D1805C900430126 /* EditBeta2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2280AC9C1D1805C900430126 /* EditBeta2.m */; };
 		2280ACA11D1807A600430126 /* UIView+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 2280ACA01D1807A600430126 /* UIView+YYAdd.m */; };
 		228165BB1D050A6D00A29D54 /* ProfileSliderMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 228165BA1D050A6D00A29D54 /* ProfileSliderMenu.m */; };
 		228166031D05179800A29D54 /* BYNCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 228165FE1D05179800A29D54 /* BYNCollectionCell.m */; };
@@ -27,7 +23,6 @@
 		228166051D05179800A29D54 /* BYNCollectionFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 228166021D05179800A29D54 /* BYNCollectionFlowView.m */; };
 		2281660C1D0522F700A29D54 /* ProfileSliderMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281660B1D0522F700A29D54 /* ProfileSliderMenuButton.m */; };
 		228166DC1D0D4A4F00A29D54 /* EditNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 228166DB1D0D4A4F00A29D54 /* EditNoteViewController.m */; };
-		229817071D18C5960009256E /* Line.m in Sources */ = {isa = PBXBuildFile; fileRef = 229817061D18C5960009256E /* Line.m */; };
 		22CFB4DA1CF4374300C38ED7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4D91CF4374300C38ED7 /* main.m */; };
 		22CFB4DD1CF4374300C38ED7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4DC1CF4374300C38ED7 /* AppDelegate.m */; };
 		22CFB4E01CF4374300C38ED7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4DF1CF4374300C38ED7 /* ViewController.m */; };
@@ -36,7 +31,6 @@
 		22CFB4E81CF4374300C38ED7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22CFB4E61CF4374300C38ED7 /* LaunchScreen.storyboard */; };
 		22CFB4F31CF4374300C38ED7 /* BYNoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4F21CF4374300C38ED7 /* BYNoteTests.m */; };
 		22CFB4FE1CF4374300C38ED7 /* BYNoteUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4FD1CF4374300C38ED7 /* BYNoteUITests.m */; };
-		22D92F0B1D125EC5006C6B89 /* EditBeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D92F0A1D125EC5006C6B89 /* EditBeta.m */; };
 		D935FAF49087FCE30EEE4402 /* libPods-BYNote.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B56F9D3FA69CAA2BE87C8F3A /* libPods-BYNote.a */; };
 /* End PBXBuildFile section */
 
@@ -67,19 +61,12 @@
 		22174CA91D0EC8CF00DBA117 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
 		22174CAA1D0EC8CF00DBA117 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
 		22174CAC1D0EC95000DBA117 /* Note+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Note+CoreDataProperties.h"; sourceTree = "<group>"; };
-		22174CAD1D0EC95000DBA117 /* Note+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Note+CoreDataProperties.m"; sourceTree = "<group>"; };
-		22174CAE1D0EC95000DBA117 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
-		22174CAF1D0EC95000DBA117 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
-		222859B01D17C02600B3C53B /* BetaTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BetaTextView.h; sourceTree = "<group>"; };
-		222859B11D17C02600B3C53B /* BetaTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BetaTextView.m; sourceTree = "<group>"; };
 		222859B61D17CAA500B3C53B /* ToDoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoButton.h; sourceTree = "<group>"; };
 		222859B71D17CAA500B3C53B /* ToDoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoButton.m; sourceTree = "<group>"; };
 		22601E211CF4764E00E2150A /* 123.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 123.JPG; sourceTree = "<group>"; };
 		22601E231CF476B000E2150A /* 12.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 12.JPG; sourceTree = "<group>"; };
 		227DF2921D032206004DDC15 /* MainNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainNavigation.h; path = BYNote/MainNavigation.h; sourceTree = SOURCE_ROOT; };
 		227DF2931D032206004DDC15 /* MainNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainNavigation.m; path = BYNote/MainNavigation.m; sourceTree = SOURCE_ROOT; };
-		2280AC9B1D1805C900430126 /* EditBeta2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditBeta2.h; sourceTree = "<group>"; };
-		2280AC9C1D1805C900430126 /* EditBeta2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditBeta2.m; sourceTree = "<group>"; };
 		2280AC9F1D1807A600430126 /* UIView+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YYAdd.h"; sourceTree = "<group>"; };
 		2280ACA01D1807A600430126 /* UIView+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YYAdd.m"; sourceTree = "<group>"; };
 		228165B91D050A6D00A29D54 /* ProfileSliderMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileSliderMenu.h; sourceTree = "<group>"; };
@@ -97,8 +84,6 @@
 		228166D81D0D4A1300A29D54 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		228166DA1D0D4A4F00A29D54 /* EditNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditNoteViewController.h; sourceTree = "<group>"; };
 		228166DB1D0D4A4F00A29D54 /* EditNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditNoteViewController.m; sourceTree = "<group>"; };
-		229817051D18C5960009256E /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line.h; sourceTree = "<group>"; };
-		229817061D18C5960009256E /* Line.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Line.m; sourceTree = "<group>"; };
 		22CFB4D51CF4374300C38ED7 /* BYNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BYNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22CFB4D91CF4374300C38ED7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		22CFB4DB1CF4374300C38ED7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -115,8 +100,6 @@
 		22CFB4F91CF4374300C38ED7 /* BYNoteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BYNoteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22CFB4FD1CF4374300C38ED7 /* BYNoteUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BYNoteUITests.m; sourceTree = "<group>"; };
 		22CFB4FF1CF4374300C38ED7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22D92F091D125EC5006C6B89 /* EditBeta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditBeta.h; sourceTree = "<group>"; };
-		22D92F0A1D125EC5006C6B89 /* EditBeta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditBeta.m; sourceTree = "<group>"; };
 		8028F1DAB2A8BBD037EBD314 /* Pods-BYNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BYNote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BYNote/Pods-BYNote.debug.xcconfig"; sourceTree = "<group>"; };
 		95F3A9C2800E208A0FFDDE7B /* Pods-BYNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BYNote.release.xcconfig"; path = "Pods/Target Support Files/Pods-BYNote/Pods-BYNote.release.xcconfig"; sourceTree = "<group>"; };
 		B56F9D3FA69CAA2BE87C8F3A /* libPods-BYNote.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BYNote.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -273,12 +256,6 @@
 			children = (
 				228166DA1D0D4A4F00A29D54 /* EditNoteViewController.h */,
 				228166DB1D0D4A4F00A29D54 /* EditNoteViewController.m */,
-				22D92F091D125EC5006C6B89 /* EditBeta.h */,
-				22D92F0A1D125EC5006C6B89 /* EditBeta.m */,
-				222859B01D17C02600B3C53B /* BetaTextView.h */,
-				222859B11D17C02600B3C53B /* BetaTextView.m */,
-				2280AC9B1D1805C900430126 /* EditBeta2.h */,
-				2280AC9C1D1805C900430126 /* EditBeta2.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -287,11 +264,6 @@
 			isa = PBXGroup;
 			children = (
 				22174CAC1D0EC95000DBA117 /* Note+CoreDataProperties.h */,
-				22174CAD1D0EC95000DBA117 /* Note+CoreDataProperties.m */,
-				22174CAE1D0EC95000DBA117 /* Note.h */,
-				22174CAF1D0EC95000DBA117 /* Note.m */,
-				229817051D18C5960009256E /* Line.h */,
-				229817061D18C5960009256E /* Line.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -570,23 +542,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22174CB11D0EC95000DBA117 /* Note.m in Sources */,
 				227DF2941D032206004DDC15 /* MainNavigation.m in Sources */,
 				22174CAB1D0EC8CF00DBA117 /* CoreDataManager.m in Sources */,
 				228166041D05179800A29D54 /* BYNCollectionFlowLayout.m in Sources */,
 				228166DC1D0D4A4F00A29D54 /* EditNoteViewController.m in Sources */,
-				222859B21D17C02600B3C53B /* BetaTextView.m in Sources */,
 				2281660C1D0522F700A29D54 /* ProfileSliderMenuButton.m in Sources */,
 				228166051D05179800A29D54 /* BYNCollectionFlowView.m in Sources */,
 				2280ACA11D1807A600430126 /* UIView+YYAdd.m in Sources */,
-				22D92F0B1D125EC5006C6B89 /* EditBeta.m in Sources */,
-				2280AC9D1D1805C900430126 /* EditBeta2.m in Sources */,
 				228166031D05179800A29D54 /* BYNCollectionCell.m in Sources */,
 				22174CA31D0E8FFA00DBA117 /* Data.xcdatamodeld in Sources */,
 				222859B81D17CAA500B3C53B /* ToDoButton.m in Sources */,
 				22CFB4E01CF4374300C38ED7 /* ViewController.m in Sources */,
-				22174CB01D0EC95000DBA117 /* Note+CoreDataProperties.m in Sources */,
-				229817071D18C5960009256E /* Line.m in Sources */,
 				22CFB4DD1CF4374300C38ED7 /* AppDelegate.m in Sources */,
 				22CFB4DA1CF4374300C38ED7 /* main.m in Sources */,
 				228165BB1D050A6D00A29D54 /* ProfileSliderMenu.m in Sources */,
