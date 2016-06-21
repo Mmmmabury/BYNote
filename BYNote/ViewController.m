@@ -17,6 +17,7 @@
 #import <ENSDKAdvanced.h>
 #import <ENSDK.h>
 #import <EDAM.h>
+#import "SearchViewController.h"
 
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
@@ -36,7 +37,13 @@
     [self createMainView];
     [self initNavigationItems];
     [self addGuesture];
-    [self presentEditNoteViewController];
+    [self displaySearchView];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
 }
 
 /**
@@ -52,6 +59,7 @@
     [self.view addGestureRecognizer:edgePanGuesture];
 }
 
+# pragma mark 子视图初始化
 /**
  *  @brief 初始化导航栏中的 items
  */
@@ -83,19 +91,12 @@
     _profileMenu = [[ProfileSliderMenu alloc]init];
     _profileMenu.delegate = self;
     
-    
     // 底部的子视图
     BottomView *bottomView = [[BottomView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 64, SCREEN_WIDTH, 64) andVC:self];
     [self.view addSubview:bottomView];
-    
-
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
+# pragma mark 手势，按钮target
 - (void)profile:(UIButton *)sender {
 	
     [_profileMenu triggle];
@@ -109,6 +110,7 @@
     }
 }
 
+# pragma mark 弹出编辑视图
 - (void)presentEditNoteViewController{
 	
     EditNoteViewController *editNote = nil;
@@ -187,5 +189,14 @@
         
         [_profileMenu triggle];
     }];
+}
+
+// search
+- (void)displaySearchView{
+    
+    SearchViewController *searchViewController =  [self.storyboard instantiateViewControllerWithIdentifier:@"search"];
+//    [_profileMenu triggle];
+//    [self presentViewController:searchViewController animated:YES completion:nil];
+    [self.navigationController pushViewController:searchViewController animated:YES];
 }
 @end

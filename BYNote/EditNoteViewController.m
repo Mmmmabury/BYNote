@@ -114,7 +114,7 @@
     clockButton.frame = CGRectMake(5 * 3 + 80, 0, 50, 30);
     [clockButton setTitle:@"redo" forState: UIControlStateNormal];
     [clockButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [clockButton addTarget:self action:@selector(redo) forControlEvents:UIControlEventTouchUpInside];
+//    [clockButton addTarget:self action:@selector() forControlEvents:UIControlEventTouchUpInside];
     
     [_bottomView addSubview:redoButton];
     [_bottomView addSubview:undoButton];

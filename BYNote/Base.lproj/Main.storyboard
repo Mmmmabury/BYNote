@@ -21,6 +21,35 @@
             </objects>
             <point key="canvasLocation" x="175" y="356"/>
         </scene>
+        <!--Search View Controller-->
+        <scene sceneID="NcW-mx-N8S">
+            <objects>
+                <viewController storyboardIdentifier="search" id="8di-S4-eFk" customClass="SearchViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Wzn-7P-Wtg"/>
+                        <viewControllerLayoutGuide type="bottom" id="1dA-26-BiW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vsJ-rc-tBI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="2lJ-9Z-lSe">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="2lJ-9Z-lSe"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YOg-Fh-Lo3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="827" y="-325"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="j4S-2e-Y2z">
             <objects>

@@ -13,6 +13,7 @@
 
 - (void)linkToEverNote: (ProfileSliderMenuButton *) sender;
 - (void)sendEmailAction;
+- (void)displaySearchView;
 @end
 
 @interface ProfileSliderMenu : UIView

@@ -80,10 +80,10 @@
 }
 
 // 点击时背景加深
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    
+//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+
 //    _darkBlurView.hidden = NO;
-}
+//}
 
 /**
  *  @brief 点击的时候背景取消加深
@@ -91,10 +91,10 @@
  *  @param touches  touch
  *  @param event   事件
  */
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    
+//- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+
 //    [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(removeBlur) userInfo:nil repeats:NO];
-}
+//}
 
 - (void) removeBlur{
     

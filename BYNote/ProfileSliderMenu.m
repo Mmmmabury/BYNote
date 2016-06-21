@@ -83,7 +83,7 @@
         
         CGRect frame = CGRectMake(20, 50 + i * 50, SCREEN_WIDTH / 2 - 40, 40);
         ProfileSliderMenuButton *button = [[ProfileSliderMenuButton alloc] initWithFrame:frame andTitle:s[i]];
-        button.tag = 100 + i;
+        button.tag = 99 + i;
         button.status = a[i];
         [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
@@ -128,6 +128,10 @@
     NSURL *appStoreUrl =[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=414478124"];
     switch (sender.tag) {
             // Evernote
+        case 99:
+            
+            [_delegate displaySearchView];
+            break;
         case 100:
             
             [_delegate linkToEverNote:sender];

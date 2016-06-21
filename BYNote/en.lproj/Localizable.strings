@@ -23,6 +23,7 @@
 "rating" = "评分";
 "feedback" = "反馈";
 
+"searchBarPlaceHolder" = "输入搜索";
 
 "confirmLogOut" = "确定登出";
 "cancel" = "取消";

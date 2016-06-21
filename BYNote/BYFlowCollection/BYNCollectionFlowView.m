@@ -21,46 +21,6 @@
 
 @implementation BYNCollectionFlowView
 
-
-/**
- *  @brief 计算各个 item 的 frame
- */
-- (void) calculateFrames{
-    
-    CGRect lastFrame = CGRectZero;
-    // 计算 间距值
-    CGFloat inset = (numberOfRow + 1) * itemInset;
-    // 每个 cell 的宽
-    CGFloat cellWidth = (SCREEN_WIDTH - inset) / numberOfRow;
-    self.frames = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 2; i++) {
-        
-        [self.frames addObject:[[NSMutableArray alloc] init]];
-    }
-    
-    // 计算frame
-    for (int row = 0; row < numberOfRow; row++) {
-        
-        lastFrame = CGRectZero;
-        for (int i = row; i < self.texts.count; i += numberOfRow) {
-            
-            NSAttributedString *attriString = [[NSAttributedString alloc] initWithString:self.texts[i] attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:20.0f]}];
-            // 根据字符串的特性计算每行高度
-            CGRect rect = [attriString boundingRectWithSize:CGSizeMake(cellWidth - 8, SCREEN_HEIGHT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin context:nil];
-            
-            CGFloat height = ceil(rect.size.height);
-            CGFloat cellY = lastFrame.origin.y + lastFrame.size.height + itemInset;
-            CGFloat cellX = itemInset * (row + 1) + cellWidth * row;
-            CGRect frame = CGRectMake(cellX, cellY, cellWidth, height + itemInset + timeLabelHeight + 20);
-            
-            lastFrame = frame;
-            
-            [self.frames[row] addObject:[NSValue valueWithCGRect:frame]];
-        }
-    }
-}
-
-
 /**
  *  @brief 初始化
  *
@@ -78,7 +38,6 @@
     if (self) {
         
         [self registerClass:[BYNCollectionCell class] forCellWithReuseIdentifier:@"cell"];
-        
         self.delegate = self;
         self.dataSource = self;
         self.backgroundColor = [UIColor clearColor];
@@ -137,5 +96,44 @@
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Edit" bundle:[NSBundle mainBundle]];
     editNote = [sb instantiateViewControllerWithIdentifier:@"editViewController"];
     [_containedVC presentViewController:editNote animated:YES completion:nil];
+}
+
+# pragma mark 计算 frame
+/**
+ *  @brief 计算各个 item 的 frame
+ */
+- (void) calculateFrames{
+    
+    CGRect lastFrame = CGRectZero;
+    // 计算 间距值
+    CGFloat inset = (numberOfRow + 1) * itemInset;
+    // 每个 cell 的宽
+    CGFloat cellWidth = (SCREEN_WIDTH - inset) / numberOfRow;
+    self.frames = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 2; i++) {
+        
+        [self.frames addObject:[[NSMutableArray alloc] init]];
+    }
+    
+    // 计算frame
+    for (int row = 0; row < numberOfRow; row++) {
+        
+        lastFrame = CGRectZero;
+        for (int i = row; i < self.texts.count; i += numberOfRow) {
+            
+            NSAttributedString *attriString = [[NSAttributedString alloc] initWithString:self.texts[i] attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:20.0f]}];
+            // 根据字符串的特性计算每行高度
+            CGRect rect = [attriString boundingRectWithSize:CGSizeMake(cellWidth - 8, SCREEN_HEIGHT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin context:nil];
+            
+            CGFloat height = ceil(rect.size.height);
+            CGFloat cellY = lastFrame.origin.y + lastFrame.size.height + itemInset;
+            CGFloat cellX = itemInset * (row + 1) + cellWidth * row;
+            CGRect frame = CGRectMake(cellX, cellY, cellWidth, height + itemInset + timeLabelHeight + 20);
+            
+            lastFrame = frame;
+            
+            [self.frames[row] addObject:[NSValue valueWithCGRect:frame]];
+        }
+    }
 }
 @end
