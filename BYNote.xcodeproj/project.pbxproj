@@ -24,6 +24,7 @@
 		2281660C1D0522F700A29D54 /* ProfileSliderMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281660B1D0522F700A29D54 /* ProfileSliderMenuButton.m */; };
 		228166DC1D0D4A4F00A29D54 /* EditNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 228166DB1D0D4A4F00A29D54 /* EditNoteViewController.m */; };
 		2298170D1D191AC30009256E /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2298170C1D191AC30009256E /* SearchViewController.m */; };
+		22A3F30B1D1A1B1E00D6624D /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A3F30A1D1A1B1E00D6624D /* LaunchViewController.m */; };
 		22CFB4DA1CF4374300C38ED7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4D91CF4374300C38ED7 /* main.m */; };
 		22CFB4DD1CF4374300C38ED7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4DC1CF4374300C38ED7 /* AppDelegate.m */; };
 		22CFB4E01CF4374300C38ED7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4DF1CF4374300C38ED7 /* ViewController.m */; };
@@ -87,6 +88,8 @@
 		228166DB1D0D4A4F00A29D54 /* EditNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditNoteViewController.m; sourceTree = "<group>"; };
 		2298170B1D191AC30009256E /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		2298170C1D191AC30009256E /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		22A3F3091D1A1B1E00D6624D /* LaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchViewController.h; sourceTree = "<group>"; };
+		22A3F30A1D1A1B1E00D6624D /* LaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchViewController.m; sourceTree = "<group>"; };
 		22CFB4D51CF4374300C38ED7 /* BYNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BYNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22CFB4D91CF4374300C38ED7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		22CFB4DB1CF4374300C38ED7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -221,6 +224,8 @@
 				22CFB4DF1CF4374300C38ED7 /* ViewController.m */,
 				2298170B1D191AC30009256E /* SearchViewController.h */,
 				2298170C1D191AC30009256E /* SearchViewController.m */,
+				22A3F3091D1A1B1E00D6624D /* LaunchViewController.h */,
+				22A3F30A1D1A1B1E00D6624D /* LaunchViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -552,6 +557,7 @@
 				228166041D05179800A29D54 /* BYNCollectionFlowLayout.m in Sources */,
 				228166DC1D0D4A4F00A29D54 /* EditNoteViewController.m in Sources */,
 				2281660C1D0522F700A29D54 /* ProfileSliderMenuButton.m in Sources */,
+				22A3F30B1D1A1B1E00D6624D /* LaunchViewController.m in Sources */,
 				228166051D05179800A29D54 /* BYNCollectionFlowView.m in Sources */,
 				2298170D1D191AC30009256E /* SearchViewController.m in Sources */,
 				2280ACA11D1807A600430126 /* UIView+YYAdd.m in Sources */,

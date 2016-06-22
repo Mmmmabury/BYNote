@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Main Navigation-->
@@ -20,6 +21,38 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7vH-lC-NfH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="175" y="356"/>
+        </scene>
+        <!--Launch View Controller-->
+        <scene sceneID="nRY-P2-1DQ">
+            <objects>
+                <viewController id="ntx-xg-86X" customClass="LaunchViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="civ-Pu-eOP"/>
+                        <viewControllerLayoutGuide type="bottom" id="qVq-rn-0eK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AXB-Mw-eRp" customClass="UIControl">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="123.JPG" translatesAutoresizingMaskIntoConstraints="NO" id="MOi-qs-Y3b">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="MOi-qs-Y3b" firstAttribute="top" secondItem="AXB-Mw-eRp" secondAttribute="topMargin" id="AIw-Nx-i7N"/>
+                            <constraint firstItem="qVq-rn-0eK" firstAttribute="top" secondItem="MOi-qs-Y3b" secondAttribute="bottom" id="XTA-2t-cgX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="MOi-qs-Y3b" secondAttribute="trailing" constant="-20" id="isO-0y-6xE"/>
+                            <constraint firstItem="MOi-qs-Y3b" firstAttribute="leading" secondItem="AXB-Mw-eRp" secondAttribute="leadingMargin" constant="-20" id="yiv-MZ-Pjc"/>
+                        </constraints>
+                        <connections>
+                            <action selector="viewTap:" destination="ntx-xg-86X" eventType="touchDown" id="vzY-Ov-e2b"/>
+                        </connections>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l1z-in-9OD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="175" y="-303"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="NcW-mx-N8S">
@@ -70,4 +103,7 @@
             <point key="canvasLocation" x="827" y="356"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="123.JPG" width="1920" height="1080"/>
+    </resources>
 </document>
