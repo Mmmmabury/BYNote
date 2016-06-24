@@ -78,6 +78,10 @@
         
         textLength++;
     }
+    if (textLength > 4) {
+        
+        return NO;
+    }
     UIButton *button = [_passwordImageView viewWithTag:99 + textLength];
     button.selected = !button.selected;
     if (textLength == 4) {
@@ -95,49 +99,76 @@
     return YES;
 }
 
+# pragma mark 已经输入4位密码
 - (void) inputDidEnd{
     
-    if (_firstPassword.length == 0) {
-    
-        // 开始第二次输入密码
-        _hitText.text = @"请再次输入密码";
-        _firstPassword = _passwordFieldView.text;
-        [self clearPassword];
-        return;
+    BOOL result = NO;
+    // 关闭密码锁
+    if (_statues == ClosePasswordLock) {
+        
+        result = [self closeLock];
+    }else if (_statues == OpenPasswordLock){
+        // 开启密码锁
+        
+         result = [self openLock];
     }
+    if (result) {
+        
+        [_passwordFieldView resignFirstResponder];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+# pragma mark 开启和关闭密码锁
+- (BOOL) closeLock{
     
-    // 判断第二次输入密码是否匹配
-    if ([_firstPassword isEqualToString:_passwordFieldView.text]) {
+    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
+    if ([password isEqualToString:_passwordFieldView.text]) {
         
-        // 第二次匹配成功
-        switch (_statues) {
-            case OpenPasswordLock:
-        
-                [[NSUserDefaults standardUserDefaults] setObject:@"password" forKey:_passwordFieldView.text];
-                break;
-            case ClosePasswordLock:
-                
-                [[NSUserDefaults standardUserDefaults] setObject:@"password" forKey:@""];
-                break;
-            default:
-                break;
-        }
         if (_completedBlock) {
             
             _completedBlock();
         }
-        [_passwordFieldView resignFirstResponder];
-        [self dismissViewControllerAnimated:YES completion:nil];
-        return;
+        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"password"];
+        return YES;
     }else{
+        
+        _hitText.text = @"密码输入错误";
+        [self clearPassword];
+    }
+    return NO;
+}
+
+- (BOOL) openLock{
     
+    if (_firstPassword.length == 0) {
+        
+        // 开始第二次输入密码
+        _hitText.text = @"请再次输入密码";
+        _firstPassword = _passwordFieldView.text;
+        [self clearPassword];
+        return NO;
+    }
+    
+    // 判断是开启密码锁，并判断第二次输入密码是否匹配
+    if ([_firstPassword isEqualToString:_passwordFieldView.text]) {
+        
+        // 第二次匹配成功
+        if (_completedBlock) {
+            
+            _completedBlock();
+        }
+        [[NSUserDefaults standardUserDefaults] setObject:_passwordFieldView.text forKey:@"password"];
+        return YES;
+    }else{
+        
         // 第二次输入不匹配
         NSAttributedString *attributedString = [[NSAttributedString alloc]
                                                 initWithString:@"密码输入不符，请再次输入"
                                                 attributes:@{NSForegroundColorAttributeName : [UIColor redColor]}];
         _hitText.attributedText = attributedString;
         [self clearPassword];
-        return;
+        return NO;
     }
 }
 

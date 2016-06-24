@@ -273,10 +273,19 @@
 
 - (void)launchWithPassword:(ProfileSliderMenuButton *)sender{
     
+    // 判断开启或者关闭密码锁
+    int lockStatus = 0;
+    if (sender.status == SliderButtonActive) {
+        
+        lockStatus = ClosePasswordLock;
+    }else{
+        
+        lockStatus = OpenPasswordLock;
+    }
     PasswordViewController *vc = [PasswordViewController pwLockWithCompletedBlock:^{
         
-        sender.status = SliderButtonActive;
-    }andStatus:OpenPasswordLock];
+        sender.status = sender.status ^ 0x1;
+    }andStatus:lockStatus];
     [_profileMenu triggle];
     [self presentViewController:vc animated:YES completion:nil];
 }
