@@ -15,6 +15,7 @@
 - (void)sendEmailAction;
 - (void)displaySearchView;
 - (void)authenticationWithFinger: (ProfileSliderMenuButton *) sender;
+- (void)launchWithPassword: (ProfileSliderMenuButton *) sender;
 @end
 
 @interface ProfileSliderMenu : UIView

@@ -30,16 +30,7 @@
                             consumerSecret:CONSUMER_SECRET
                               optionalHost:SANDBOX_HOST];
     
-//    authenticationWithBiometrics
-    NSString *authBio = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationWithBiometrics"];
-    if (!authBio) {
-        
-        return YES;
-    }
-    if ([authBio boolValue]) {
-        
-//        [self authB];
-    }
+
     return YES;
 }
 

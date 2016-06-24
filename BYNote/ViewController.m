@@ -19,6 +19,7 @@
 #import <EDAM.h>
 #import <LocalAuthentication/LocalAuthentication.h>
 #import "SearchViewController.h"
+#import "PasswordViewController.h"
 
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
@@ -38,10 +39,10 @@
     [self createMainView];
     [self initNavigationItems];
     [self addGuesture];
-    [self displaySearchView];
+//    [self displaySearchView];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewDidAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
@@ -265,11 +266,19 @@
                 
                 NSLog(@"指纹锁发生错误: %@",error);
             }
-            
         }
-        
     }];
     
+}
+
+- (void)launchWithPassword:(ProfileSliderMenuButton *)sender{
+    
+    PasswordViewController *vc = [PasswordViewController pwLockWithCompletedBlock:^{
+        
+        sender.status = SliderButtonActive;
+    }andStatus:OpenPasswordLock];
+    [_profileMenu triggle];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 @end

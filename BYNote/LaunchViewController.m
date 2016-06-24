@@ -17,24 +17,44 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self authenticationWithBiometrics];
+    [self passwordLock];
 }
+
+- (BOOL) authenticationWithBiometrics{
+    
+    //    authenticationWithBiometrics
+    NSString *authBio = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationWithBiometrics"];
+    if (!authBio) {
+        
+        
+    }
+    if ([authBio boolValue]) {
+        
+        //        [self authB];
+    }
+    return YES;
+}
+
+- (BOOL) passwordLock{
+    
+    // passwordLock
+    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
+    if (password || password.length != 0) {
+        
+        // 没有密码锁
+    } else{
+        
+        // 有密码锁
+    }
+    return YES;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)viewTap:(UIControl *)sender {
-    
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

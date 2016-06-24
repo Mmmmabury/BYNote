@@ -23,6 +23,9 @@
 		228166051D05179800A29D54 /* BYNCollectionFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 228166021D05179800A29D54 /* BYNCollectionFlowView.m */; };
 		2281660C1D0522F700A29D54 /* ProfileSliderMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281660B1D0522F700A29D54 /* ProfileSliderMenuButton.m */; };
 		228166DC1D0D4A4F00A29D54 /* EditNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 228166DB1D0D4A4F00A29D54 /* EditNoteViewController.m */; };
+		229311C11D1CBE7400169EFA /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 229311C01D1CBE7400169EFA /* Launch.storyboard */; };
+		229311C51D1CBEDA00169EFA /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 229311C31D1CBEDA00169EFA /* PasswordViewController.m */; };
+		229311C61D1CBEDA00169EFA /* PasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 229311C41D1CBEDA00169EFA /* PasswordViewController.xib */; };
 		2298170D1D191AC30009256E /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2298170C1D191AC30009256E /* SearchViewController.m */; };
 		22A3F30B1D1A1B1E00D6624D /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A3F30A1D1A1B1E00D6624D /* LaunchViewController.m */; };
 		22CFB4DA1CF4374300C38ED7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4D91CF4374300C38ED7 /* main.m */; };
@@ -86,6 +89,10 @@
 		228166D81D0D4A1300A29D54 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		228166DA1D0D4A4F00A29D54 /* EditNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditNoteViewController.h; sourceTree = "<group>"; };
 		228166DB1D0D4A4F00A29D54 /* EditNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditNoteViewController.m; sourceTree = "<group>"; };
+		229311C01D1CBE7400169EFA /* Launch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
+		229311C21D1CBEDA00169EFA /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordViewController.h; sourceTree = "<group>"; };
+		229311C31D1CBEDA00169EFA /* PasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordViewController.m; sourceTree = "<group>"; };
+		229311C41D1CBEDA00169EFA /* PasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordViewController.xib; sourceTree = "<group>"; };
 		2298170B1D191AC30009256E /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		2298170C1D191AC30009256E /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		22A3F3091D1A1B1E00D6624D /* LaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchViewController.h; sourceTree = "<group>"; };
@@ -207,14 +214,14 @@
 			path = BYFlowCollection;
 			sourceTree = "<group>";
 		};
-		228166071D0517D000A29D54 /* MainViewController */ = {
+		228166071D0517D000A29D54 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				22174CA41D0EA70400DBA117 /* Model */,
 				228166091D0517FF00A29D54 /* View */,
 				228166081D0517EA00A29D54 /* Controller */,
 			);
-			name = MainViewController;
+			name = Main;
 			sourceTree = "<group>";
 		};
 		228166081D0517EA00A29D54 /* Controller */ = {
@@ -224,8 +231,6 @@
 				22CFB4DF1CF4374300C38ED7 /* ViewController.m */,
 				2298170B1D191AC30009256E /* SearchViewController.h */,
 				2298170C1D191AC30009256E /* SearchViewController.m */,
-				22A3F3091D1A1B1E00D6624D /* LaunchViewController.h */,
-				22A3F30A1D1A1B1E00D6624D /* LaunchViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -241,14 +246,14 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		228166D91D0D4A2300A29D54 /* EditNoteViewController */ = {
+		228166D91D0D4A2300A29D54 /* EditNote */ = {
 			isa = PBXGroup;
 			children = (
 				228166DF1D0D4A8B00A29D54 /* Model */,
 				228166DD1D0D4A7100A29D54 /* View */,
 				228166DE1D0D4A7A00A29D54 /* Controller */,
 			);
-			name = EditNoteViewController;
+			name = EditNote;
 			sourceTree = "<group>";
 		};
 		228166DD1D0D4A7100A29D54 /* View */ = {
@@ -278,6 +283,35 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		229311BD1D1CBE2200169EFA /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				229311BF1D1CBE4D00169EFA /* Controller */,
+				229311BE1D1CBE4800169EFA /* View */,
+			);
+			name = Launch;
+			sourceTree = "<group>";
+		};
+		229311BE1D1CBE4800169EFA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				229311C01D1CBE7400169EFA /* Launch.storyboard */,
+				229311C41D1CBEDA00169EFA /* PasswordViewController.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		229311BF1D1CBE4D00169EFA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				22A3F3091D1A1B1E00D6624D /* LaunchViewController.h */,
+				22A3F30A1D1A1B1E00D6624D /* LaunchViewController.m */,
+				229311C21D1CBEDA00169EFA /* PasswordViewController.h */,
+				229311C31D1CBEDA00169EFA /* PasswordViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		22CFB4CC1CF4374300C38ED7 = {
 			isa = PBXGroup;
 			children = (
@@ -303,10 +337,11 @@
 		22CFB4D71CF4374300C38ED7 /* BYNote */ = {
 			isa = PBXGroup;
 			children = (
+				229311BD1D1CBE2200169EFA /* Launch */,
 				2280AC9E1D18078F00430126 /* Framework */,
 				22174CA01D0E8FDA00DBA117 /* Data */,
-				228166D91D0D4A2300A29D54 /* EditNoteViewController */,
-				228166071D0517D000A29D54 /* MainViewController */,
+				228166D91D0D4A2300A29D54 /* EditNote */,
+				228166071D0517D000A29D54 /* Main */,
 				227DF2911D0321E0004DDC15 /* Public */,
 				22174C231D0D93A600DBA117 /* Localizable.strings */,
 				22601E231CF476B000E2150A /* 12.JPG */,
@@ -476,9 +511,11 @@
 				22CFB4E81CF4374300C38ED7 /* LaunchScreen.storyboard in Resources */,
 				22CFB4E51CF4374300C38ED7 /* Assets.xcassets in Resources */,
 				22601E241CF476B000E2150A /* 12.JPG in Resources */,
+				229311C11D1CBE7400169EFA /* Launch.storyboard in Resources */,
 				22174C211D0D93A600DBA117 /* Localizable.strings in Resources */,
 				22601E221CF4764E00E2150A /* 123.JPG in Resources */,
 				22174C1E1D0D63EE00DBA117 /* Edit.storyboard in Resources */,
+				229311C61D1CBEDA00169EFA /* PasswordViewController.xib in Resources */,
 				22CFB4E31CF4374300C38ED7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -569,6 +606,7 @@
 				22CFB4DA1CF4374300C38ED7 /* main.m in Sources */,
 				228165BB1D050A6D00A29D54 /* ProfileSliderMenu.m in Sources */,
 				22174CA81D0EC4B500DBA117 /* BottomView.m in Sources */,
+				229311C51D1CBEDA00169EFA /* PasswordViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

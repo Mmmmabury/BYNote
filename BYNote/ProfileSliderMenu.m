@@ -72,7 +72,8 @@
                    NSLocalizedString(@"password", nil),
                    NSLocalizedString(@"rating", nil),
                    NSLocalizedString(@"feedback", nil),];
-    int a[7] = {
+    int a[8] = {
+        SliderButtonNotActive,
         logStatus,
         SliderButtonNotActive,
         SliderButtonNotActive,
@@ -145,10 +146,15 @@
         case 102:
             
             break;
-            // finger
+            // 指纹锁
         case 103:
             
             [_delegate authenticationWithFinger:sender];
+            break;
+            // 密码锁
+        case 104:
+            
+            [_delegate launchWithPassword:sender];
             break;
             // rating
         case 105:
