@@ -15,10 +15,13 @@
 #import "Note.h"
 
 @interface BYNCollectionFlowView()<UICollectionViewDelegate, UICollectionViewDataSource>
-
+{
+    CGFloat _offsetY;
+}
 @property (nonatomic, strong) NSMutableArray *frames;
 @property (nonatomic, copy) NSArray *texts;
 @property (nonatomic, copy) NSArray *colors;
+
 @end
 
 @implementation BYNCollectionFlowView
@@ -42,6 +45,7 @@
         [self registerClass:[BYNCollectionCell class] forCellWithReuseIdentifier:@"cell"];
         self.delegate = self;
         self.dataSource = self;
+        
         self.backgroundColor = [UIColor clearColor];
         self.showsVerticalScrollIndicator = NO;
 //        self.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT * 64);
@@ -150,6 +154,33 @@
             
             [self.frames[row] addObject:[NSValue valueWithCGRect:frame]];
         }
+    }
+}
+
+# pragma mark scrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+//    NSLog(@"%f", scrollView.contentOffset.y);
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    
+    _offsetY = scrollView.contentOffset.y;
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
+    
+//    NSLog(@"%.2f", scrollView.contentOffset.y);
+//    NSLog(@"%.2f", targetContentOffset->y);
+    CGFloat y = scrollView.contentOffset.y;
+    if (y > _offsetY) {
+        
+        NSLog(@"视图向上滑动");
+        [[NSNotificationCenter defaultCenter] postNotificationName:FLOWVIEW_UP_SCROLL_NOTI object:nil];
+    }else{
+        
+        NSLog(@"视图向下滑动");
+        [[NSNotificationCenter defaultCenter] postNotificationName:FLOWVIEW_DOWN_SCROLL_NOTI object:nil];
     }
 }
 @end

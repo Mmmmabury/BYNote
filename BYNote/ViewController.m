@@ -20,13 +20,19 @@
 #import <LocalAuthentication/LocalAuthentication.h>
 #import "SearchViewController.h"
 #import "PasswordViewController.h"
+#import "UIView+YYAdd.h"
 
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 
 @interface ViewController () <SliderButtonAction, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate>
 
+{
+    CGRect _bottomViewHideFrame;
+    CGRect _bottomViewShowFrame;
+}
 @property (nonatomic, strong) ProfileSliderMenu *profileMenu;
+@property (nonatomic, strong) BottomView *bottomView;
 @end
 
 @implementation ViewController
@@ -39,6 +45,7 @@
     [self createMainView];
     [self initNavigationItems];
     [self addGuesture];
+    [self addNotifications];
 //    [self displaySearchView];
 }
 
@@ -46,6 +53,12 @@
     
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
+}
+
+- (void) addNotifications{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(bottomViewShow) name:FLOWVIEW_DOWN_SCROLL_NOTI object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(bottomViewHide) name:FLOWVIEW_UP_SCROLL_NOTI object:nil];
 }
 
 /**
@@ -94,8 +107,11 @@
     _profileMenu.delegate = self;
     
     // 底部的子视图
-    BottomView *bottomView = [[BottomView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 64, SCREEN_WIDTH, 64) andVC:self];
-    [self.view addSubview:bottomView];
+    _bottomView = [[BottomView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 64, SCREEN_WIDTH, 64) andVC:self];
+    [self.view addSubview:_bottomView];
+    _bottomViewShowFrame = _bottomView.frame;
+    _bottomViewHideFrame = _bottomViewShowFrame;
+    _bottomViewHideFrame.origin.y = _bottomViewHideFrame.origin.y + 70.0;
 }
 
 # pragma mark 手势，按钮target
@@ -288,6 +304,22 @@
     }andStatus:lockStatus];
     [_profileMenu triggle];
     [self presentViewController:vc animated:YES completion:nil];
+}
+
+- (void)bottomViewHide {
+	
+    [UIView animateWithDuration:0.2 animations:^{
+        
+        _bottomView.frame = _bottomViewHideFrame;
+    }];
+}
+
+- (void)bottomViewShow {
+	
+    [UIView animateWithDuration:0.2 animations:^{
+        
+        _bottomView.frame = _bottomViewShowFrame;
+    }];
 }
 
 @end

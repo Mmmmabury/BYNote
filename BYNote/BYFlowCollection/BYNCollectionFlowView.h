@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+#define FLOWVIEW_UP_SCROLL_NOTI @"scrollup"
+#define FLOWVIEW_DOWN_SCROLL_NOTI @"scrolldown"
+
 @interface BYNCollectionFlowView : UICollectionView
 
 @property (nonatomic, weak) UIViewController *containedVC;

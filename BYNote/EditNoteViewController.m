@@ -81,8 +81,11 @@
     _textView.width -= 20.0f;
     _textView.left += 10.0f;
     _textView.height -= 60.0f;
-    _textView.font = [UIFont systemFontOfSize:20.0f];
-    _textView.showsVerticalScrollIndicator = NO;
+    _textView.font = [UIFont systemFontOfSize:FONT_SIZE];
+    _textView.allowsCopyAttributedString = NO;
+    _textView.allowsPasteAttributedString = YES;
+    _textView.allowsPasteImage = NO;
+    _textView.showsVerticalScrollIndicator = YES;
     _textView.showsHorizontalScrollIndicator = NO;
     _textView.delegate = self;
     _textView.autocapitalizationType = UITextAutocapitalizationTypeSentences;
@@ -206,13 +209,13 @@
     
     ToDoButton *toDoButton = [ToDoButton buttonWithType:UIButtonTypeCustom];
     toDoButton.frame = CGRectMake(0, 0, 19, 19);
-    toDoButton.titleLabel.font = [UIFont systemFontOfSize:20.0f];
+    toDoButton.titleLabel.font = [UIFont systemFontOfSize:FONT_SIZE];
     NSMutableAttributedString *todo =
     [NSMutableAttributedString yy_attachmentStringWithContent:toDoButton
                                                   contentMode:UIViewContentModeBottom
                                                attachmentSize:toDoButton.size
-                                                  alignToFont:[UIFont systemFontOfSize:20.0f]
-                                                    alignment:YYTextVerticalAlignmentCenter];
+                                                  alignToFont:[UIFont systemFontOfSize:FONT_SIZE]
+                                                    alignment:YYTextVerticalAlignmentBottom];
     // 如果 index 和文本长度相等，则直接加载文本末尾
     if (index == text.length){
     
@@ -223,7 +226,7 @@
     }
     _textView.attributedText = text;
 //    _textView.selectedRange = NSMakeRange(text.length + 2, 0);
-    _textView.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:20.0f]};
+    _textView.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
 }
 
 
@@ -233,10 +236,10 @@
     // 这里我把 YYTextView 中的 setSelectedRange 方法改了一点，如果有问题，点进源码看看
     _textView.selectedRange = NSMakeRange(_currentCursorRange.location + 1 + _cursorOffset, 0);
     _cursorOffset = 0;
-    textView.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:20.0f]};
+    textView.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
 }
 
-// 实现原行有 todo 按钮时，换行自动添加 todo 按钮
+// 实现 原行有 todo 按钮时，换行时自动添加 todo 按钮
 - (BOOL)textView:(YYTextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     
     _currentCursorRange = textView.selectedRange;
@@ -297,6 +300,7 @@
 
 - (void) saveContent{
     
+    //todo 还要保存 todobutton 的状态
     NSLog(@"%@", NSHomeDirectory());
     NSDate *now = [NSDate date];
     if (!_note) {
