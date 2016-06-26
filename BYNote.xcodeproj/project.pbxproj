@@ -26,6 +26,9 @@
 		229311C11D1CBE7400169EFA /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 229311C01D1CBE7400169EFA /* Launch.storyboard */; };
 		229311C51D1CBEDA00169EFA /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 229311C31D1CBEDA00169EFA /* PasswordViewController.m */; };
 		229311C61D1CBEDA00169EFA /* PasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 229311C41D1CBEDA00169EFA /* PasswordViewController.xib */; };
+		229312121D1FB4DC00169EFA /* Note+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2293120F1D1FB4DC00169EFA /* Note+CoreDataProperties.m */; };
+		229312131D1FB4DC00169EFA /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 229312111D1FB4DC00169EFA /* Note.m */; };
+		229312171D1FB5E900169EFA /* syncWithEvernote.m in Sources */ = {isa = PBXBuildFile; fileRef = 229312161D1FB5E900169EFA /* syncWithEvernote.m */; };
 		2298170D1D191AC30009256E /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2298170C1D191AC30009256E /* SearchViewController.m */; };
 		22A3F30B1D1A1B1E00D6624D /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A3F30A1D1A1B1E00D6624D /* LaunchViewController.m */; };
 		22CFB4DA1CF4374300C38ED7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4D91CF4374300C38ED7 /* main.m */; };
@@ -65,7 +68,6 @@
 		22174CA71D0EC4B500DBA117 /* BottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomView.m; sourceTree = "<group>"; };
 		22174CA91D0EC8CF00DBA117 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
 		22174CAA1D0EC8CF00DBA117 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
-		22174CAC1D0EC95000DBA117 /* Note+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Note+CoreDataProperties.h"; sourceTree = "<group>"; };
 		222859B61D17CAA500B3C53B /* ToDoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoButton.h; sourceTree = "<group>"; };
 		222859B71D17CAA500B3C53B /* ToDoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoButton.m; sourceTree = "<group>"; };
 		22601E211CF4764E00E2150A /* 123.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 123.JPG; sourceTree = "<group>"; };
@@ -93,6 +95,12 @@
 		229311C21D1CBEDA00169EFA /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordViewController.h; sourceTree = "<group>"; };
 		229311C31D1CBEDA00169EFA /* PasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordViewController.m; sourceTree = "<group>"; };
 		229311C41D1CBEDA00169EFA /* PasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordViewController.xib; sourceTree = "<group>"; };
+		2293120E1D1FB4DC00169EFA /* Note+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Note+CoreDataProperties.h"; sourceTree = "<group>"; };
+		2293120F1D1FB4DC00169EFA /* Note+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Note+CoreDataProperties.m"; sourceTree = "<group>"; };
+		229312101D1FB4DC00169EFA /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
+		229312111D1FB4DC00169EFA /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
+		229312151D1FB5E900169EFA /* syncWithEvernote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = syncWithEvernote.h; sourceTree = "<group>"; };
+		229312161D1FB5E900169EFA /* syncWithEvernote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = syncWithEvernote.m; sourceTree = "<group>"; };
 		2298170B1D191AC30009256E /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		2298170C1D191AC30009256E /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		22A3F3091D1A1B1E00D6624D /* LaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchViewController.h; sourceTree = "<group>"; };
@@ -278,7 +286,10 @@
 		228166DF1D0D4A8B00A29D54 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				22174CAC1D0EC95000DBA117 /* Note+CoreDataProperties.h */,
+				2293120E1D1FB4DC00169EFA /* Note+CoreDataProperties.h */,
+				2293120F1D1FB4DC00169EFA /* Note+CoreDataProperties.m */,
+				229312101D1FB4DC00169EFA /* Note.h */,
+				229312111D1FB4DC00169EFA /* Note.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -312,6 +323,15 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		229312141D1FB5A800169EFA /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				229312151D1FB5E900169EFA /* syncWithEvernote.h */,
+				229312161D1FB5E900169EFA /* syncWithEvernote.m */,
+			);
+			name = Tools;
+			sourceTree = "<group>";
+		};
 		22CFB4CC1CF4374300C38ED7 = {
 			isa = PBXGroup;
 			children = (
@@ -337,6 +357,7 @@
 		22CFB4D71CF4374300C38ED7 /* BYNote */ = {
 			isa = PBXGroup;
 			children = (
+				229312141D1FB5A800169EFA /* Tools */,
 				229311BD1D1CBE2200169EFA /* Launch */,
 				2280AC9E1D18078F00430126 /* Framework */,
 				22174CA01D0E8FDA00DBA117 /* Data */,
@@ -603,9 +624,12 @@
 				222859B81D17CAA500B3C53B /* ToDoButton.m in Sources */,
 				22CFB4E01CF4374300C38ED7 /* ViewController.m in Sources */,
 				22CFB4DD1CF4374300C38ED7 /* AppDelegate.m in Sources */,
+				229312171D1FB5E900169EFA /* syncWithEvernote.m in Sources */,
 				22CFB4DA1CF4374300C38ED7 /* main.m in Sources */,
+				229312131D1FB4DC00169EFA /* Note.m in Sources */,
 				228165BB1D050A6D00A29D54 /* ProfileSliderMenu.m in Sources */,
 				22174CA81D0EC4B500DBA117 /* BottomView.m in Sources */,
+				229312121D1FB4DC00169EFA /* Note+CoreDataProperties.m in Sources */,
 				229311C51D1CBEDA00169EFA /* PasswordViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

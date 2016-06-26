@@ -11,6 +11,8 @@
 #import "BYNCollectionCell.h"
 #import "BYNCELLSIZE.h"
 #import "EditNoteViewController.h"
+#import "CoreDataManager.h"
+#import "Note.h"
 
 @interface BYNCollectionFlowView()<UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -92,9 +94,23 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
+    NSManagedObjectContext *context = [[CoreDataManager shareCoreDataManager] managedObjectContext];
+    NSFetchRequest *fetch = [[NSFetchRequest alloc] initWithEntityName:@"Note"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"content like '*'", @"hhh"];
+    
+    fetch.predicate = predicate;
+    NSArray *array = [context executeFetchRequest:fetch error:nil];
+    for (Note *note in array) {
+        
+        NSString *s = note.content;
+        NSLog(@"%@", note.content);
+    }
+    Note *n = array[0];
+    
     EditNoteViewController *editNote = nil;
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Edit" bundle:[NSBundle mainBundle]];
     editNote = [sb instantiateViewControllerWithIdentifier:@"editViewController"];
+    editNote.note = n;
     [_containedVC presentViewController:editNote animated:YES completion:nil];
 }
 

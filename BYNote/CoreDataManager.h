@@ -2,7 +2,7 @@
 //  CoreDataManager.h
 //  BYNote
 //
-//  Created by cby on 16/6/13.
+//  Created by cby on 16/6/25.
 //  Copyright © 2016年 cby. All rights reserved.
 //
 
@@ -17,5 +17,5 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
-+ (instancetype) defaultCoreDataManager;
++ (instancetype) shareCoreDataManager;
 @end

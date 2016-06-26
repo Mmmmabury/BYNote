@@ -10,6 +10,8 @@
 #import "YYText.h"
 #import "UIView+YYAdd.h"
 #import "ToDoButton.h"
+#import "CoreDataManager.h"
+#import "Note.h"
 
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
@@ -25,6 +27,7 @@
 // 文本改变时，光标的偏移值
 @property (assign, nonatomic) NSInteger cursorOffset;
 @property (assign, nonatomic) CGFloat keyboardHeight;
+@property (strong, nonatomic) NSManagedObjectContext *context;
 
 @end
 
@@ -41,6 +44,11 @@
     [self initSubViews];
     [self createTextView];
     [self createBottomView];
+    _context = [[CoreDataManager shareCoreDataManager] managedObjectContext];
+    if (_note) {
+        
+        [self loadContent];
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -49,7 +57,7 @@
     _keyboardHeight = 0;
 }
 
-// 初始化一些其他的子视图
+# pragma mark  初始化一些其他的子视图
 - (void) initSubViews{
     
     self.view.backgroundColor = [UIColor colorWithRed:0.8672 green:0.8672 blue:0.8672 alpha:1.0];
@@ -89,9 +97,15 @@
     
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     closeButton.frame = CGRectMake(SCREEN_WIDTH - 45, 0, 40, 30);
-    [closeButton setTitle:@"保存" forState: UIControlStateNormal];
+    [closeButton setTitle:@"关闭" forState: UIControlStateNormal];
     [closeButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [closeButton addTarget:self action:@selector(closeView:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    saveButton.frame = CGRectMake(SCREEN_WIDTH - 90, 0, 40, 30);
+    [saveButton setTitle:@"保存" forState: UIControlStateNormal];
+    [saveButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [saveButton addTarget:self action:@selector(saveContent) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *toDoListButton = [UIButton buttonWithType:UIButtonTypeCustom];
     toDoListButton.frame = CGRectMake(5, 0, 40, 30);
@@ -110,35 +124,43 @@
     [redoButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [redoButton addTarget:self action:@selector(redo) forControlEvents:UIControlEventTouchUpInside];
     
+    UIButton *hideKeyboardButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    hideKeyboardButton.frame = CGRectMake(5 * 4 + 120, 0, 50, 30);
+    [hideKeyboardButton setTitle:@"收键盘" forState: UIControlStateNormal];
+    [hideKeyboardButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [hideKeyboardButton addTarget:self action:@selector(hideKeyboard) forControlEvents:UIControlEventTouchUpInside];
+    
     UIButton *clockButton = [UIButton buttonWithType:UIButtonTypeCustom];
     clockButton.frame = CGRectMake(5 * 3 + 80, 0, 50, 30);
     [clockButton setTitle:@"redo" forState: UIControlStateNormal];
     [clockButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
 //    [clockButton addTarget:self action:@selector() forControlEvents:UIControlEventTouchUpInside];
     
+    [_bottomView addSubview:hideKeyboardButton];
     [_bottomView addSubview:redoButton];
     [_bottomView addSubview:undoButton];
     [_bottomView addSubview:toDoListButton];
     [_bottomView addSubview:closeButton];
+    [_bottomView addSubview:saveButton];
     [self.view addSubview:_bottomView];
 }
 
+# pragma mark 按钮事件
 - (void) undo{
     
     [_textView performSelector:@selector(_undo)];
-//    [_textView performSelector:@selector(_showUndoRedoAlert)];
 }
 
 - (void) redo{
     
-        [_textView performSelector:@selector(_redo)];
+    [_textView performSelector:@selector(_redo)];
 }
 
-/**
- *  @brief dismiss 当前页
- *
- *  @param sender 关闭按钮
- */
+- (void) hideKeyboard{
+    
+    [_textView resignFirstResponder];
+}
+
 - (void)closeView:(UIButton *)sender {
     
     [_textView resignFirstResponder];
@@ -218,6 +240,11 @@
 - (BOOL)textView:(YYTextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     
     _currentCursorRange = textView.selectedRange;
+    // 删除字符
+    if (text.length == 0 && range.length == 1) {
+        
+        _cursorOffset = -1;
+    }
     if ([text isEqualToString:@"\n"]) {
         
         NSAttributedString *attributedText = textView.attributedText;
@@ -228,7 +255,6 @@
             NSInteger subStringEndIndex = substringRange.location + substringRange.length;
             NSInteger changeIndex = range.location + range.length;
             
-            NSLog(@"range:%@, string:%@", NSStringFromRange(substringRange), substring);
             // 光标所在行是否有 todo 按钮
             if (changeIndex >= subStringBeginIndex && changeIndex <= subStringEndIndex) {
                 
@@ -253,4 +279,37 @@
     return YES;
 }
 
+# pragma mark 加载数据
+- (void) loadContent{
+    
+    NSString *str = _note.content;
+    [str enumerateSubstringsInRange:NSMakeRange(0, str.length) options:NSStringEnumerationByComposedCharacterSequences usingBlock:^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
+       
+        if ([substring isEqualToString:@"\U0000fffc"]) {
+           
+           NSMutableString *s = [str mutableCopy];
+           [s replaceCharactersInRange:substringRange withString:@""];
+           _textView.text = [s copy];
+           [self addToDoButton:substringRange.location];
+        }
+    }];
+}
+
+- (void) saveContent{
+    
+    NSLog(@"%@", NSHomeDirectory());
+    NSDate *now = [NSDate date];
+    if (!_note) {
+        
+        NSLog(@"Note 实例不存在，新建 Note 实例");
+        _note = [NSEntityDescription insertNewObjectForEntityForName:@"Note" inManagedObjectContext:_context];
+        _note.create_data = now;
+    }
+    _note.content = _textView.text;
+    _note.changed = @YES;
+    _note.update_data = now;
+    [[CoreDataManager shareCoreDataManager] saveContext];
+    [_textView resignFirstResponder];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

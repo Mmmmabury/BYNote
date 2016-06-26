@@ -50,6 +50,7 @@
     [_passwordFieldView becomeFirstResponder];
 }
 
+// 初始化子视图
 - (void) initSubViews{
     
     self.navigationController.navigationBarHidden = NO;

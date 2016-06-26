@@ -2,7 +2,7 @@
 //  CoreDataManager.m
 //  BYNote
 //
-//  Created by cby on 16/6/13.
+//  Created by cby on 16/6/25.
 //  Copyright © 2016年 cby. All rights reserved.
 //
 
@@ -10,19 +10,21 @@
 
 @implementation CoreDataManager
 
+#pragma mark - Core Data stack
+
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-+ (instancetype) defaultCoreDataManager{
-    
-    static CoreDataManager *instance;
+static CoreDataManager *instance;
++ (instancetype) shareCoreDataManager{
+   
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         
         if (!instance) {
             
-            instance = [[super allocWithZone:nil]init];
+            instance = [[super allocWithZone:nil] init];
         }
     });
     return instance;
@@ -30,7 +32,7 @@
 
 + (instancetype)allocWithZone:(struct _NSZone *)zone{
     
-    return [CoreDataManager defaultCoreDataManager];
+    return [CoreDataManager shareCoreDataManager];
 }
 
 - (id)copy{
@@ -38,9 +40,8 @@
     return self;
 }
 
-
 - (NSURL *)applicationDocumentsDirectory {
-    // The directory the application uses to store the Core Data store file. This code uses a directory named "com.cby.coreData02" in the application's documents directory.
+    // The directory the application uses to store the Core Data store file. This code uses a directory named "com.cby.CoreData01" in the application's documents directory.
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
@@ -49,7 +50,7 @@
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Student" withExtension:@"momd"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Data" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
 }
@@ -63,7 +64,7 @@
     // Create the coordinator and store
     
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"student.sqlite"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Data.sqlite"];
     NSError *error = nil;
     NSString *failureReason = @"There was an error creating or loading the application's saved data.";
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
