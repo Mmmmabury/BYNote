@@ -29,6 +29,8 @@
 @property (assign, nonatomic) CGFloat keyboardHeight;
 @property (strong, nonatomic) NSManagedObjectContext *context;
 
+@property (strong, nonatomic) NSMutableArray *aaaa;
+
 @end
 
 @implementation EditNoteViewController
@@ -41,6 +43,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _aaaa = [[NSMutableArray alloc] init];
     [self initSubViews];
     [self createTextView];
     [self createBottomView];
@@ -161,7 +164,11 @@
 
 - (void) hideKeyboard{
     
-    [_textView resignFirstResponder];
+//    [_textView resignFirstResponder];
+    for (ToDoButton *b in _aaaa) {
+        
+        b.selected = YES;
+    }
 }
 
 - (void)closeView:(UIButton *)sender {
@@ -199,7 +206,8 @@
     
     _currentCursorRange = _textView.selectedRange;
     NSAttributedString *text = [self addToDoButton: _currentCursorRange.location + _currentCursorRange.length
-                                 andAttributedText:_textView.attributedText];
+                                 andAttributedText:_textView.attributedText
+                                       andSelected:NO];
     _textView.attributedText = text;
     //    _textView.selectedRange = NSMakeRange(text.length + 2, 0);
     _textView.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
@@ -207,13 +215,15 @@
 
 # pragma mark 添加 todo
 // 添加 todo 按钮
-- (NSAttributedString *)addToDoButton:(NSInteger) index andAttributedText: (NSAttributedString *) attext{
+- (NSAttributedString *)addToDoButton:(NSInteger) index andAttributedText: (NSAttributedString *) attext andSelected: (BOOL) selected{
 
     NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString:attext];
     
     ToDoButton *toDoButton = [ToDoButton buttonWithType:UIButtonTypeCustom];
     toDoButton.frame = CGRectMake(0, 0, 19, 19);
     toDoButton.titleLabel.font = [UIFont systemFontOfSize:FONT_SIZE];
+    toDoButton.selected = selected;
+    [_aaaa addObject:toDoButton];
     NSMutableAttributedString *todo =
     [NSMutableAttributedString yy_attachmentStringWithContent:toDoButton
                                                   contentMode:UIViewContentModeBottom
@@ -270,7 +280,7 @@
                 if ([firstChar isEqualToString:@"\U0000fffc"]) {
                     
                     NSLog(@"行首有 todo 按钮, 添加 todo 按钮");
-                    NSAttributedString *text = [self addToDoButton:_currentCursorRange.location andAttributedText:_textView.attributedText];
+                    NSAttributedString *text = [self addToDoButton:_currentCursorRange.location andAttributedText:_textView.attributedText andSelected:NO];
                     _textView.attributedText = text;
                     _textView.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
                     _cursorOffset = 1;
@@ -293,27 +303,26 @@
 - (void) loadContent{
     
     NSString *str = _note.content;
-    NSMutableArray *aa = [[NSMutableArray alloc] init];
+    NSArray *status = _note.status;
+    NSMutableArray *ranges = [[NSMutableArray alloc] init];
     [str enumerateSubstringsInRange:NSMakeRange(0, str.length) options:NSStringEnumerationByComposedCharacterSequences usingBlock:^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
        
         if ([substring isEqualToString:@"\U0000fffc"]) {
            
-//           [s replaceCharactersInRange:substringRange withString:@""];
-//           _textView.text = [s copy];
-//           [self addToDoButton:substringRange.location andAttributedText:ss];
-            [aa addObject:[NSValue valueWithRange:substringRange]];
+            [ranges addObject:[NSValue valueWithRange:substringRange]];
         }
     }];
     NSMutableAttributedString *ms = [[NSMutableAttributedString alloc] initWithString:str];
-    if (aa.count > 0) {
+    if (ranges.count > 0) {
         
-        for (int i = 0; i < aa.count; i++) {
+        for (int i = 0; i < ranges.count; i++) {
          
-            NSValue *v = aa[i];
+            NSValue *v = ranges[i];
             NSRange range = [v rangeValue];
             NSInteger index = range.location;
+            BOOL s = [status[i] boolValue];
             [ms replaceCharactersInRange:range withString:@""];
-            ms = [[self addToDoButton:index andAttributedText:ms] mutableCopy];
+            ms = [[self addToDoButton:index andAttributedText:ms andSelected:s] mutableCopy];
         }
     }
     [ms addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:FONT_SIZE] range:NSMakeRange(0, ms.length)];
@@ -335,6 +344,14 @@
     _note.content = _textView.text;
     _note.changed = @YES;
     _note.update_data = now;
+    NSMutableArray *a = [[NSMutableArray alloc] init];
+    for (int i = 0; i < _aaaa.count; i++) {
+        
+        ToDoButton *b = _aaaa[i];
+        NSNumber *n = [NSNumber numberWithBool:b.selected];
+        [a addObject:n];
+    }
+    _note.status = a;
     [[CoreDataManager shareCoreDataManager] saveContext];
     [_textView resignFirstResponder];
     [self dismissViewControllerAnimated:YES completion:nil];
