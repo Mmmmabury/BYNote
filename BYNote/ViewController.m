@@ -49,12 +49,7 @@
 //    [self displaySearchView];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
-}
-
+// 添加重要通知
 - (void) addNotifications{
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(bottomViewShow) name:FLOWVIEW_DOWN_SCROLL_NOTI object:nil];
@@ -100,7 +95,6 @@
     [self.view addSubview:blurView];
     
     BYNCollectionFlowView *collectionView = [[BYNCollectionFlowView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - 20)];
-    collectionView.containedVC = self;
     [self.view addSubview:collectionView];
     
     _profileMenu = [[ProfileSliderMenu alloc]init];
@@ -213,7 +207,7 @@
 - (void)displaySearchView{
     
     SearchViewController *searchViewController =  [self.storyboard instantiateViewControllerWithIdentifier:@"search"];
-//    [_profileMenu triggle];
+    [_profileMenu triggle];
 //    [self presentViewController:searchViewController animated:YES completion:nil];
     [self.navigationController pushViewController:searchViewController animated:YES];
 }

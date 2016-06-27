@@ -13,6 +13,7 @@
 #import "EditNoteViewController.h"
 #import "CoreDataManager.h"
 #import "Note.h"
+#import "ViewController.h"
 
 @interface BYNCollectionFlowView()<UICollectionViewDelegate, UICollectionViewDataSource>
 {
@@ -26,6 +27,7 @@
 
 @implementation BYNCollectionFlowView
 
+# pragma mark 各种初始化
 /**
  *  @brief 初始化
  *
@@ -39,7 +41,7 @@
     [self calculateFrames];
     BYNCollectionFlowLayout *flowLayout = [[BYNCollectionFlowLayout alloc] initWithItemFrames:[self.frames copy]];
     self = [super initWithFrame:frame collectionViewLayout:flowLayout];
-    
+    [self superViewController];
     if (self) {
         
         [self registerClass:[BYNCollectionCell class] forCellWithReuseIdentifier:@"cell"];
@@ -78,6 +80,7 @@
     self.colors = @[[UIColor colorWithRed:0.8672 green:0.8672 blue:0.8672 alpha:1.0]];
 }
 
+# pragma mark datasource 代理实现
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     BYNCollectionCell *cell = [self dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
@@ -115,7 +118,7 @@
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Edit" bundle:[NSBundle mainBundle]];
     editNote = [sb instantiateViewControllerWithIdentifier:@"editViewController"];
     editNote.note = n;
-    [_containedVC presentViewController:editNote animated:YES completion:nil];
+    [[self superViewController] presentViewController:editNote animated:YES completion:nil];
 }
 
 # pragma mark 计算 frame
@@ -182,5 +185,15 @@
         NSLog(@"视图向下滑动");
         [[NSNotificationCenter defaultCenter] postNotificationName:FLOWVIEW_DOWN_SCROLL_NOTI object:nil];
     }
+}
+
+- (ViewController *)superViewController{
+ 
+    UIResponder *nextResponder = self.nextResponder;
+    while (nextResponder && ![nextResponder isMemberOfClass:[ViewController class]]) {
+        
+        nextResponder = nextResponder.nextResponder;
+    }
+    return (ViewController *) nextResponder;
 }
 @end

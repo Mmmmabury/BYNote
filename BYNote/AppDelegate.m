@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "LaunchViewController.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 #import <ENSDK.h>
 
@@ -29,8 +30,11 @@
     [ENSession setSharedSessionConsumerKey:CONSUMER_KEY
                             consumerSecret:CONSUMER_SECRET
                               optionalHost:SANDBOX_HOST];
-    
-
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Launch" bundle:[NSBundle mainBundle]];
+    LaunchViewController *launchVC = [storyboard instantiateViewControllerWithIdentifier:@"launch"];
+    _window = [[UIWindow alloc] init];
+    _window.rootViewController = launchVC;
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

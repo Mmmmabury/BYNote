@@ -9,6 +9,7 @@
 #import "ProfileSliderMenu.h"
 #import <MessageUI/MessageUI.h>
 #import <ENSDK.h>
+#import "ViewController.h"
 
 
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
@@ -71,14 +72,16 @@
                    NSLocalizedString(@"finger", nil),
                    NSLocalizedString(@"password", nil),
                    NSLocalizedString(@"rating", nil),
-                   NSLocalizedString(@"feedback", nil),];
-    int a[8] = {
+                   NSLocalizedString(@"feedback", nil),
+                   @"清除"];
+    int a[9] = {
         SliderButtonNotActive,
         logStatus,
         SliderButtonNotActive,
         SliderButtonNotActive,
         SliderButtonActive,
         SliderButtonNotActive,
+        SliderButtonNormal,
         SliderButtonNormal,
         SliderButtonNormal};
     for (int i = 0; i < s.count; i++) {

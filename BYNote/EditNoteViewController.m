@@ -198,14 +198,18 @@
 - (void) addToDo:(UIButton *) sender{
     
     _currentCursorRange = _textView.selectedRange;
-    [self addToDoButton: _currentCursorRange.location + _currentCursorRange.length];
+    NSAttributedString *text = [self addToDoButton: _currentCursorRange.location + _currentCursorRange.length
+                                 andAttributedText:_textView.attributedText];
+    _textView.attributedText = text;
+    //    _textView.selectedRange = NSMakeRange(text.length + 2, 0);
+    _textView.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
 }
 
 # pragma mark 添加 todo
 // 添加 todo 按钮
-- (void)addToDoButton:(NSInteger) index {
+- (NSAttributedString *)addToDoButton:(NSInteger) index andAttributedText: (NSAttributedString *) attext{
 
-    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString:_textView.attributedText];
+    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString:attext];
     
     ToDoButton *toDoButton = [ToDoButton buttonWithType:UIButtonTypeCustom];
     toDoButton.frame = CGRectMake(0, 0, 19, 19);
@@ -224,9 +228,10 @@
         
         [text insertAttributedString:todo atIndex:index];
     }
-    _textView.attributedText = text;
-//    _textView.selectedRange = NSMakeRange(text.length + 2, 0);
-    _textView.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
+    return [text copy];
+//    _textView.attributedText = text;
+////    _textView.selectedRange = NSMakeRange(text.length + 2, 0);
+//    _textView.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
 }
 
 
@@ -265,7 +270,9 @@
                 if ([firstChar isEqualToString:@"\U0000fffc"]) {
                     
                     NSLog(@"行首有 todo 按钮, 添加 todo 按钮");
-                    [self addToDoButton:_currentCursorRange.location];
+                    NSAttributedString *text = [self addToDoButton:_currentCursorRange.location andAttributedText:_textView.attributedText];
+                    _textView.attributedText = text;
+                    _textView.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
                     _cursorOffset = 1;
                 }else{
                     
@@ -286,16 +293,32 @@
 - (void) loadContent{
     
     NSString *str = _note.content;
+    NSMutableArray *aa = [[NSMutableArray alloc] init];
     [str enumerateSubstringsInRange:NSMakeRange(0, str.length) options:NSStringEnumerationByComposedCharacterSequences usingBlock:^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
        
         if ([substring isEqualToString:@"\U0000fffc"]) {
            
-           NSMutableString *s = [str mutableCopy];
-           [s replaceCharactersInRange:substringRange withString:@""];
-           _textView.text = [s copy];
-           [self addToDoButton:substringRange.location];
+//           [s replaceCharactersInRange:substringRange withString:@""];
+//           _textView.text = [s copy];
+//           [self addToDoButton:substringRange.location andAttributedText:ss];
+            [aa addObject:[NSValue valueWithRange:substringRange]];
         }
     }];
+    NSMutableAttributedString *ms = [[NSMutableAttributedString alloc] initWithString:str];
+    if (aa.count > 0) {
+        
+        for (int i = 0; i < aa.count; i++) {
+         
+            NSValue *v = aa[i];
+            NSRange range = [v rangeValue];
+            NSInteger index = range.location;
+            [ms replaceCharactersInRange:range withString:@""];
+            ms = [[self addToDoButton:index andAttributedText:ms] mutableCopy];
+        }
+    }
+    [ms addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:FONT_SIZE] range:NSMakeRange(0, ms.length)];
+    _textView.attributedText = [ms copy];
+    _textView.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
 }
 
 - (void) saveContent{

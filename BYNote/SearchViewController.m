@@ -40,6 +40,11 @@
     [_searchResultTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
 # pragma mark searchBar 代理
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     

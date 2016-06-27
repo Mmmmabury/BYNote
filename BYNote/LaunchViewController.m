@@ -7,6 +7,9 @@
 //
 
 #import "LaunchViewController.h"
+#import "AppDelegate.h"
+#import "ViewController.h"
+#import "MainNavigation.h"
 
 @interface LaunchViewController ()
 
@@ -20,6 +23,38 @@
     
     [self authenticationWithBiometrics];
     [self passwordLock];
+    [self pasteboard];
+}
+
+- (IBAction)buttonAc:(UIButton *)sender {
+    
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    UIWindow *window = delegate.window;
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    MainNavigation *mainNav = [sb instantiateViewControllerWithIdentifier:@"MainNav"];
+    
+    CATransition *transition = [[CATransition alloc] init];
+    transition.type = kCATransitionFade;
+//    transition.subtype = kCATransitionFromRight;
+    transition.duration = 1.0;
+//    transition.delegate = self;
+    [self.view.layer addAnimation:transition forKey:@"transition"];
+    window.rootViewController = mainNav;
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag{
+    
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    UIWindow *window = delegate.window;
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    MainNavigation *mainNav = [sb instantiateViewControllerWithIdentifier:@"MainNav"];
+//    window.rootViewController = mainNav;
+}
+
+- (void) pasteboard{
+    
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    NSLog(@"%@", pasteboard.string);
 }
 
 - (BOOL) authenticationWithBiometrics{
