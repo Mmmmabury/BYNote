@@ -3113,25 +3113,25 @@ typedef NS_ENUM(NSUInteger, YYTextMoveDirection) {
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [[YYTextEffectWindow sharedWindow] hideSelectionDot:_selectionView];
     
-    if ([_outerDelegate respondsToSelector:_cmd]) {
+    if ([_outerDelegate respondsToSelector:_cmd] && _outerDelegate != self) {
         [_outerDelegate scrollViewDidScroll:scrollView];
     }
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
-    if ([_outerDelegate respondsToSelector:_cmd]) {
+    if ([_outerDelegate respondsToSelector:_cmd] && _outerDelegate != self) {
         [_outerDelegate scrollViewDidZoom:scrollView];
     }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    if ([_outerDelegate respondsToSelector:_cmd]) {
+    if ([_outerDelegate respondsToSelector:_cmd] && _outerDelegate != self){
         [_outerDelegate scrollViewWillBeginDragging:scrollView];
     }
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    if ([_outerDelegate respondsToSelector:_cmd]) {
+    if ([_outerDelegate respondsToSelector:_cmd] && _outerDelegate != self) {
         [_outerDelegate scrollViewWillEndDragging:scrollView withVelocity:velocity targetContentOffset:targetContentOffset];
     }
 }
@@ -3141,13 +3141,13 @@ typedef NS_ENUM(NSUInteger, YYTextMoveDirection) {
         [[YYTextEffectWindow sharedWindow] showSelectionDot:_selectionView];
     }
     
-    if ([_outerDelegate respondsToSelector:_cmd]) {
+    if ([_outerDelegate respondsToSelector:_cmd] && _outerDelegate != self) {
         [_outerDelegate scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
     }
 }
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    if ([_outerDelegate respondsToSelector:_cmd]) {
+    if ([_outerDelegate respondsToSelector:_cmd] && _outerDelegate != self) {
         [_outerDelegate scrollViewWillBeginDecelerating:scrollView];
     }
 }
@@ -3155,19 +3155,19 @@ typedef NS_ENUM(NSUInteger, YYTextMoveDirection) {
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     [[YYTextEffectWindow sharedWindow] showSelectionDot:_selectionView];
     
-    if ([_outerDelegate respondsToSelector:_cmd]) {
+    if ([_outerDelegate respondsToSelector:_cmd] && _outerDelegate != self) {
         [_outerDelegate scrollViewDidEndDecelerating:scrollView];
     }
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    if ([_outerDelegate respondsToSelector:_cmd]) {
+    if ([_outerDelegate respondsToSelector:_cmd] && _outerDelegate != self) {
         [_outerDelegate scrollViewDidEndScrollingAnimation:scrollView];
     }
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    if ([_outerDelegate respondsToSelector:_cmd]) {
+    if ([_outerDelegate respondsToSelector:_cmd] && _outerDelegate != self) {
         return [_outerDelegate viewForZoomingInScrollView:scrollView];
     } else {
         return nil;
@@ -3175,26 +3175,26 @@ typedef NS_ENUM(NSUInteger, YYTextMoveDirection) {
 }
 
 - (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view{
-    if ([_outerDelegate respondsToSelector:_cmd]) {
+    if ([_outerDelegate respondsToSelector:_cmd] && _outerDelegate != self) {
         [_outerDelegate scrollViewWillBeginZooming:scrollView withView:view];
     }
 }
 
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
-    if ([_outerDelegate respondsToSelector:_cmd]) {
+    if ([_outerDelegate respondsToSelector:_cmd] && _outerDelegate != self) {
         [_outerDelegate scrollViewDidEndZooming:scrollView withView:view atScale:scale];
     }
 }
 
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
-    if ([_outerDelegate respondsToSelector:_cmd]) {
+    if ([_outerDelegate respondsToSelector:_cmd] && _outerDelegate != self) {
         return [_outerDelegate scrollViewShouldScrollToTop:scrollView];
     }
     return YES;
 }
 
 - (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView {
-    if ([_outerDelegate respondsToSelector:_cmd]) {
+    if ([_outerDelegate respondsToSelector:_cmd] && _outerDelegate != self) {
         [_outerDelegate scrollViewDidScrollToTop:scrollView];
     }
 }

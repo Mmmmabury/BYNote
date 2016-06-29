@@ -60,6 +60,7 @@
     return [attributes copy];
 }
 
+// contentSize
 - (CGSize)collectionViewContentSize{
     
     CGFloat height = 0;
@@ -77,7 +78,7 @@
         }
         height = 0;
     }
-    maxHeight += itemInset * (self.frames.count ) + 84;
+    maxHeight += itemInset * (self.frames.count ) + 0;
     if (maxHeight < SCREEN_HEIGHT) {
         
         maxHeight = SCREEN_HEIGHT;

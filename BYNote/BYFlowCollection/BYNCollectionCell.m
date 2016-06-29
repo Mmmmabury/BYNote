@@ -46,10 +46,10 @@
     
     NSLog(@"%@", NSStringFromCGRect(self.bounds));
     _textFrame = self.bounds;
-    _textFrame.origin.x += 10;
+    _textFrame.origin.x += 10.0;
     _textFrame.origin.y += 0;
-    _textFrame.size.width -= 20;
-    _textFrame.size.height -= timeLabelHeight + 10;
+    _textFrame.size.width -= 20.0;
+    _textFrame.size.height -= timeLabelHeight + 0;
     
     _timeFrame = CGRectMake(0, self.bounds.size.height - timeLabelHeight - 10, self.bounds.size.width - 10, timeLabelHeight);
 }

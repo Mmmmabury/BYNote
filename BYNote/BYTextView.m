@@ -40,12 +40,25 @@
         
         self.note = note;
     }
-    self.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
+    YYTextDebugOption *debugOptions = [YYTextDebugOption new];
+    debugOptions.baselineColor = [UIColor redColor];
+    debugOptions.CTFrameBorderColor = [UIColor redColor];
+    debugOptions.CTLineFillColor = [UIColor colorWithRed:0.000 green:0.463 blue:1.000 alpha:0.180];
+    debugOptions.CGGlyphBorderColor = [UIColor colorWithRed:1.000 green:0.524 blue:0.000 alpha:1.00];
+    
+    [YYTextDebugOption setSharedDebugOption:debugOptions];
+    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+    paragraph.lineSpacing = 2.0f;
+//    paragraph.maximumLineHeight = 10.0f;
+//    paragraph.minimumLineHeight = 10.0f;
+    self.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE],
+                              NSParagraphStyleAttributeName : paragraph};
     return self;
 }
 
 - (void) setupConfig{
-   
+    
+    
     self.delegate = self;
     self.font = [UIFont systemFontOfSize:FONT_SIZE];
     self.allowsCopyAttributedString = NO;
@@ -87,7 +100,12 @@
             ms = [[self addToDoButton:index andAttributedText:ms andSelected:selected] mutableCopy];
         }
     }
+    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+    paragraph.lineSpacing = 2.0f;
+    paragraph.maximumLineHeight = 18.0f;
+    paragraph.minimumLineHeight = 10.0f;
     [ms addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:FONT_SIZE] range:NSMakeRange(0, ms.length)];
+    [ms addAttribute:NSParagraphStyleAttributeName value:paragraph range:NSMakeRange(0, ms.length)];
     self.attributedText = ms;
 }
 
@@ -117,6 +135,9 @@
         
         [text insertAttributedString:todo atIndex:index];
     }
+    text.yy_lineSpacing = 0.0f;
+    NSRange r = NSMakeRange(0, 5);
+    NSLog(@"%@", [text attributesAtIndex:4 effectiveRange:&r]);
     return [text copy];
 }
 
@@ -128,7 +149,10 @@
     self.selectedRange = NSMakeRange(_currentCursorRange.location + 1 + _cursorOffset, 0);
     _cursorOffset = 0;
     _changed = YES;
-    textView.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
+    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+    paragraph.lineSpacing = 2.0f;
+    self.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE],
+                              NSParagraphStyleAttributeName : paragraph};
 }
 
 // 实现 原行有 todo 按钮时，换行时自动添加 todo 按钮
@@ -161,7 +185,6 @@ shouldChangeTextInRange:(NSRange)range
                     NSLog(@"行首有 todo 按钮, 添加 todo 按钮");
                     NSAttributedString *text = [self addToDoButton:_currentCursorRange.location andAttributedText:self.attributedText andSelected:NO];
                     self.attributedText = text;
-                    self.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
                     _cursorOffset = 1;
                 }else{
                     
@@ -178,7 +201,7 @@ shouldChangeTextInRange:(NSRange)range
     return YES;
 }
 
- # pragma mark 保存内容
+# pragma mark 保存内容
 - (void) saveContent{
     
     if (self.text.length == 0) {
@@ -220,4 +243,7 @@ shouldChangeTextInRange:(NSRange)range
     _status = note.status;
     [self loadContent];
 }
+
+
+
 @end
