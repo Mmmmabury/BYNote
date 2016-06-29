@@ -12,6 +12,8 @@
 #import "ToDoButton.h"
 #import "CoreDataManager.h"
 #import "Note.h"
+#import "SyncNoteManager.h"
+#import "BYTextView.h"
 
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
@@ -20,7 +22,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *weekLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (strong, nonatomic) YYTextView *textView;
+@property (strong, nonatomic) BYTextView *textView;
 @property (strong, nonatomic) UIView *bottomView;
 // 当前光标的位置
 @property (assign, nonatomic) NSRange currentCursorRange;
@@ -29,7 +31,7 @@
 @property (assign, nonatomic) CGFloat keyboardHeight;
 @property (strong, nonatomic) NSManagedObjectContext *context;
 
-@property (strong, nonatomic) NSMutableArray *aaaa;
+@property (strong, nonatomic) NSMutableArray *todoButtonList;
 
 @end
 
@@ -43,14 +45,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _aaaa = [[NSMutableArray alloc] init];
+    _todoButtonList = [[NSMutableArray alloc] init];
+    NSArray *array = _note.status;
     [self initSubViews];
     [self createTextView];
     [self createBottomView];
     _context = [[CoreDataManager shareCoreDataManager] managedObjectContext];
     if (_note) {
         
-        [self loadContent];
+//        [self loadContent];
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -79,19 +82,13 @@
  */
 - (void) createTextView{
     
-    _textView = [[YYTextView alloc] initWithFrame:self.view.bounds];
+//    _textView = [[YYTextView alloc] initWithFrame:self.view.bounds];
+    _textView = [[BYTextView alloc] initWithNote:_note andFrame:self.view.bounds];
     _textView.top += 60.0f;
     _textView.width -= 20.0f;
     _textView.left += 10.0f;
     _textView.height -= 60.0f;
-    _textView.font = [UIFont systemFontOfSize:FONT_SIZE];
-    _textView.allowsCopyAttributedString = NO;
-    _textView.allowsPasteAttributedString = YES;
-    _textView.allowsPasteImage = NO;
-    _textView.showsVerticalScrollIndicator = YES;
-    _textView.showsHorizontalScrollIndicator = NO;
-    _textView.delegate = self;
-    _textView.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+
     [self.view addSubview:_textView];
 }
 
@@ -164,17 +161,21 @@
 
 - (void) hideKeyboard{
     
-//    [_textView resignFirstResponder];
-    for (ToDoButton *b in _aaaa) {
-        
-        b.selected = YES;
-    }
+    [_textView resignFirstResponder];
 }
 
 - (void)closeView:(UIButton *)sender {
     
     [_textView resignFirstResponder];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void) saveContent{
+    
+    [_textView saveContent];
+    [self dismissViewControllerAnimated:YES completion:nil];
+//    SyncNoteManager *manager = [[SyncNoteManager alloc] init];
+//    [manager createNoteInAppNotebook];
 }
 
 - (void)keyBoardShow: (NSNotification *) notification {
@@ -205,7 +206,7 @@
 - (void) addToDo:(UIButton *) sender{
     
     _currentCursorRange = _textView.selectedRange;
-    NSAttributedString *text = [self addToDoButton: _currentCursorRange.location + _currentCursorRange.length
+    NSAttributedString *text = [_textView addToDoButton: _currentCursorRange.location + _currentCursorRange.length
                                  andAttributedText:_textView.attributedText
                                        andSelected:NO];
     _textView.attributedText = text;
@@ -213,147 +214,4 @@
     _textView.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
 }
 
-# pragma mark 添加 todo
-// 添加 todo 按钮
-- (NSAttributedString *)addToDoButton:(NSInteger) index andAttributedText: (NSAttributedString *) attext andSelected: (BOOL) selected{
-
-    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString:attext];
-    
-    ToDoButton *toDoButton = [ToDoButton buttonWithType:UIButtonTypeCustom];
-    toDoButton.frame = CGRectMake(0, 0, 19, 19);
-    toDoButton.titleLabel.font = [UIFont systemFontOfSize:FONT_SIZE];
-    toDoButton.selected = selected;
-    [_aaaa addObject:toDoButton];
-    NSMutableAttributedString *todo =
-    [NSMutableAttributedString yy_attachmentStringWithContent:toDoButton
-                                                  contentMode:UIViewContentModeBottom
-                                               attachmentSize:toDoButton.size
-                                                  alignToFont:[UIFont systemFontOfSize:FONT_SIZE]
-                                                    alignment:YYTextVerticalAlignmentBottom];
-    // 如果 index 和文本长度相等，则直接加载文本末尾
-    if (index == text.length){
-    
-        [text appendAttributedString:todo];
-    }else if (index < text.length){
-        
-        [text insertAttributedString:todo atIndex:index];
-    }
-    return [text copy];
-//    _textView.attributedText = text;
-////    _textView.selectedRange = NSMakeRange(text.length + 2, 0);
-//    _textView.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
-}
-
-
-# pragma mark textView 的代理实现
-- (void)textViewDidChange:(YYTextView *)textView{
-    
-    // 这里我把 YYTextView 中的 setSelectedRange 方法改了一点，如果有问题，点进源码看看
-    _textView.selectedRange = NSMakeRange(_currentCursorRange.location + 1 + _cursorOffset, 0);
-    _cursorOffset = 0;
-    textView.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
-}
-
-// 实现 原行有 todo 按钮时，换行时自动添加 todo 按钮
-- (BOOL)textView:(YYTextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    
-    _currentCursorRange = textView.selectedRange;
-    // 删除字符
-    if (text.length == 0 && range.length == 1) {
-        
-        _cursorOffset = -1;
-    }
-    if ([text isEqualToString:@"\n"]) {
-        
-        NSAttributedString *attributedText = textView.attributedText;
-        // 遍历每一行
-        [textView.text enumerateSubstringsInRange:NSMakeRange(0, textView.text.length) options:NSStringEnumerationByLines usingBlock:^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
-            
-            NSInteger subStringBeginIndex = substringRange.location;
-            NSInteger subStringEndIndex = substringRange.location + substringRange.length;
-            NSInteger changeIndex = range.location + range.length;
-            
-            // 光标所在行是否有 todo 按钮
-            if (changeIndex >= subStringBeginIndex && changeIndex <= subStringEndIndex) {
-                
-                NSString *firstChar = [attributedText yy_plainTextForRange:NSMakeRange(subStringBeginIndex, 1)];
-                if ([firstChar isEqualToString:@"\U0000fffc"]) {
-                    
-                    NSLog(@"行首有 todo 按钮, 添加 todo 按钮");
-                    NSAttributedString *text = [self addToDoButton:_currentCursorRange.location andAttributedText:_textView.attributedText andSelected:NO];
-                    _textView.attributedText = text;
-                    _textView.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
-                    _cursorOffset = 1;
-                }else{
-                    
-                    NSLog(@"行首没有 todo 按钮");
-                }
-            }
-        }];
-    }
-    
-    if ([text isEqualToString:@"\U0000fffc"]) {
-        
-        _cursorOffset = 1;
-    }
-    return YES;
-}
-
-# pragma mark 加载数据
-- (void) loadContent{
-    
-    NSString *str = _note.content;
-    NSArray *status = _note.status;
-    NSMutableArray *ranges = [[NSMutableArray alloc] init];
-    [str enumerateSubstringsInRange:NSMakeRange(0, str.length) options:NSStringEnumerationByComposedCharacterSequences usingBlock:^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
-       
-        if ([substring isEqualToString:@"\U0000fffc"]) {
-           
-            [ranges addObject:[NSValue valueWithRange:substringRange]];
-        }
-    }];
-    NSMutableAttributedString *ms = [[NSMutableAttributedString alloc] initWithString:str];
-    if (ranges.count > 0) {
-        
-        for (int i = 0; i < ranges.count; i++) {
-         
-            NSValue *v = ranges[i];
-            NSRange range = [v rangeValue];
-            NSInteger index = range.location;
-            BOOL s = [status[i] boolValue];
-            [ms replaceCharactersInRange:range withString:@""];
-            ms = [[self addToDoButton:index andAttributedText:ms andSelected:s] mutableCopy];
-        }
-    }
-    [ms addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:FONT_SIZE] range:NSMakeRange(0, ms.length)];
-    _textView.attributedText = [ms copy];
-    _textView.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
-}
-
-- (void) saveContent{
-    
-    //todo 还要保存 todobutton 的状态
-    NSLog(@"%@", NSHomeDirectory());
-    NSDate *now = [NSDate date];
-    if (!_note) {
-        
-        NSLog(@"Note 实例不存在，新建 Note 实例");
-        _note = [NSEntityDescription insertNewObjectForEntityForName:@"Note" inManagedObjectContext:_context];
-        _note.create_data = now;
-    }
-    _note.content = _textView.text;
-    _note.changed = @YES;
-    _note.update_data = now;
-    NSMutableArray *a = [[NSMutableArray alloc] init];
-    for (int i = 0; i < _aaaa.count; i++) {
-        
-        ToDoButton *b = _aaaa[i];
-        NSNumber *n = [NSNumber numberWithBool:b.selected];
-        [a addObject:n];
-    }
-    _note.status = a;
-    [[CoreDataManager shareCoreDataManager] saveContext];
-    [_textView resignFirstResponder];
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 @end

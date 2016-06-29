@@ -35,6 +35,7 @@
     _window = [[UIWindow alloc] init];
     _window.rootViewController = launchVC;
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

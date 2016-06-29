@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface BYNCollectionFlowLayout : UICollectionViewFlowLayout
+
+@property (nonatomic, copy) NSArray *frames;
+
 - (instancetype) initWithItemFrames: (NSArray *) frames;
 
 @end

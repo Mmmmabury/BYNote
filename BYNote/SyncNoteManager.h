@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface syncWithEvernote : NSObject
+@interface SyncNoteManager : NSObject
 
+- (void) createNoteInAppNotebook;
 @end

@@ -22,6 +22,8 @@
 @property (nonatomic, strong) NSMutableArray *frames;
 @property (nonatomic, copy) NSArray *texts;
 @property (nonatomic, copy) NSArray *colors;
+@property (nonatomic, strong) NSArray *localNotes;
+@property (nonatomic, strong) BYNCollectionFlowLayout *flowLayout;
 
 @end
 
@@ -38,9 +40,8 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     
     [self loadData];
-    [self calculateFrames];
-    BYNCollectionFlowLayout *flowLayout = [[BYNCollectionFlowLayout alloc] initWithItemFrames:[self.frames copy]];
-    self = [super initWithFrame:frame collectionViewLayout:flowLayout];
+    _flowLayout = [[BYNCollectionFlowLayout alloc] initWithItemFrames:[self.frames copy]];
+    self = [super initWithFrame:frame collectionViewLayout:_flowLayout];
     [self superViewController];
     if (self) {
         
@@ -55,10 +56,27 @@
     return self;
 }
 
+- (void)reloadData{
+    
+    _localNotes = nil;
+    [self loadData];
+    _flowLayout.frames = [_frames copy];
+    NSLog(@"%@", _frames);
+    [super reloadData];
+}
 /**
  *  @brief 初始化数据
  */
 - (void) loadData{
+    
+    // 获取笔记
+    NSManagedObjectContext *context = [[CoreDataManager shareCoreDataManager] managedObjectContext];
+    NSFetchRequest *fetch = [[NSFetchRequest alloc] initWithEntityName:@"Note"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"content like '*'", @""];
+    
+    fetch.predicate = predicate;
+     _localNotes = [context executeFetchRequest:fetch error:nil];
+    
     
     self.texts = @[@"卡片理五 A 409\n李四117\n八格牙路\n填完",
                    @"buhaosdaifjaewiohfdkasjeroifdnsagij",
@@ -78,6 +96,7 @@
 //                    [UIColor colorWithRed:0.2588 green:0.698 blue:0.9373 alpha:1.0],
 //                    [UIColor colorWithRed:0.3294 green:0.1686 blue:0.698 alpha:1.0]];
     self.colors = @[[UIColor colorWithRed:0.8672 green:0.8672 blue:0.8672 alpha:1.0]];
+    [self calculateFrames];
 }
 
 # pragma mark datasource 代理实现
@@ -85,7 +104,7 @@
     
     BYNCollectionCell *cell = [self dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     NSValue *value = self.frames[indexPath.item % 2][indexPath.item / 2];
-    cell.text = self.texts[indexPath.item];
+    cell.note = _localNotes[indexPath.item];
     cell.itemFrame = [value CGRectValue];
     cell.backgroundColor = self.colors[indexPath.item % self.colors.count];
 //    cell.backgroundColor = [UIColor colorWithRed:0.2039 green:0.5098 blue:0.7922 alpha:1.0];
@@ -96,28 +115,16 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
-    return self.texts.count;
+    return _localNotes.count;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSManagedObjectContext *context = [[CoreDataManager shareCoreDataManager] managedObjectContext];
-    NSFetchRequest *fetch = [[NSFetchRequest alloc] initWithEntityName:@"Note"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"content like '*'", @"hhh"];
-    
-    fetch.predicate = predicate;
-    NSArray *array = [context executeFetchRequest:fetch error:nil];
-    for (Note *note in array) {
-        
-        NSString *s = note.content;
-        NSLog(@"%@", note.content);
-    }
-    Note *n = array[0];
     
     EditNoteViewController *editNote = nil;
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Edit" bundle:[NSBundle mainBundle]];
     editNote = [sb instantiateViewControllerWithIdentifier:@"editViewController"];
-    editNote.note = n;
+    editNote.note = _localNotes[indexPath.row];
     [[self superViewController] presentViewController:editNote animated:YES completion:nil];
 }
 
@@ -142,9 +149,10 @@
     for (int row = 0; row < numberOfRow; row++) {
         
         lastFrame = CGRectZero;
-        for (int i = row; i < self.texts.count; i += numberOfRow) {
+        for (int i = row; i < _localNotes.count; i += numberOfRow) {
             
-            NSAttributedString *attriString = [[NSAttributedString alloc] initWithString:self.texts[i] attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:20.0f]}];
+            Note *note = _localNotes[i];
+            NSAttributedString *attriString = [[NSAttributedString alloc] initWithString:note.content attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]}];
             // 根据字符串的特性计算每行高度
             CGRect rect = [attriString boundingRectWithSize:CGSizeMake(cellWidth - 8, SCREEN_HEIGHT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin context:nil];
             
@@ -177,12 +185,14 @@
 //    NSLog(@"%.2f", targetContentOffset->y);
     CGFloat y = scrollView.contentOffset.y;
     if (y > _offsetY) {
-        
+
         NSLog(@"视图向上滑动");
         [[NSNotificationCenter defaultCenter] postNotificationName:FLOWVIEW_UP_SCROLL_NOTI object:nil];
     }else{
         
+#ifdef DEBUG
         NSLog(@"视图向下滑动");
+#endif
         [[NSNotificationCenter defaultCenter] postNotificationName:FLOWVIEW_DOWN_SCROLL_NOTI object:nil];
     }
 }

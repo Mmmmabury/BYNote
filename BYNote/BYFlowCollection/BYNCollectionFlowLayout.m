@@ -11,7 +11,6 @@
 
 @interface BYNCollectionFlowLayout ()
 
-@property (nonatomic, copy) NSArray *frames;
 @property (assign, nonatomic) NSInteger itemsCount;
 @end
 

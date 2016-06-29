@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Note.h"
 
 @interface BYNCollectionCell : UICollectionViewCell
 
-@property (nonatomic, copy) NSString *text;
 @property (nonatomic, copy) UIImage *image;
 @property (nonatomic, assign) CGRect itemFrame;
+@property (nonatomic, strong) Note *note;
 @end

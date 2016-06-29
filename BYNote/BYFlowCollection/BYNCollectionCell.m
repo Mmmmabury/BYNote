@@ -8,11 +8,14 @@
 
 #import "BYNCollectionCell.h"
 #import "BYNCELLSIZE.h"
+#import "BYTextView.h"
 
 @interface BYNCollectionCell ()
 
 //@property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) UILabel *label;
+@property (nonatomic, strong) BYTextView *textView;
+
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UIVisualEffectView *darkBlurView;
 @property (nonatomic, assign) CGRect timeFrame;
@@ -41,6 +44,7 @@
 
 - (void) initFrames{
     
+    NSLog(@"%@", NSStringFromCGRect(self.bounds));
     _textFrame = self.bounds;
     _textFrame.origin.x += 10;
     _textFrame.origin.y += 0;
@@ -55,11 +59,15 @@
     if (_image) {
         
     }else{
-        self.label = [[UILabel alloc] initWithFrame:_textFrame];
-        self.label.numberOfLines = 0;
-        self.label.textColor = [UIColor blackColor];
-        self.label.font = [UIFont fontWithName:@"monaco" size:20.0f];
-        [self.contentView addSubview:self.label];
+//        self.label = [[UILabel alloc] initWithFrame:_textFrame];
+//        self.label.numberOfLines = 0;
+//        self.label.textColor = [UIColor blackColor];
+//        self.label.font = [UIFont fontWithName:@"monaco" size:20.0f];
+//        [self.contentView addSubview:self.label];
+        self.textView = [[BYTextView alloc] initWithNote:nil andFrame:_textFrame];
+        self.textView.editable = NO;
+        self.textView.userInteractionEnabled = NO;
+        [self.contentView addSubview:_textView];
     }
     
     _timeLabel = [[UILabel alloc] initWithFrame:_timeFrame];
@@ -101,13 +109,10 @@
 //    _darkBlurView.hidden = YES;
 }
 
-- (void)setText:(NSString *)text{
+- (void)setNote:(Note *)note{
     
-    if (text != _text) {
-        
-        _text = text;
-    }
-    self.label.text = text;
+    _note = note;
+    _textView.note = note;
 }
 
 /**
@@ -116,7 +121,7 @@
 - (void)setItemFrame:(CGRect)itemFrame{
     
     [self initFrames];
-    self.label.frame = _textFrame;
+    self.textView.frame = _textFrame;
     self.timeLabel.frame = _timeFrame;
     self.darkBlurView.frame = self.bounds;
     self.darkBlurView.hidden = YES;

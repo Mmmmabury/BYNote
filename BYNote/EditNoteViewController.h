@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Note.h"
 
-#define FONT_SIZE 18.0f
+
 @interface EditNoteViewController : UIViewController
 @property (strong, nonatomic) Note *note;
 @end

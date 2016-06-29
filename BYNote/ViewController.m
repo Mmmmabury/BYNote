@@ -33,6 +33,7 @@
 }
 @property (nonatomic, strong) ProfileSliderMenu *profileMenu;
 @property (nonatomic, strong) BottomView *bottomView;
+@property (strong, nonatomic) BYNCollectionFlowView *collectionView;
 @end
 
 @implementation ViewController
@@ -47,6 +48,12 @@
     [self addGuesture];
     [self addNotifications];
 //    [self displaySearchView];
+}
+
+- (void) viewDidAppear:(BOOL)animated{
+    
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [_collectionView reloadData];
 }
 
 // 添加重要通知
@@ -94,8 +101,8 @@
     blurView.frame = self.view.bounds;
     [self.view addSubview:blurView];
     
-    BYNCollectionFlowView *collectionView = [[BYNCollectionFlowView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - 20)];
-    [self.view addSubview:collectionView];
+    _collectionView = [[BYNCollectionFlowView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - 20)];
+    [self.view addSubview:_collectionView];
     
     _profileMenu = [[ProfileSliderMenu alloc]init];
     _profileMenu.delegate = self;
@@ -136,22 +143,21 @@
 // 连接印象笔记
 - (void)linkToEverNote: (ProfileSliderMenuButton *) sender {
     
+    [_profileMenu triggle];
     ENSession *session = [ENSession sharedSession];
     if (session.isAuthenticated) {
         
-        [_profileMenu triggle];
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"logoutTitle", nil) message:NSLocalizedString(@"logoutMessage", nil) preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *confirm = [UIAlertAction actionWithTitle:NSLocalizedString(@"confirmLogOut", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
             
             [session unauthenticate];
             [sender setStatus:SliderButtonNotActive];
             [sender setTitle:NSLocalizedString(@"login", nil) forState:UIControlStateNormal];
-            [_profileMenu triggle];
             
         }];
         UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             
-            [_profileMenu triggle];
+            NSLog(@"取消连接印象笔记");
         }];
         [alert addAction:confirm];
         [alert addAction:cancel];
@@ -167,7 +173,6 @@
             NSLog(@"印象笔记绑定失败");
             [sender setStatus:SliderButtonNotActive];
             [sender setTitle:NSLocalizedString(@"login", nil) forState:UIControlStateNormal];
-            [_profileMenu triggle];
         } else {
             // authentication succeeded
             // do something now that we're authenticated
@@ -175,10 +180,8 @@
             NSLog(@"印象笔记绑定成功");
             [sender setStatus:SliderButtonActive];
             [sender setTitle:NSLocalizedString(@"logout", nil) forState:UIControlStateNormal];
-            [_profileMenu triggle];
         }
     }];
-    [_profileMenu triggle];
 }
 
 // feedback

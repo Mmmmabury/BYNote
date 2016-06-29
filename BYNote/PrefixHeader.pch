@@ -1,0 +1,29 @@
+//
+//  PrefixHeader.pch
+//  BYNote
+//
+//  Created by cby on 16/6/28.
+//  Copyright © 2016年 cby. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// header
+#import "UIView+YYAdd.h"
+
+
+#ifndef DEBUG
+    #define DEBUG 1
+#endif
+
+#ifdef DEBUG
+#define NSLog(FORMAT, ...) fprintf(stderr,"%s\n", [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+#else
+#define NSLog(...)
+#endif
+
+//
+#define FONT_SIZE 18.0f
+
+#endif /* PrefixHeader_pch */
