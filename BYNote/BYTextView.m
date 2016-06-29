@@ -27,7 +27,8 @@
 - (instancetype) initWithNote: ( Note *) note
                      andFrame: (CGRect) frame{
 
-    self = [super initWithFrame:frame];
+    self = [super init];
+    self.frame = frame;
     if (!self) {
         
         return nil;
@@ -40,24 +41,18 @@
         
         self.note = note;
     }
-    YYTextDebugOption *debugOptions = [YYTextDebugOption new];
-    debugOptions.baselineColor = [UIColor redColor];
-    debugOptions.CTFrameBorderColor = [UIColor redColor];
-    debugOptions.CTLineFillColor = [UIColor colorWithRed:0.000 green:0.463 blue:1.000 alpha:0.180];
-    debugOptions.CGGlyphBorderColor = [UIColor colorWithRed:1.000 green:0.524 blue:0.000 alpha:1.00];
+//    YYTextDebugOption *debugOptions = [YYTextDebugOption new];
+//    debugOptions.baselineColor = [UIColor redColor];
+//    debugOptions.CTFrameBorderColor = [UIColor redColor];
+//    debugOptions.CTLineFillColor = [UIColor colorWithRed:0.000 green:0.463 blue:1.000 alpha:0.180];
+//    debugOptions.CGGlyphBorderColor = [UIColor colorWithRed:1.000 green:0.524 blue:0.000 alpha:1.00];
+//    [YYTextDebugOption setSharedDebugOption:debugOptions];
     
-    [YYTextDebugOption setSharedDebugOption:debugOptions];
-    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
-    paragraph.lineSpacing = 2.0f;
-//    paragraph.maximumLineHeight = 10.0f;
-//    paragraph.minimumLineHeight = 10.0f;
-    self.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE],
-                              NSParagraphStyleAttributeName : paragraph};
+    self.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
     return self;
 }
 
 - (void) setupConfig{
-    
     
     self.delegate = self;
     self.font = [UIFont systemFontOfSize:FONT_SIZE];
@@ -67,6 +62,10 @@
     self.showsVerticalScrollIndicator = YES;
     self.showsHorizontalScrollIndicator = NO;
     self.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+    
+    YYTextLinePositionSimpleModifier *modifier = [YYTextLinePositionSimpleModifier new];
+    modifier.fixedLineHeight = 21;
+    self.linePositionModifier = modifier;
 }
 
 # pragma mark 加载内容
@@ -86,7 +85,11 @@
                                       [ranges addObject:[NSValue valueWithRange:substringRange]];
                                   }
                               }];
-    NSMutableAttributedString *ms = [[NSMutableAttributedString alloc] initWithString:_content];
+    self.text = _content;
+    NSMutableAttributedString *ms = [self.attributedText mutableCopy];
+    [ms beginEditing];
+    [ms addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:FONT_SIZE] range:NSMakeRange(0, ms.mutableString.length)];
+    [ms endEditing];
     if (ranges.count > 0) {
         
         for (int i = 0; i < ranges.count; i++) {
@@ -100,12 +103,7 @@
             ms = [[self addToDoButton:index andAttributedText:ms andSelected:selected] mutableCopy];
         }
     }
-    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
-    paragraph.lineSpacing = 2.0f;
-    paragraph.maximumLineHeight = 18.0f;
-    paragraph.minimumLineHeight = 10.0f;
-    [ms addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:FONT_SIZE] range:NSMakeRange(0, ms.length)];
-    [ms addAttribute:NSParagraphStyleAttributeName value:paragraph range:NSMakeRange(0, ms.length)];
+
     self.attributedText = ms;
 }
 
@@ -135,9 +133,6 @@
         
         [text insertAttributedString:todo atIndex:index];
     }
-    text.yy_lineSpacing = 0.0f;
-    NSRange r = NSMakeRange(0, 5);
-    NSLog(@"%@", [text attributesAtIndex:4 effectiveRange:&r]);
     return [text copy];
 }
 
@@ -149,10 +144,7 @@
     self.selectedRange = NSMakeRange(_currentCursorRange.location + 1 + _cursorOffset, 0);
     _cursorOffset = 0;
     _changed = YES;
-    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
-    paragraph.lineSpacing = 2.0f;
-    self.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE],
-                              NSParagraphStyleAttributeName : paragraph};
+    self.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
 }
 
 // 实现 原行有 todo 按钮时，换行时自动添加 todo 按钮
@@ -241,6 +233,7 @@ shouldChangeTextInRange:(NSRange)range
     _note = note;
     _content = note.content;
     _status = note.status;
+    [_todoButtonList removeAllObjects];
     [self loadContent];
 }
 

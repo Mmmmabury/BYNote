@@ -40,6 +40,8 @@
 - (void)prepareForReuse{
     
     _image = nil;
+    [_textView removeFromSuperview];
+    _textView = nil;
 }
 
 - (void) initFrames{
@@ -64,10 +66,7 @@
 //        self.label.textColor = [UIColor blackColor];
 //        self.label.font = [UIFont fontWithName:@"monaco" size:20.0f];
 //        [self.contentView addSubview:self.label];
-        self.textView = [[BYTextView alloc] initWithNote:nil andFrame:_textFrame];
-        self.textView.editable = NO;
-        self.textView.userInteractionEnabled = NO;
-        [self.contentView addSubview:_textView];
+
     }
     
     _timeLabel = [[UILabel alloc] initWithFrame:_timeFrame];
@@ -112,7 +111,19 @@
 - (void)setNote:(Note *)note{
     
     _note = note;
-    _textView.note = note;
+    self.textView.note = note;
+}
+
+- (BYTextView *)textView{
+    
+    if (!_textView) {
+        
+        _textView = [[BYTextView alloc] initWithNote:nil andFrame:_textFrame];
+        _textView.editable = NO;
+        _textView.userInteractionEnabled = NO;
+        [self.contentView addSubview:_textView];
+    }
+    return _textView;
 }
 
 /**

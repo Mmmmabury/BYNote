@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *weekLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) BYTextView *textView;
+//@property (strong, nonatomic) YYTextView *textView;
 @property (strong, nonatomic) UIView *bottomView;
 // 当前光标的位置
 @property (assign, nonatomic) NSRange currentCursorRange;
@@ -46,7 +47,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _todoButtonList = [[NSMutableArray alloc] init];
-    NSArray *array = _note.status;
     [self initSubViews];
     [self createTextView];
     [self createBottomView];
@@ -82,12 +82,16 @@
  */
 - (void) createTextView{
     
-//    _textView = [[YYTextView alloc] initWithFrame:self.view.bounds];
+//    _textView = [YYTextView new];
+//    _textView.frame = self.view.bounds;
+//    _textView.font = [UIFont systemFontOfSize:18.0f];
+//    _textView.delegate = self;
     _textView = [[BYTextView alloc] initWithNote:_note andFrame:self.view.bounds];
     _textView.top += 60.0f;
     _textView.width -= 20.0f;
     _textView.left += 10.0f;
     _textView.height -= 60.0f;
+
 
     [self.view addSubview:_textView];
 }
@@ -210,8 +214,8 @@
                                  andAttributedText:_textView.attributedText
                                        andSelected:NO];
     _textView.attributedText = text;
-    //    _textView.selectedRange = NSMakeRange(text.length + 2, 0);
     _textView.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
 }
+
 
 @end
