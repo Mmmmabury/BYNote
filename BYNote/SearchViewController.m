@@ -10,11 +10,14 @@
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 
 #import "SearchViewController.h"
+#import "CoreDataManager.h"
+#import "Note.h"
 
 @interface SearchViewController () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) UISearchBar *searchBar;
 @property (strong, nonatomic) UITableView *searchResultTableView;
+@property (strong, nonatomic) NSArray *localNotes;
 
 @end
 
@@ -48,7 +51,21 @@
 # pragma mark searchBar 代理
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     
-    
+    if (searchText.length == 0) {
+        
+        _localNotes = nil;
+        [_searchResultTableView reloadData];
+        return;
+    }
+    // 获取笔记
+    NSManagedObjectContext *context = [[CoreDataManager shareCoreDataManager] managedObjectContext];
+    NSFetchRequest *fetch = [[NSFetchRequest alloc] initWithEntityName:@"Note"];
+    NSString *format = [NSString stringWithFormat:@"content like '*%@*'", searchText];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:format];
+    NSLog(@"%@", predicate.predicateFormat);
+    fetch.predicate = predicate;
+    _localNotes = [context executeFetchRequest:fetch error:nil];
+    [_searchResultTableView reloadData];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
@@ -60,13 +77,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.textLabel.text = @"hh";
+    Note *note = _localNotes[indexPath.row];
+    cell.textLabel.text = note.content;
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 2;
+    return _localNotes.count;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

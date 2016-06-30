@@ -32,12 +32,11 @@
 		2298170D1D191AC30009256E /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2298170C1D191AC30009256E /* SearchViewController.m */; };
 		22A3F30B1D1A1B1E00D6624D /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A3F30A1D1A1B1E00D6624D /* LaunchViewController.m */; };
 		22CE8B311D239BAB002A77D0 /* BYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CE8B301D239BAB002A77D0 /* BYTextView.m */; };
-		22CE8B371D24C83B002A77D0 /* STHeiti Medium.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 22CE8B361D24C83B002A77D0 /* STHeiti Medium.ttc */; };
+		22CE8B3F1D24F10A002A77D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22CE8B3E1D24F10A002A77D0 /* Assets.xcassets */; };
 		22CFB4DA1CF4374300C38ED7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4D91CF4374300C38ED7 /* main.m */; };
 		22CFB4DD1CF4374300C38ED7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4DC1CF4374300C38ED7 /* AppDelegate.m */; };
 		22CFB4E01CF4374300C38ED7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4DF1CF4374300C38ED7 /* ViewController.m */; };
 		22CFB4E31CF4374300C38ED7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22CFB4E11CF4374300C38ED7 /* Main.storyboard */; };
-		22CFB4E51CF4374300C38ED7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22CFB4E41CF4374300C38ED7 /* Assets.xcassets */; };
 		22CFB4E81CF4374300C38ED7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22CFB4E61CF4374300C38ED7 /* LaunchScreen.storyboard */; };
 		22CFB4F31CF4374300C38ED7 /* BYNoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4F21CF4374300C38ED7 /* BYNoteTests.m */; };
 		22CFB4FE1CF4374300C38ED7 /* BYNoteUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4FD1CF4374300C38ED7 /* BYNoteUITests.m */; };
@@ -110,8 +109,7 @@
 		22A3F30A1D1A1B1E00D6624D /* LaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchViewController.m; sourceTree = "<group>"; };
 		22CE8B2F1D239BAB002A77D0 /* BYTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYTextView.h; sourceTree = "<group>"; };
 		22CE8B301D239BAB002A77D0 /* BYTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYTextView.m; sourceTree = "<group>"; };
-		22CE8B351D24C5CF002A77D0 /* STHeiti Light.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "STHeiti Light.ttc"; sourceTree = "<group>"; };
-		22CE8B361D24C83B002A77D0 /* STHeiti Medium.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "STHeiti Medium.ttc"; sourceTree = "<group>"; };
+		22CE8B3E1D24F10A002A77D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22CFB4D51CF4374300C38ED7 /* BYNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BYNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22CFB4D91CF4374300C38ED7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		22CFB4DB1CF4374300C38ED7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -119,7 +117,6 @@
 		22CFB4DE1CF4374300C38ED7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		22CFB4DF1CF4374300C38ED7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		22CFB4E21CF4374300C38ED7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		22CFB4E41CF4374300C38ED7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22CFB4E71CF4374300C38ED7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22CFB4E91CF4374300C38ED7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22CFB4EE1CF4374300C38ED7 /* BYNoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BYNoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -341,15 +338,6 @@
 			name = Tools;
 			sourceTree = "<group>";
 		};
-		22CE8B381D24C842002A77D0 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				22CE8B351D24C5CF002A77D0 /* STHeiti Light.ttc */,
-				22CE8B361D24C83B002A77D0 /* STHeiti Medium.ttc */,
-			);
-			name = Fonts;
-			sourceTree = "<group>";
-		};
 		22CFB4CC1CF4374300C38ED7 = {
 			isa = PBXGroup;
 			children = (
@@ -383,12 +371,11 @@
 				228166071D0517D000A29D54 /* Main */,
 				227DF2911D0321E0004DDC15 /* Public */,
 				22174C231D0D93A600DBA117 /* Localizable.strings */,
-				22CE8B381D24C842002A77D0 /* Fonts */,
 				22601E231CF476B000E2150A /* 12.JPG */,
 				22601E211CF4764E00E2150A /* 123.JPG */,
+				22CE8B3E1D24F10A002A77D0 /* Assets.xcassets */,
 				22CFB4DB1CF4374300C38ED7 /* AppDelegate.h */,
 				22CFB4DC1CF4374300C38ED7 /* AppDelegate.m */,
-				22CFB4E41CF4374300C38ED7 /* Assets.xcassets */,
 				22CFB4E61CF4374300C38ED7 /* LaunchScreen.storyboard */,
 				22CFB4E91CF4374300C38ED7 /* Info.plist */,
 				22CFB4D81CF4374300C38ED7 /* Supporting Files */,
@@ -550,10 +537,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				22CFB4E81CF4374300C38ED7 /* LaunchScreen.storyboard in Resources */,
-				22CFB4E51CF4374300C38ED7 /* Assets.xcassets in Resources */,
 				22601E241CF476B000E2150A /* 12.JPG in Resources */,
 				229311C11D1CBE7400169EFA /* Launch.storyboard in Resources */,
-				22CE8B371D24C83B002A77D0 /* STHeiti Medium.ttc in Resources */,
+				22CE8B3F1D24F10A002A77D0 /* Assets.xcassets in Resources */,
 				22174C211D0D93A600DBA117 /* Localizable.strings in Resources */,
 				22601E221CF4764E00E2150A /* 123.JPG in Resources */,
 				22174C1E1D0D63EE00DBA117 /* Edit.storyboard in Resources */,

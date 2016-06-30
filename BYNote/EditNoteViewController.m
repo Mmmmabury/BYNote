@@ -18,6 +18,16 @@
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 
+typedef enum buttonName{
+    
+    listButton = 100,
+    undoButton,
+    redoButton,
+    hideKeyboardButton,
+    saveButton,
+    closeButton
+}buttonName;
+
 @interface EditNoteViewController () <YYTextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *weekLabel;
@@ -50,6 +60,7 @@
     [self initSubViews];
     [self createTextView];
     [self createBottomView];
+    NSLog(@"%@", [UIFont familyNames]);
     _context = [[CoreDataManager shareCoreDataManager] managedObjectContext];
     if (_note) {
         
@@ -99,56 +110,82 @@
 // 添加底部视图
 - (void) createBottomView{
     
-    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 30, SCREEN_WIDTH, 30)];
+    CGFloat buttonWidth = 30;
+    NSArray *buttonNames = @[@"列表", @"undo", @"redo", @"hide", @"save", @"cancel"];
+    NSArray *buttonImages = @[[UIImage imageNamed:@"clock"],
+                              [UIImage imageNamed:@"clock"],
+                              [UIImage imageNamed:@"clock"],
+                              [UIImage imageNamed:@"clock"],
+                              [UIImage imageNamed:@"clock"],
+                              [UIImage imageNamed:@"cancel"]];
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 20, SCREEN_WIDTH, 20)];
     _bottomView.backgroundColor = [UIColor clearColor];
     
-    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    closeButton.frame = CGRectMake(SCREEN_WIDTH - 45, 0, 40, 30);
-    [closeButton setTitle:@"关闭" forState: UIControlStateNormal];
-    [closeButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [closeButton addTarget:self action:@selector(closeView:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIButton *saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    saveButton.frame = CGRectMake(SCREEN_WIDTH - 90, 0, 40, 30);
-    [saveButton setTitle:@"保存" forState: UIControlStateNormal];
-    [saveButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [saveButton addTarget:self action:@selector(saveContent) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIButton *toDoListButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    toDoListButton.frame = CGRectMake(5, 0, 40, 30);
-    [toDoListButton setTitle:@"列表" forState: UIControlStateNormal];
-    [toDoListButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [toDoListButton addTarget:self action:@selector(addToDo:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIButton *undoButton = [UIButton buttonWithType:UIButtonTypeCustom]; undoButton.frame = CGRectMake(5 * 2 + 40, 0, 50, 30);
-    [undoButton setTitle:@"undo" forState: UIControlStateNormal];
-    [undoButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [undoButton addTarget:self action:@selector(undo) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIButton *redoButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    redoButton.frame = CGRectMake(5 * 3 + 80, 0, 50, 30);
-    [redoButton setTitle:@"redo" forState: UIControlStateNormal];
-    [redoButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [redoButton addTarget:self action:@selector(redo) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIButton *hideKeyboardButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    hideKeyboardButton.frame = CGRectMake(5 * 4 + 120, 0, 50, 30);
-    [hideKeyboardButton setTitle:@"收键盘" forState: UIControlStateNormal];
-    [hideKeyboardButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [hideKeyboardButton addTarget:self action:@selector(hideKeyboard) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIButton *clockButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    clockButton.frame = CGRectMake(5 * 3 + 80, 0, 50, 30);
-    [clockButton setTitle:@"redo" forState: UIControlStateNormal];
-    [clockButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-//    [clockButton addTarget:self action:@selector() forControlEvents:UIControlEventTouchUpInside];
-    
-    [_bottomView addSubview:hideKeyboardButton];
-    [_bottomView addSubview:redoButton];
-    [_bottomView addSubview:undoButton];
-    [_bottomView addSubview:toDoListButton];
-    [_bottomView addSubview:closeButton];
-    [_bottomView addSubview:saveButton];
+    for (int i = 0; i < buttonNames.count; i++) {
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(0 + i * buttonWidth, 0, buttonWidth, buttonWidth);
+        if (i < buttonImages.count) {
+            
+            [button setImage:buttonImages[i] forState:UIControlStateNormal];
+        }
+        [button setTitle:buttonNames[i] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        button.tag = listButton + i;
+        [_bottomView addSubview:button];
+    }
+//    
+//    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    closeButton.frame = CGRectMake(SCREEN_WIDTH - 45, 0, 40, 30);
+//    [closeButton setTitle:@"关闭" forState: UIControlStateNormal];
+//    [closeButton addTarget:self action:@selector(closeView:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    UIButton *saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    saveButton.frame = CGRectMake(SCREEN_WIDTH - 90, 0, 40, 30);
+//    [saveButton setImage:[UIImage imageNamed:@"save"] forState:UIControlStateNormal];
+//    [saveButton setTitle:@"保存" forState: UIControlStateNormal];
+//    [saveButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+//    [saveButton addTarget:self action:@selector(saveContent) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    UIButton *toDoListButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    toDoListButton.frame = CGRectMake(5, 0, 40, 30);
+//    [toDoListButton setImage:[UIImage imageNamed:@"signs"] forState:UIControlStateNormal];
+//    [toDoListButton setTitle:@"列表" forState: UIControlStateNormal];
+//    [toDoListButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+//    [toDoListButton addTarget:self action:@selector(addToDo:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    UIButton *undoButton = [UIButton buttonWithType:UIButtonTypeCustom]; undoButton.frame = CGRectMake(5 * 2 + 40, 0, 50, 30);
+//    [undoButton setImage:[UIImage imageNamed:@"back-arrow"] forState:UIControlStateNormal];
+//    [undoButton setTitle:@"undo" forState: UIControlStateNormal];
+//    [undoButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+//    [undoButton addTarget:self action:@selector(undo) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    UIButton *redoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    redoButton.frame = CGRectMake(5 * 3 + 80, 0, 50, 30);
+//    [redoButton setImage:[UIImage imageNamed:@"next"] forState:UIControlStateNormal];
+//    [redoButton setTitle:@"redo" forState: UIControlStateNormal];
+//    [redoButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+//    [redoButton addTarget:self action:@selector(redo) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    UIButton *hideKeyboardButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    hideKeyboardButton.frame = CGRectMake(5 * 4 + 120, 0, 50, 30);
+//    [hideKeyboardButton setImage:[UIImage imageNamed:@"download-button"] forState:UIControlStateNormal];
+//    [hideKeyboardButton setTitle:@"收键盘" forState: UIControlStateNormal];
+//    [hideKeyboardButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+//    [hideKeyboardButton addTarget:self action:@selector(hideKeyboard) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    UIButton *clockButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    clockButton.frame = CGRectMake(5 * 3 + 80, 0, 50, 30);
+//    [clockButton setTitle:@"redo" forState: UIControlStateNormal];
+//    [clockButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+////    [clockButton addTarget:self action:@selector() forControlEvents:UIControlEventTouchUpInside];
+//    
+//    [_bottomView addSubview:hideKeyboardButton];
+//    [_bottomView addSubview:redoButton];
+//    [_bottomView addSubview:undoButton];
+//    [_bottomView addSubview:toDoListButton];
+//    [_bottomView addSubview:closeButton];
+//    [_bottomView addSubview:saveButton];
     [self.view addSubview:_bottomView];
 }
 

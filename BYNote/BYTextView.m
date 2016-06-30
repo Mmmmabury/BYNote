@@ -10,6 +10,8 @@
 #import "ToDoButton.h"
 #import "CoreDataManager.h"
 
+#define THE_FONT [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE]
+
 @interface BYTextView ()<YYTextViewDelegate>
 
 @property (copy, nonatomic) NSString *content;
@@ -48,14 +50,14 @@
 //    debugOptions.CGGlyphBorderColor = [UIColor colorWithRed:1.000 green:0.524 blue:0.000 alpha:1.00];
 //    [YYTextDebugOption setSharedDebugOption:debugOptions];
     
-    self.typingAttributes = @{NSFontAttributeName : [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE]};
+    self.typingAttributes = @{NSFontAttributeName : THE_FONT};
     return self;
 }
 
 - (void) setupConfig{
     
     self.delegate = self;
-    self.font = [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE];
+    self.font = THE_FONT;
     self.allowsCopyAttributedString = YES;
     self.allowsPasteAttributedString = YES;
     self.allowsPasteImage = NO;
@@ -72,7 +74,7 @@
 // 如果有 note 传入，则加载 note 中的内容
 - (void) loadContent{
     
-    NSAttributedString *ms = [[NSAttributedString alloc] initWithString:_content attributes:@{NSFontAttributeName: [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE]}];
+    NSAttributedString *ms = [[NSAttributedString alloc] initWithString:_content attributes:@{NSFontAttributeName: THE_FONT}];
     self.attributedText = [self parserContent:ms];
 }
 
@@ -120,7 +122,7 @@
     NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString:attext];
     ToDoButton *toDoButton = [ToDoButton buttonWithType:UIButtonTypeCustom];
     toDoButton.frame = CGRectMake(0, 0, 19, 19);
-    toDoButton.titleLabel.font = [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE];
+    toDoButton.titleLabel.font = THE_FONT;
     toDoButton.selected = selected;
     // 将 todobutton 添加到数组中
     [_todoButtonList addObject:toDoButton];
@@ -128,7 +130,7 @@
     [NSMutableAttributedString yy_attachmentStringWithContent:toDoButton
                                                   contentMode:UIViewContentModeCenter
                                                attachmentSize:toDoButton.size
-                                                  alignToFont:[UIFont fontWithName:@"Heiti SC" size:FONT_SIZE]
+                                                  alignToFont:THE_FONT
                                                     alignment:YYTextVerticalAlignmentCenter];
     // 如果 index 和文本长度相等，则直接加载文本末尾
     if (index >= text.length){
@@ -149,7 +151,7 @@
     self.selectedRange = NSMakeRange(_currentCursorRange.location + 1 + _cursorOffset, 0);
     _cursorOffset = 0;
     _changed = YES;
-    self.typingAttributes = @{NSFontAttributeName : [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE]};
+    self.typingAttributes = @{NSFontAttributeName : THE_FONT};
 }
 
 // 实现 原行有 todo 按钮时，换行时自动添加 todo 按钮
@@ -196,7 +198,7 @@ shouldChangeTextInRange:(NSRange)range
                 NSLog(@"行首有 todo 按钮, 添加 todo 按钮");
                 NSAttributedString *text = [self addToDoButton:_currentCursorRange.location andAttributedText:self.attributedText andSelected:NO];
                 NSMutableAttributedString *addSpaceText = [text mutableCopy];
-                NSAttributedString *space = [[NSAttributedString alloc] initWithString:@" " attributes: @{NSFontAttributeName : [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE]}];
+                NSAttributedString *space = [[NSAttributedString alloc] initWithString:@" " attributes: @{NSFontAttributeName : THE_FONT}];
                 [addSpaceText appendAttributedString: space];
                 self.attributedText = [addSpaceText copy];
                 _cursorOffset = 2;

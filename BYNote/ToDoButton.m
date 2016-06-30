@@ -15,8 +15,8 @@
     ToDoButton *button = [super buttonWithType:buttonType];
     if (button) {
         
-        [button setImage:[UIImage imageNamed:@"todotrue"] forState:UIControlStateSelected];
-        [button setImage:[UIImage imageNamed:@"todono"] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:@"checkYES"] forState:UIControlStateSelected];
+        [button setImage:[UIImage imageNamed:@"checkNO"] forState:UIControlStateNormal];
         [button addTarget:button action:@selector(buttonAc) forControlEvents:UIControlEventTouchDown];
     }
     return button;
