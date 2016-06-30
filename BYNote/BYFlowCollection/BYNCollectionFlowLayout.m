@@ -78,7 +78,7 @@
         }
         height = 0;
     }
-    maxHeight += itemInset * (self.frames.count ) + 0;
+    maxHeight += itemInset * (self.frames.count ) + 10;
     if (maxHeight < SCREEN_HEIGHT) {
         
         maxHeight = SCREEN_HEIGHT;

@@ -214,7 +214,7 @@
                                  andAttributedText:_textView.attributedText
                                        andSelected:NO];
     _textView.attributedText = text;
-    _textView.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
+    _textView.typingAttributes = @{NSFontAttributeName : [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE]};
 }
 
 

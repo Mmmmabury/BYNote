@@ -24,7 +24,7 @@
 
 - (instancetype)init{
     
-    self = [super initWithFrame:CGRectMake(-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2, SCREEN_HEIGHT)];
+    self = [super initWithFrame:CGRectMake(-SCREEN_WIDTH + 50, 0, SCREEN_WIDTH - 50, SCREEN_HEIGHT)];
     if (self) {
         
         self.backgroundColor = [UIColor colorWithRed:0.2078 green:0.5137 blue:0.8 alpha:1.0];
@@ -113,7 +113,7 @@
         
         [UIView animateWithDuration:0.3f animations:^{
             
-            self.transform = CGAffineTransformMakeTranslation(SCREEN_WIDTH / 2, 0);
+            self.transform = CGAffineTransformMakeTranslation(SCREEN_WIDTH - 50, 0);
             _blurView.alpha = 1.0f;
         }];
         _blurView.hidden = NO;

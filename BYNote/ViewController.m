@@ -192,7 +192,7 @@
     
     [mailCompose setMailComposeDelegate:self];
     [mailCompose setSubject:@"Feedback"];
-    [mailCompose setToRecipients:@[@"admin@qq.com"]];
+    [mailCompose setToRecipients:@[@"yuntechs@outlook.com"]];
     
     // 弹出邮件发送视图
     [self presentViewController:mailCompose animated:YES completion:nil];

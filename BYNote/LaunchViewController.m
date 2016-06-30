@@ -12,6 +12,7 @@
 #import "MainNavigation.h"
 
 @interface LaunchViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *b;
 
 @end
 
@@ -21,6 +22,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    NSAttributedString *str = [[NSAttributedString alloc] initWithString:@"大飞第三方" attributes:@{NSFontAttributeName: [UIFont fontWithName:@"Heiti SC" size:18.0f]}];
+    [_b setAttributedTitle:str forState:UIControlStateNormal];
     [self authenticationWithBiometrics];
     [self passwordLock];
     [self pasteboard];

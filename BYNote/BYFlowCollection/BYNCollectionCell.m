@@ -46,7 +46,6 @@
 
 - (void) initFrames{
     
-    NSLog(@"%@", NSStringFromCGRect(self.bounds));
     _textFrame = self.bounds;
     _textFrame.origin.x += 10.0;
     _textFrame.origin.y += 0;

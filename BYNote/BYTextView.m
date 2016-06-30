@@ -48,15 +48,15 @@
 //    debugOptions.CGGlyphBorderColor = [UIColor colorWithRed:1.000 green:0.524 blue:0.000 alpha:1.00];
 //    [YYTextDebugOption setSharedDebugOption:debugOptions];
     
-    self.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
+    self.typingAttributes = @{NSFontAttributeName : [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE]};
     return self;
 }
 
 - (void) setupConfig{
     
     self.delegate = self;
-    self.font = [UIFont systemFontOfSize:FONT_SIZE];
-    self.allowsCopyAttributedString = NO;
+    self.font = [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE];
+    self.allowsCopyAttributedString = YES;
     self.allowsPasteAttributedString = YES;
     self.allowsPasteImage = NO;
     self.showsVerticalScrollIndicator = YES;
@@ -72,6 +72,12 @@
 // 如果有 note 传入，则加载 note 中的内容
 - (void) loadContent{
     
+    NSAttributedString *ms = [[NSAttributedString alloc] initWithString:_content attributes:@{NSFontAttributeName: [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE]}];
+    self.attributedText = [self parserContent:ms];
+}
+
+- (NSAttributedString *) parserContent: (NSAttributedString *) str{
+    
     NSMutableArray *ranges = [[NSMutableArray alloc] init];
     [_content enumerateSubstringsInRange:NSMakeRange(0, _content.length)
                                  options:NSStringEnumerationByComposedCharacterSequences
@@ -85,11 +91,7 @@
                                       [ranges addObject:[NSValue valueWithRange:substringRange]];
                                   }
                               }];
-    self.text = _content;
-    NSMutableAttributedString *ms = [self.attributedText mutableCopy];
-    [ms beginEditing];
-    [ms addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:FONT_SIZE] range:NSMakeRange(0, ms.mutableString.length)];
-    [ms endEditing];
+    NSMutableAttributedString *ms = [str mutableCopy];
     if (ranges.count > 0) {
         
         for (int i = 0; i < ranges.count; i++) {
@@ -97,14 +99,17 @@
             NSValue *v = ranges[i];
             NSRange range = [v rangeValue];
             NSInteger index = range.location;
-            NSNumber *selectNum = _status[i];
-            BOOL selected = [selectNum boolValue];
+            BOOL selected = NO;
+            if (i < _status.count) {
+                
+                NSNumber *selectNum = _status[i];
+                selected = [selectNum boolValue];
+            }
             [ms replaceCharactersInRange:range withString:@""];
             ms = [[self addToDoButton:index andAttributedText:ms andSelected:selected] mutableCopy];
         }
     }
-
-    self.attributedText = ms;
+    return ms;
 }
 
 # pragma mark 添加 todo 按钮
@@ -115,18 +120,18 @@
     NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString:attext];
     ToDoButton *toDoButton = [ToDoButton buttonWithType:UIButtonTypeCustom];
     toDoButton.frame = CGRectMake(0, 0, 19, 19);
-    toDoButton.titleLabel.font = [UIFont systemFontOfSize:FONT_SIZE];
+    toDoButton.titleLabel.font = [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE];
     toDoButton.selected = selected;
     // 将 todobutton 添加到数组中
     [_todoButtonList addObject:toDoButton];
     NSMutableAttributedString *todo =
     [NSMutableAttributedString yy_attachmentStringWithContent:toDoButton
-                                                  contentMode:UIViewContentModeBottom
+                                                  contentMode:UIViewContentModeCenter
                                                attachmentSize:toDoButton.size
-                                                  alignToFont:[UIFont systemFontOfSize:FONT_SIZE]
-                                                    alignment:YYTextVerticalAlignmentBottom];
+                                                  alignToFont:[UIFont fontWithName:@"Heiti SC" size:FONT_SIZE]
+                                                    alignment:YYTextVerticalAlignmentCenter];
     // 如果 index 和文本长度相等，则直接加载文本末尾
-    if (index == text.length){
+    if (index >= text.length){
         
         [text appendAttributedString:todo];
     }else if (index < text.length){
@@ -144,7 +149,7 @@
     self.selectedRange = NSMakeRange(_currentCursorRange.location + 1 + _cursorOffset, 0);
     _cursorOffset = 0;
     _changed = YES;
-    self.typingAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]};
+    self.typingAttributes = @{NSFontAttributeName : [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE]};
 }
 
 // 实现 原行有 todo 按钮时，换行时自动添加 todo 按钮
@@ -153,44 +158,54 @@ shouldChangeTextInRange:(NSRange)range
  replacementText:(NSString *)text{
     
     _currentCursorRange = textView.selectedRange;
-    // 删除字符
+    // 如果是删除字符
     if (text.length == 0 && range.length == 1) {
         
         _cursorOffset = -1;
     }
+    // 如果输入的是空格，则坚持是否需要添加按钮
     if ([text isEqualToString:@"\n"]) {
         
-        NSAttributedString *attributedText = textView.attributedText;
-        // 遍历每一行
-        [textView.text enumerateSubstringsInRange:NSMakeRange(0, textView.text.length) options:NSStringEnumerationByLines usingBlock:^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
-            
-            NSInteger subStringBeginIndex = substringRange.location;
-            NSInteger subStringEndIndex = substringRange.location + substringRange.length;
-            NSInteger changeIndex = range.location + range.length;
-            
-            // 光标所在行是否有 todo 按钮
-            if (changeIndex >= subStringBeginIndex && changeIndex <= subStringEndIndex) {
-                
-                NSString *firstChar = [attributedText yy_plainTextForRange:NSMakeRange(subStringBeginIndex, 1)];
-                if ([firstChar isEqualToString:@"\U0000fffc"]) {
-                    
-                    NSLog(@"行首有 todo 按钮, 添加 todo 按钮");
-                    NSAttributedString *text = [self addToDoButton:_currentCursorRange.location andAttributedText:self.attributedText andSelected:NO];
-                    self.attributedText = text;
-                    _cursorOffset = 1;
-                }else{
-                    
-                    NSLog(@"行首没有 todo 按钮");
-                }
-            }
-        }];
+        [self addTodoButtonInNewLine:textView andRange:range];
     }
     
     if ([text isEqualToString:@"\U0000fffc"]) {
         
         _cursorOffset = 1;
     }
+    
     return YES;
+}
+
+- (void) addTodoButtonInNewLine: (YYTextView *) textView andRange: (NSRange) range{
+    
+    NSAttributedString *attributedText = textView.attributedText;
+    // 遍历每一行
+    [textView.text enumerateSubstringsInRange:NSMakeRange(0, textView.text.length) options:NSStringEnumerationByLines usingBlock:^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
+        
+        NSInteger subStringBeginIndex = substringRange.location;
+        NSInteger subStringEndIndex = substringRange.location + substringRange.length;
+        NSInteger changeIndex = range.location + range.length;
+        
+        // 光标所在行是否有 todo 按钮
+        if (changeIndex >= subStringBeginIndex && changeIndex <= subStringEndIndex) {
+            
+            NSString *firstChar = [attributedText yy_plainTextForRange:NSMakeRange(subStringBeginIndex, 1)];
+            if ([firstChar isEqualToString:@"\U0000fffc"]) {
+                
+                NSLog(@"行首有 todo 按钮, 添加 todo 按钮");
+                NSAttributedString *text = [self addToDoButton:_currentCursorRange.location andAttributedText:self.attributedText andSelected:NO];
+                NSMutableAttributedString *addSpaceText = [text mutableCopy];
+                NSAttributedString *space = [[NSAttributedString alloc] initWithString:@" " attributes: @{NSFontAttributeName : [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE]}];
+                [addSpaceText appendAttributedString: space];
+                self.attributedText = [addSpaceText copy];
+                _cursorOffset = 2;
+            }else{
+                
+                NSLog(@"行首没有 todo 按钮");
+            }
+        }
+    }];
 }
 
 # pragma mark 保存内容
@@ -200,7 +215,7 @@ shouldChangeTextInRange:(NSRange)range
         
         return;
     }
-    NSLog(@"%@", NSHomeDirectory());
+    NSLog(@"HomeDirectory:%@", NSHomeDirectory());
     CoreDataManager *manager = [CoreDataManager shareCoreDataManager];
     NSManagedObjectContext *context = [manager managedObjectContext];
     NSDate *now = [NSDate date];

@@ -14,6 +14,7 @@
 #import "CoreDataManager.h"
 #import "Note.h"
 #import "ViewController.h"
+#import <YYText.h>
 
 @interface BYNCollectionFlowView()<UICollectionViewDelegate, UICollectionViewDataSource>
 {
@@ -61,7 +62,6 @@
     _localNotes = nil;
     [self loadData];
     _flowLayout.frames = [_frames copy];
-    NSLog(@"%@", _frames);
     [super reloadData];
 }
 /**
@@ -105,13 +105,9 @@
     BYNCollectionCell *cell = [self dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     NSValue *value = self.frames[indexPath.item % 2][indexPath.item / 2];
     Note *note = _localNotes[indexPath.item];
-    NSLog(@"note:%@, index:%d", note.content, indexPath.item);
     cell.note = _localNotes[indexPath.item];
     cell.itemFrame = [value CGRectValue];
     cell.backgroundColor = self.colors[indexPath.item % self.colors.count];
-//    cell.backgroundColor = [UIColor colorWithRed:0.2039 green:0.5098 blue:0.7922 alpha:1.0];
-//    NSLog(@"%@", [self.collectionViewLayout layoutAttributesForItemAtIndexPath:indexPath]);
-//    [cell applyLayoutAttributes:]
     return cell;
 }
 
@@ -141,6 +137,8 @@
     CGFloat inset = (numberOfRow + 1) * itemInset;
     // 每个 cell 的宽
     CGFloat cellWidth = (SCREEN_WIDTH - inset) / numberOfRow;
+    // cell 的范围
+    CGSize cellFrameMax = CGSizeMake(cellWidth - 10, SCREEN_HEIGHT * 8);
     self.frames = [[NSMutableArray alloc] init];
     for (int i = 0; i < 2; i++) {
         
@@ -154,9 +152,14 @@
         for (int i = row; i < _localNotes.count; i += numberOfRow) {
             
             Note *note = _localNotes[i];
-            NSAttributedString *attriString = [[NSAttributedString alloc] initWithString:note.content attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]}];
+//            NSAttributedString *attriString = [[NSAttributedString alloc] initWithString:note.content attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:FONT_SIZE]}];
             // 根据字符串的特性计算每行高度
-            CGRect rect = [attriString boundingRectWithSize:CGSizeMake(cellWidth - 8, SCREEN_HEIGHT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin context:nil];
+//            CGRect rect = [attriString boundingRectWithSize:CGSizeMake(cellWidth - 8, SCREEN_HEIGHT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin context:nil];
+            NSAttributedString *ss = [[NSAttributedString alloc] initWithString:note.content attributes:@{NSFontAttributeName : [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE + 0.5f]}];
+            // YYText
+            YYTextLayout *layout = [YYTextLayout layoutWithContainerSize: cellFrameMax text:ss];
+            CGRect rect = layout.textBoundingRect;
+            
             
             CGFloat height = ceil(rect.size.height);
             CGFloat cellY = lastFrame.origin.y + lastFrame.size.height + itemInset;
@@ -173,7 +176,6 @@
 # pragma mark scrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-//    NSLog(@"%f", scrollView.contentOffset.y);
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
@@ -208,4 +210,10 @@
     }
     return (ViewController *) nextResponder;
 }
+
+- (void)deleteItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths{
+    
+    
+}
+
 @end

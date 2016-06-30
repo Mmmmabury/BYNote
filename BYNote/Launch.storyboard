@@ -24,8 +24,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vl5-1G-qzR">
-                                <rect key="frame" x="43" y="208" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="51" y="208" width="118" height="30"/>
+                                <state key="normal" title="合法"/>
                                 <connections>
                                     <action selector="buttonAc:" destination="S6u-wA-3Ih" eventType="touchUpInside" id="bcI-SA-7Sq"/>
                                 </connections>
@@ -33,6 +33,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="b" destination="vl5-1G-qzR" id="ZqV-gY-hte"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lgT-2d-Mdg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
