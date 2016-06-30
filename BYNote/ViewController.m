@@ -21,6 +21,7 @@
 #import "SearchViewController.h"
 #import "PasswordViewController.h"
 #import "UIView+YYAdd.h"
+#import "CoreDataManager.h"
 
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
@@ -53,7 +54,22 @@
 - (void) viewDidAppear:(BOOL)animated{
     
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [self loadNotes];
     [_collectionView reloadData];
+}
+
+- (void) loadNotes{
+    
+    NSManagedObjectContext *context = [[CoreDataManager shareCoreDataManager] managedObjectContext];
+    NSFetchRequest *fetch = [[NSFetchRequest alloc] initWithEntityName:@"Note"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"content like '*'", @""];
+    
+    fetch.predicate = predicate;
+    _collectionView.localNotes = [context executeFetchRequest:fetch error:nil];
 }
 
 // 添加重要通知
@@ -103,6 +119,7 @@
     
     _collectionView = [[BYNCollectionFlowView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - 20)];
     [self.view addSubview:_collectionView];
+    [self loadNotes];
     
     _profileMenu = [[ProfileSliderMenu alloc]init];
     _profileMenu.delegate = self;
@@ -202,7 +219,7 @@
     
     [self dismissViewControllerAnimated:YES completion:^{
         
-        [_profileMenu triggle];
+//        [_profileMenu triggle];
     }];
 }
 
@@ -210,9 +227,12 @@
 - (void)displaySearchView{
     
     SearchViewController *searchViewController =  [self.storyboard instantiateViewControllerWithIdentifier:@"search"];
-    [_profileMenu triggle];
+//    [_profileMenu triggle];
 //    [self presentViewController:searchViewController animated:YES completion:nil];
     [self.navigationController pushViewController:searchViewController animated:YES];
+//    [_collectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
+//    [self loadNotes];
+//    [_collectionView reloadData];
 }
 
 // 指纹
@@ -318,5 +338,6 @@
         _bottomView.frame = _bottomViewShowFrame;
     }];
 }
+
 
 @end

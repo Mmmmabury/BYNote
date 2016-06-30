@@ -398,6 +398,11 @@ IB_DESIGNABLE
 @property (nullable, nonatomic, readwrite, strong) __kindof UIView *inputView;
 @property (nullable, nonatomic, readwrite, strong) __kindof UIView *inputAccessoryView;
 @property (nonatomic) CGFloat extraAccessoryViewHeight;
+
+# pragma mark 我添加的
+- (void)undo;
+- (void)redo;
+
 @end
 #endif // !TARGET_INTERFACE_BUILDER
 

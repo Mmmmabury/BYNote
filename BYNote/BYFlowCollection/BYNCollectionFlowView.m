@@ -23,7 +23,6 @@
 @property (nonatomic, strong) NSMutableArray *frames;
 @property (nonatomic, copy) NSArray *texts;
 @property (nonatomic, copy) NSArray *colors;
-@property (nonatomic, strong) NSArray *localNotes;
 @property (nonatomic, strong) BYNCollectionFlowLayout *flowLayout;
 
 @end
@@ -59,7 +58,7 @@
 
 - (void)reloadData{
     
-    _localNotes = nil;
+//    _localNotes = nil;
     [self loadData];
     _flowLayout.frames = [_frames copy];
     [super reloadData];
@@ -70,12 +69,12 @@
 - (void) loadData{
     
     // 获取笔记
-    NSManagedObjectContext *context = [[CoreDataManager shareCoreDataManager] managedObjectContext];
-    NSFetchRequest *fetch = [[NSFetchRequest alloc] initWithEntityName:@"Note"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"content like '*'", @""];
-    
-    fetch.predicate = predicate;
-     _localNotes = [context executeFetchRequest:fetch error:nil];
+//    NSManagedObjectContext *context = [[CoreDataManager shareCoreDataManager] managedObjectContext];
+//    NSFetchRequest *fetch = [[NSFetchRequest alloc] initWithEntityName:@"Note"];
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"content like '*'", @""];
+//    
+//    fetch.predicate = predicate;
+//     _localNotes = [context executeFetchRequest:fetch error:nil];
     
     
     self.texts = @[@"卡片理五 A 409\n李四117\n八格牙路\n填完",
@@ -213,7 +212,13 @@
 
 - (void)deleteItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths{
     
-    
+    NSManagedObjectContext *context = [[CoreDataManager shareCoreDataManager] managedObjectContext];
+    for (NSIndexPath *indexPath in indexPaths) {
+        
+        Note *note = _localNotes[indexPath.item];
+        [context deleteObject:note];
+    }
+    [[CoreDataManager shareCoreDataManager] saveContext];
 }
 
 @end

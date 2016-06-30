@@ -1644,6 +1644,16 @@ typedef NS_ENUM(NSUInteger, YYTextMoveDirection) {
     return YES;
 }
 
+- (void)undo {
+    
+    [self _undo];
+}
+
+- (void)redo {
+    
+    [self _redo];
+}
+
 - (void)_undo {
     if (![self _canUndo]) return;
     [self _saveToRedoStack];

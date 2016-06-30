@@ -13,4 +13,5 @@
 
 @interface BYNCollectionFlowView : UICollectionView
 
+@property (nonatomic, strong) NSArray *localNotes;
 @end

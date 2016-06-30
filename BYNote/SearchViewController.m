@@ -28,7 +28,7 @@
     // Do any additional setup after loading the view.
     self.title = @"搜索";
     
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 50)];
     _searchBar.delegate = self;

@@ -35,6 +35,7 @@ typedef enum buttonName{
 @property (strong, nonatomic) BYTextView *textView;
 //@property (strong, nonatomic) YYTextView *textView;
 @property (strong, nonatomic) UIView *bottomView;
+@property (strong, nonatomic) UIView *bottomCenterView;
 // 当前光标的位置
 @property (assign, nonatomic) NSRange currentCursorRange;
 // 文本改变时，光标的偏移值
@@ -60,7 +61,6 @@ typedef enum buttonName{
     [self initSubViews];
     [self createTextView];
     [self createBottomView];
-    NSLog(@"%@", [UIFont familyNames]);
     _context = [[CoreDataManager shareCoreDataManager] managedObjectContext];
     if (_note) {
         
@@ -80,7 +80,6 @@ typedef enum buttonName{
     self.view.backgroundColor = [UIColor colorWithRed:0.8672 green:0.8672 blue:0.8672 alpha:1.0];
     _weekLabel.textColor = [UIColor colorWithRed:0.2507 green:0.247 blue:0.2544 alpha:0.8];
     _dateLabel.textColor = [UIColor colorWithRed:0.2507 green:0.247 blue:0.2544 alpha:0.8];
-    
     _weekLabel.text = NSLocalizedString(@"Sat", nil);
 }
 
@@ -93,10 +92,6 @@ typedef enum buttonName{
  */
 - (void) createTextView{
     
-//    _textView = [YYTextView new];
-//    _textView.frame = self.view.bounds;
-//    _textView.font = [UIFont systemFontOfSize:18.0f];
-//    _textView.delegate = self;
     _textView = [[BYTextView alloc] initWithNote:_note andFrame:self.view.bounds];
     _textView.top += 60.0f;
     _textView.width -= 20.0f;
@@ -105,6 +100,7 @@ typedef enum buttonName{
 
 
     [self.view addSubview:_textView];
+    [_textView becomeFirstResponder];
 }
 
 // 添加底部视图
@@ -112,100 +108,88 @@ typedef enum buttonName{
     
     CGFloat buttonWidth = 30;
     NSArray *buttonNames = @[@"列表", @"undo", @"redo", @"hide", @"save", @"cancel"];
-    NSArray *buttonImages = @[[UIImage imageNamed:@"clock"],
-                              [UIImage imageNamed:@"clock"],
-                              [UIImage imageNamed:@"clock"],
-                              [UIImage imageNamed:@"clock"],
-                              [UIImage imageNamed:@"clock"],
+    NSArray *buttonImages = @[[UIImage imageNamed:@"list"],
+                              [UIImage imageNamed:@"undo"],
+                              [UIImage imageNamed:@"redo"],
+                              [UIImage imageNamed:@"down"],
+                              [UIImage imageNamed:@"save"],
                               [UIImage imageNamed:@"cancel"]];
-    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 20, SCREEN_WIDTH, 20)];
+    
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - buttonWidth, SCREEN_WIDTH, buttonWidth)];
     _bottomView.backgroundColor = [UIColor clearColor];
+    _bottomCenterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 4 * buttonWidth, buttonWidth)];
+    _bottomCenterView.center = CGPointMake(_bottomView.center.x, _bottomCenterView.center.y);
+    [_bottomView addSubview:_bottomCenterView];
     
     for (int i = 0; i < buttonNames.count; i++) {
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(0 + i * buttonWidth, 0, buttonWidth, buttonWidth);
-        if (i < buttonImages.count) {
-            
-            [button setImage:buttonImages[i] forState:UIControlStateNormal];
-        }
+        CGRect rect = CGRectMake(0 + i * buttonWidth, 0, buttonWidth, buttonWidth);
+        [button setImage:buttonImages[i] forState:UIControlStateNormal];
         [button setTitle:buttonNames[i] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
         button.tag = listButton + i;
-        [_bottomView addSubview:button];
+        [button addTarget:self action:@selector(buttonActions:) forControlEvents:UIControlEventTouchUpInside];
+        if (button.tag < saveButton) {
+            
+            [_bottomCenterView addSubview:button];
+        }
+        if (button.tag == closeButton) {
+           
+            rect = CGRectMake(0, 0, buttonWidth, buttonWidth);
+            rect = CGRectInset(rect, 2, 2);
+            [_bottomView addSubview:button];
+        }
+        if (button.tag == saveButton) {
+            
+            rect = CGRectMake(SCREEN_WIDTH - buttonWidth, 0, buttonWidth, buttonWidth);
+            [_bottomView addSubview:button];
+        }
+        rect = CGRectInset(rect, 3, 3);
+        button.frame = rect;
     }
-//    
-//    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    closeButton.frame = CGRectMake(SCREEN_WIDTH - 45, 0, 40, 30);
-//    [closeButton setTitle:@"关闭" forState: UIControlStateNormal];
-//    [closeButton addTarget:self action:@selector(closeView:) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    UIButton *saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    saveButton.frame = CGRectMake(SCREEN_WIDTH - 90, 0, 40, 30);
-//    [saveButton setImage:[UIImage imageNamed:@"save"] forState:UIControlStateNormal];
-//    [saveButton setTitle:@"保存" forState: UIControlStateNormal];
-//    [saveButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-//    [saveButton addTarget:self action:@selector(saveContent) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    UIButton *toDoListButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    toDoListButton.frame = CGRectMake(5, 0, 40, 30);
-//    [toDoListButton setImage:[UIImage imageNamed:@"signs"] forState:UIControlStateNormal];
-//    [toDoListButton setTitle:@"列表" forState: UIControlStateNormal];
-//    [toDoListButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-//    [toDoListButton addTarget:self action:@selector(addToDo:) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    UIButton *undoButton = [UIButton buttonWithType:UIButtonTypeCustom]; undoButton.frame = CGRectMake(5 * 2 + 40, 0, 50, 30);
-//    [undoButton setImage:[UIImage imageNamed:@"back-arrow"] forState:UIControlStateNormal];
-//    [undoButton setTitle:@"undo" forState: UIControlStateNormal];
-//    [undoButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-//    [undoButton addTarget:self action:@selector(undo) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    UIButton *redoButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    redoButton.frame = CGRectMake(5 * 3 + 80, 0, 50, 30);
-//    [redoButton setImage:[UIImage imageNamed:@"next"] forState:UIControlStateNormal];
-//    [redoButton setTitle:@"redo" forState: UIControlStateNormal];
-//    [redoButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-//    [redoButton addTarget:self action:@selector(redo) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    UIButton *hideKeyboardButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    hideKeyboardButton.frame = CGRectMake(5 * 4 + 120, 0, 50, 30);
-//    [hideKeyboardButton setImage:[UIImage imageNamed:@"download-button"] forState:UIControlStateNormal];
-//    [hideKeyboardButton setTitle:@"收键盘" forState: UIControlStateNormal];
-//    [hideKeyboardButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-//    [hideKeyboardButton addTarget:self action:@selector(hideKeyboard) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    UIButton *clockButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    clockButton.frame = CGRectMake(5 * 3 + 80, 0, 50, 30);
-//    [clockButton setTitle:@"redo" forState: UIControlStateNormal];
-//    [clockButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-////    [clockButton addTarget:self action:@selector() forControlEvents:UIControlEventTouchUpInside];
-//    
-//    [_bottomView addSubview:hideKeyboardButton];
-//    [_bottomView addSubview:redoButton];
-//    [_bottomView addSubview:undoButton];
-//    [_bottomView addSubview:toDoListButton];
-//    [_bottomView addSubview:closeButton];
-//    [_bottomView addSubview:saveButton];
     [self.view addSubview:_bottomView];
 }
 
 # pragma mark 按钮事件
-- (void) undo{
+- (void) buttonActions: (UIButton *)sender{
     
-    [_textView performSelector:@selector(_undo)];
+    switch (sender.tag) {
+        case listButton:
+            [self addToDo:sender];
+            break;
+        case undoButton:
+            [_textView performSelector:@selector(undo)];
+            break;
+        case redoButton:
+            [_textView performSelector:@selector(redo)];
+            break;
+        case hideKeyboardButton:
+            [self hideOrShowKeyboard:sender];
+            break;
+        case saveButton:
+            [self saveContent];
+            break;
+        case closeButton:
+            [self closeView];
+            break;
+        default:
+            break;
+    }
 }
 
-- (void) redo{
+- (void) hideOrShowKeyboard: (UIButton *) sender{
     
-    [_textView performSelector:@selector(_redo)];
+    if (sender.selected) {
+        
+        [_textView becomeFirstResponder];
+    }else{
+        
+        [_textView resignFirstResponder];
+    }
 }
 
-- (void) hideKeyboard{
-    
-    [_textView resignFirstResponder];
-}
-
-- (void)closeView:(UIButton *)sender {
+- (void)closeView{
     
     [_textView resignFirstResponder];
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -228,6 +212,14 @@ typedef enum buttonName{
        
         _textView.height -= _keyboardHeight + _bottomView.height;
         _bottomView.top -= _keyboardHeight;
+        for (UIButton *b in _bottomCenterView.subviews) {
+            
+            if (b.tag == hideKeyboardButton) {
+                
+                b.transform = CGAffineTransformIdentity;
+                b.selected = NO;
+            }
+        }
     }];
 }
 
@@ -241,6 +233,15 @@ typedef enum buttonName{
         
         _textView.height += _keyboardHeight + _bottomView.height;
         _bottomView.top += _keyboardHeight;
+        for (UIButton *b in _bottomCenterView.subviews) {
+            
+            if (b.tag == hideKeyboardButton) {
+                
+                CGAffineTransform transition = CGAffineTransformMakeRotation(M_PI);
+                b.transform = transition;
+                b.selected = YES;
+            }
+        }
     }];
 }
 
@@ -253,6 +254,8 @@ typedef enum buttonName{
     _textView.attributedText = text;
     _textView.typingAttributes = @{NSFontAttributeName : [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE]};
 }
+
+
 
 
 @end

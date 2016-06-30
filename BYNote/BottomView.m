@@ -7,6 +7,7 @@
 //
 
 #import "BottomView.h"
+#import "ViewController.h"
 
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
@@ -60,6 +61,16 @@
     [presentEditView setTitle:@"记" forState:UIControlStateNormal];
     [presentEditView setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self addSubview:presentEditView];
+    
+    UIButton *searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [searchButton setTitle:@"搜索" forState:UIControlStateNormal];
+    [searchButton setTitleColor:[UIColor colorWithRed:0.2235 green:0.6 blue:0.8549 alpha:1.0] forState:UIControlStateNormal];
+    [searchButton setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
+    searchButton.frame = CGRectMake(SCREEN_WIDTH - 35, 0, 25, 25);
+    searchButton.center = CGPointMake(searchButton.center.x, 35);
+    [searchButton addTarget:_delegate action:@selector(displaySearchView) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:searchButton];
     //    ➞
 }
+
 @end

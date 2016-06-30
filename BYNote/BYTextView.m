@@ -29,32 +29,32 @@
 - (instancetype) initWithNote: ( Note *) note
                      andFrame: (CGRect) frame{
 
-    self = [super init];
-    self.frame = frame;
+    self = [super initWithFrame:frame];
     if (!self) {
         
         return nil;
     }
     [self setupConfig];
-    _cursorOffset = 0;
-    _changed = NO;
-    _todoButtonList = [[NSMutableArray alloc] init];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
     if (note) {
         
         self.note = note;
     }
-//    YYTextDebugOption *debugOptions = [YYTextDebugOption new];
-//    debugOptions.baselineColor = [UIColor redColor];
-//    debugOptions.CTFrameBorderColor = [UIColor redColor];
-//    debugOptions.CTLineFillColor = [UIColor colorWithRed:0.000 green:0.463 blue:1.000 alpha:0.180];
-//    debugOptions.CGGlyphBorderColor = [UIColor colorWithRed:1.000 green:0.524 blue:0.000 alpha:1.00];
-//    [YYTextDebugOption setSharedDebugOption:debugOptions];
-    
     self.typingAttributes = @{NSFontAttributeName : THE_FONT};
+    self.selectedRange = NSMakeRange(0, 0);
     return self;
 }
 
+- (void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void) setupConfig{
+    
+    _cursorOffset = 0;
+    _changed = NO;
+    _todoButtonList = [[NSMutableArray alloc] init];
     
     self.delegate = self;
     self.font = THE_FONT;
@@ -73,7 +73,7 @@
 # pragma mark 加载内容
 // 如果有 note 传入，则加载 note 中的内容
 - (void) loadContent{
-    
+   
     NSAttributedString *ms = [[NSAttributedString alloc] initWithString:_content attributes:@{NSFontAttributeName: THE_FONT}];
     self.attributedText = [self parserContent:ms];
 }
@@ -252,6 +252,13 @@ shouldChangeTextInRange:(NSRange)range
     _status = note.status;
     [_todoButtonList removeAllObjects];
     [self loadContent];
+}
+
+# pragma mark 通知
+// 进入后台时调用
+- (void)enterBackground {
+	
+    [self resignFirstResponder];
 }
 
 
