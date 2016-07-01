@@ -42,7 +42,8 @@
     UIButton *profileButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [profileButton setTitle:@"我" forState:UIControlStateNormal];
     [profileButton setTitleColor:[UIColor colorWithRed:0.2235 green:0.6 blue:0.8549 alpha:1.0] forState:UIControlStateNormal];
-    profileButton.frame = CGRectMake(0, 0, 60, 60);
+    [profileButton setImage:[UIImage imageNamed:@"right-arrow"] forState:UIControlStateNormal];
+    profileButton.frame = CGRectMake(10, 0, 25, 25);
     profileButton.center = CGPointMake(profileButton.center.x, 32);
     [profileButton addTarget:_delegate action:@selector(profile:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:profileButton];

@@ -18,6 +18,7 @@
 @interface ProfileSliderMenu ()
 @property (nonatomic, assign) BOOL isTriggle;
 @property (nonatomic, strong) UIVisualEffectView *blurView;
+@property (strong, nonatomic) UITableView *tableView;
 @end
 
 @implementation ProfileSliderMenu

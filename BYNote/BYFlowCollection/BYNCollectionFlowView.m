@@ -103,7 +103,6 @@
     
     BYNCollectionCell *cell = [self dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     NSValue *value = self.frames[indexPath.item % 2][indexPath.item / 2];
-    Note *note = _localNotes[indexPath.item];
     cell.note = _localNotes[indexPath.item];
     cell.itemFrame = [value CGRectValue];
     cell.backgroundColor = self.colors[indexPath.item % self.colors.count];

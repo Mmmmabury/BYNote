@@ -17,7 +17,6 @@
 @property (nonatomic, strong) BYTextView *textView;
 
 @property (nonatomic, strong) UILabel *timeLabel;
-@property (nonatomic, strong) UIVisualEffectView *darkBlurView;
 @property (nonatomic, assign) CGRect timeFrame;
 @property (nonatomic, assign) CGRect textFrame;
 @property (nonatomic, strong) CAGradientLayer *gradientLayer;
@@ -57,17 +56,6 @@
 
 - (void) createSubViews{
     
-    if (_image) {
-        
-    }else{
-//        self.label = [[UILabel alloc] initWithFrame:_textFrame];
-//        self.label.numberOfLines = 0;
-//        self.label.textColor = [UIColor blackColor];
-//        self.label.font = [UIFont fontWithName:@"monaco" size:20.0f];
-//        [self.contentView addSubview:self.label];
-
-    }
-    
     _timeLabel = [[UILabel alloc] initWithFrame:_timeFrame];
     _timeLabel.text = @"06-01 10:10";
     _timeLabel.font = [UIFont systemFontOfSize:10.0f];
@@ -78,33 +66,6 @@
     _timeLabel.textColor = [UIColor colorWithRed:0.2507 green:0.247 blue:0.2544 alpha:0.8];
     [self.contentView addSubview:_timeLabel];
     
-    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-    _darkBlurView = [[UIVisualEffectView alloc] initWithEffect:blur];
-    _darkBlurView.frame = self.bounds;
-    _darkBlurView.hidden = YES;
-    [self.contentView insertSubview:_darkBlurView belowSubview:_label];
-}
-
-// 点击时背景加深
-//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-
-//    _darkBlurView.hidden = NO;
-//}
-
-/**
- *  @brief 点击的时候背景取消加深
- *
- *  @param touches  touch
- *  @param event   事件
- */
-//- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-
-//    [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(removeBlur) userInfo:nil repeats:NO];
-//}
-
-- (void) removeBlur{
-    
-//    _darkBlurView.hidden = YES;
 }
 
 - (void)setNote:(Note *)note{
@@ -133,8 +94,6 @@
     [self initFrames];
     self.textView.frame = _textFrame;
     self.timeLabel.frame = _timeFrame;
-    self.darkBlurView.frame = self.bounds;
-    self.darkBlurView.hidden = YES;
 }
 
 @end

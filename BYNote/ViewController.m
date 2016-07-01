@@ -90,6 +90,13 @@
     edgePanGuesture.edges = UIRectEdgeLeft;
     edgePanGuesture.delegate = self;
     [self.view addGestureRecognizer:edgePanGuesture];
+    
+    UIScreenEdgePanGestureRecognizer *edgeRightPanGuesture = [[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(edgeRightPan:)];
+    edgeRightPanGuesture.maximumNumberOfTouches = 1;
+    edgeRightPanGuesture.minimumNumberOfTouches = 1;
+    edgeRightPanGuesture.edges = UIRectEdgeRight;
+    edgeRightPanGuesture.delegate = self;
+    [self.view addGestureRecognizer:edgeRightPanGuesture];
 }
 
 # pragma mark 子视图初始化
@@ -143,6 +150,14 @@
     if (gr.state == UIGestureRecognizerStateEnded){
         
         [_profileMenu triggle];
+    }
+}
+
+- (void)edgeRightPan: (UIScreenEdgePanGestureRecognizer *)gr{
+    
+    if (gr.state == UIGestureRecognizerStateEnded) {
+        
+        [self displaySearchView];
     }
 }
 

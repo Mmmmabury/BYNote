@@ -76,6 +76,8 @@
    
     NSAttributedString *ms = [[NSAttributedString alloc] initWithString:_content attributes:@{NSFontAttributeName: THE_FONT}];
     self.attributedText = [self parserContent:ms];
+    NSDate *createData = _note.create_data;
+    NSDateFormatter *formatter = 
 }
 
 - (NSAttributedString *) parserContent: (NSAttributedString *) str{
