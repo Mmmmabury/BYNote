@@ -12,12 +12,12 @@
 #import "SearchViewController.h"
 #import "CoreDataManager.h"
 #import "Note.h"
+#import "BYNCollectionFlowView.h"
 
-@interface SearchViewController () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface SearchViewController () <UISearchBarDelegate>
 
 @property (strong, nonatomic) UISearchBar *searchBar;
-@property (strong, nonatomic) UITableView *searchResultTableView;
-@property (strong, nonatomic) NSArray *localNotes;
+@property (strong, nonatomic) BYNCollectionFlowView *flowView;
 
 @end
 
@@ -27,8 +27,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"搜索";
-    
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self createSubViews];
+}
+
+- (void)createSubViews{
     
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 50)];
     _searchBar.delegate = self;
@@ -36,11 +39,16 @@
     _searchBar.placeholder = NSLocalizedString(@"searchBarPlaceHolder", nil);
     [self.view addSubview:_searchBar];
     
-    _searchResultTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 114, SCREEN_WIDTH, SCREEN_HEIGHT - 114) style:UITableViewStylePlain];
-    [self.view addSubview:_searchResultTableView];
-    _searchResultTableView.delegate = self;
-    _searchResultTableView.dataSource = self;
-    [_searchResultTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    _flowView = [[BYNCollectionFlowView alloc] initWithFrame:CGRectMake(0, 114, SCREEN_WIDTH, SCREEN_HEIGHT - 114)];
+    [self.view addSubview:_flowView];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    if (self.navigationController.isNavigationBarHidden) {
+        
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -53,43 +61,27 @@
     
     if (searchText.length == 0) {
         
-        _localNotes = nil;
-        [_searchResultTableView reloadData];
+        _flowView.localNotes = nil;
+        [_flowView reloadData];
         return;
+    }
+    if (!searchBar.showsCancelButton) {
+        
+        searchBar.showsCancelButton = YES;
     }
     // 获取笔记
     NSManagedObjectContext *context = [[CoreDataManager shareCoreDataManager] managedObjectContext];
     NSFetchRequest *fetch = [[NSFetchRequest alloc] initWithEntityName:@"Note"];
     NSString *format = [NSString stringWithFormat:@"content like '*%@*'", searchText];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:format];
-    NSLog(@"%@", predicate.predicateFormat);
     fetch.predicate = predicate;
-    _localNotes = [context executeFetchRequest:fetch error:nil];
-    [_searchResultTableView reloadData];
+    _flowView.localNotes = [context executeFetchRequest:fetch error:nil];
+    [_flowView reloadData];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
     
     [_searchBar resignFirstResponder];
+    searchBar.showsCancelButton = NO;
 }
-
-# pragma mark tableView 代理
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    Note *note = _localNotes[indexPath.row];
-    cell.textLabel.text = note.content;
-    return cell;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
-    return _localNotes.count;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
-    return 1;
-}
-
 @end

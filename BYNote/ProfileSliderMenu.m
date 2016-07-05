@@ -10,6 +10,7 @@
 #import <MessageUI/MessageUI.h>
 #import <ENSDK.h>
 #import "ViewController.h"
+#import "SyncNoteManager.h"
 
 
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
@@ -66,22 +67,27 @@
     ENSession *session = [ENSession sharedSession];
     NSString *logKey = session.isAuthenticated ? @"logout" : @"login";
     int logStatus = session.isAuthenticated ? SliderButtonActive : SliderButtonNotActive;
-    NSArray *s = @[NSLocalizedString(@"search", nil),
+    
+    NSString *authBio = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationWithBiometrics"];
+    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
+    NSString *pasteboard = [[NSUserDefaults standardUserDefaults] objectForKey:@"pasteboard"];
+    int authBioStatus = (authBio && [authBio boolValue]) ? SliderButtonActive : SliderButtonNotActive;
+    int passwordStatus = (password && password.length == 4)? SliderButtonActive : SliderButtonNotActive;
+    int pasteboardStatus = (pasteboard && [pasteboard boolValue]) ? SliderButtonActive : SliderButtonNotActive;
+    
+    NSArray *s = @[
                    NSLocalizedString(logKey, nil),
-                   NSLocalizedString(@"icloud", nil),
                    NSLocalizedString(@"clipboard", nil),
                    NSLocalizedString(@"finger", nil),
                    NSLocalizedString(@"password", nil),
                    NSLocalizedString(@"rating", nil),
                    NSLocalizedString(@"feedback", nil),
-                   @"清除"];
+                   @"保存"];
     int a[9] = {
-        SliderButtonNotActive,
         logStatus,
-        SliderButtonNotActive,
-        SliderButtonNotActive,
-        SliderButtonActive,
-        SliderButtonNotActive,
+        pasteboardStatus,
+        authBioStatus,
+        passwordStatus,
         SliderButtonNormal,
         SliderButtonNormal,
         SliderButtonNormal};
@@ -89,7 +95,7 @@
         
         CGRect frame = CGRectMake(20, 50 + i * 50, SCREEN_WIDTH / 2 - 40, 40);
         ProfileSliderMenuButton *button = [[ProfileSliderMenuButton alloc] initWithFrame:frame andTitle:s[i]];
-        button.tag = 99 + i;
+        button.tag = 100 + i;
         button.status = a[i];
         [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
@@ -132,9 +138,10 @@
 - (void)buttonAction:(ProfileSliderMenuButton *)sender {
 	
     NSURL *appStoreUrl =[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=414478124"];
+    SyncNoteManager *manager = nil;
     switch (sender.tag) {
             // Evernote
-        case 99:
+        case -1:
             
             [_delegate displaySearchView];
             break;
@@ -142,37 +149,51 @@
             
             [_delegate linkToEverNote:sender];
             break;
-            // iCloud
-        case 101:
-            
-            break;
             // copy
-        case 102:
-            
+        case 101:
+            [self pasteboard:sender];
             break;
             // 指纹锁
-        case 103:
+        case 102:
             
             [_delegate authenticationWithFinger:sender];
             break;
             // 密码锁
-        case 104:
+        case 103:
             
             [_delegate launchWithPassword:sender];
             break;
             // rating
-        case 105:
+        case 104:
            
             [[UIApplication sharedApplication] openURL:appStoreUrl];
             break;
             // feedback
-        case 106:
+        case 105:
             
 //            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto://admin@hzlzh.com"]];
             [_delegate sendEmailAction];
             break;
+        case 106:
+            manager = [SyncNoteManager shareManager];
+            
+            break;
         default:
             break;
+    }
+}
+
+- (void)pasteboard: (ProfileSliderMenuButton *)sender {
+	
+    NSString *pasteboard = [[NSUserDefaults standardUserDefaults] objectForKey:@"pasteboard"];
+    if (pasteboard && [pasteboard boolValue]) {
+        
+        [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"pasteboard"];
+        [sender setStatus:SliderButtonNotActive];
+    }else{
+        
+        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"pasteboard"];
+        [sender setStatus:SliderButtonActive];
     }
 }
 

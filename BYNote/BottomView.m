@@ -59,8 +59,8 @@
     [presentEditView addTarget:_delegate action:@selector(presentEditNoteViewController) forControlEvents:UIControlEventTouchUpInside];
     //    presentEditView.backgroundColor = [UIColor colorWithRed:0.2078 green:0.5882 blue:0.8588 alpha:1.0];
     presentEditView.backgroundColor = [UIColor colorWithRed:0.2235 green:0.6 blue:0.8549 alpha:1.0];
-    [presentEditView setTitle:@"记" forState:UIControlStateNormal];
-    [presentEditView setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    NSAttributedString *title = [[NSAttributedString alloc] initWithString:@"记" attributes:@{NSFontAttributeName: [UIFont fontWithName:@"Heiti SC" size:18.0f], NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    [presentEditView setAttributedTitle:title forState:UIControlStateNormal];
     [self addSubview:presentEditView];
     
     UIButton *searchButton = [UIButton buttonWithType:UIButtonTypeCustom];

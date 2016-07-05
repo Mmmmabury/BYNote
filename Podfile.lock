@@ -1,15 +1,18 @@
 PODS:
   - evernote-cloud-sdk-ios (2.0.5)
+  - MJRefresh (3.1.1)
   - YYText (1.0.5)
 
 DEPENDENCIES:
   - evernote-cloud-sdk-ios
+  - MJRefresh
   - YYText
 
 SPEC CHECKSUMS:
   evernote-cloud-sdk-ios: 048cf5dcdc0c64069192d1336b7e121bc1a77e12
+  MJRefresh: 70a47c5543b567cdaf70ead5a6e99ce820652eb9
   YYText: ac09660c9ccd9b817f409a20caa6f5587444d2ae
 
-PODFILE CHECKSUM: 5c2f728fde86da079be385ebee4be66ae9c0118f
+PODFILE CHECKSUM: 112ae37b620a8353ab83e719aac065f71ab59646
 
 COCOAPODS: 1.0.1

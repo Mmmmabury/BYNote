@@ -17,7 +17,7 @@
 "login" = "连接印象笔记";
 "logout" = "登出印象笔记";
 "icloud" = "iCloud";
-"clipboard" = "从剪贴板复制";
+"clipboard" = "自动从剪贴板复制";
 "finger" = "指纹设置";
 "fingerStart" = "验证指纹用以打开指纹锁";
 "fingerClose" = "验证指纹用以关闭指纹锁";

@@ -2,7 +2,7 @@
 //  Note+CoreDataProperties.m
 //  BYNote
 //
-//  Created by cby on 16/6/27.
+//  Created by cby on 16/7/4.
 //  Copyright © 2016年 cby. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -13,10 +13,11 @@
 
 @implementation Note (CoreDataProperties)
 
-@dynamic content;
-@dynamic create_data;
-@dynamic update_data;
 @dynamic changed;
+@dynamic content;
+@dynamic create_date;
 @dynamic status;
+@dynamic update_date;
+@dynamic guid;
 
 @end

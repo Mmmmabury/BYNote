@@ -27,12 +27,14 @@
 		229311C51D1CBEDA00169EFA /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 229311C31D1CBEDA00169EFA /* PasswordViewController.m */; };
 		229311C61D1CBEDA00169EFA /* PasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 229311C41D1CBEDA00169EFA /* PasswordViewController.xib */; };
 		229312171D1FB5E900169EFA /* SyncNoteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 229312161D1FB5E900169EFA /* SyncNoteManager.m */; };
-		229312581D20DB4900169EFA /* Note+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 229312551D20DB4900169EFA /* Note+CoreDataProperties.m */; };
-		229312591D20DB4900169EFA /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 229312571D20DB4900169EFA /* Note.m */; };
 		2298170D1D191AC30009256E /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2298170C1D191AC30009256E /* SearchViewController.m */; };
 		22A3F30B1D1A1B1E00D6624D /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A3F30A1D1A1B1E00D6624D /* LaunchViewController.m */; };
 		22CE8B311D239BAB002A77D0 /* BYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CE8B301D239BAB002A77D0 /* BYTextView.m */; };
 		22CE8B3F1D24F10A002A77D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22CE8B3E1D24F10A002A77D0 /* Assets.xcassets */; };
+		22CE8B5A1D29FD0C002A77D0 /* Note+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CE8B571D29FD0C002A77D0 /* Note+CoreDataProperties.m */; };
+		22CE8B5B1D29FD0C002A77D0 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CE8B591D29FD0C002A77D0 /* Note.m */; };
+		22CE8B5D1D2A07C9002A77D0 /* storehouse.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22CE8B5C1D2A07C9002A77D0 /* storehouse.plist */; };
+		22CE8B631D2A1535002A77D0 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22CE8B621D2A1535002A77D0 /* View.xib */; };
 		22CFB4DA1CF4374300C38ED7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4D91CF4374300C38ED7 /* main.m */; };
 		22CFB4DD1CF4374300C38ED7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4DC1CF4374300C38ED7 /* AppDelegate.m */; };
 		22CFB4E01CF4374300C38ED7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CFB4DF1CF4374300C38ED7 /* ViewController.m */; };
@@ -98,10 +100,6 @@
 		229311C41D1CBEDA00169EFA /* PasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordViewController.xib; sourceTree = "<group>"; };
 		229312151D1FB5E900169EFA /* SyncNoteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncNoteManager.h; sourceTree = "<group>"; };
 		229312161D1FB5E900169EFA /* SyncNoteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncNoteManager.m; sourceTree = "<group>"; };
-		229312541D20DB4900169EFA /* Note+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Note+CoreDataProperties.h"; sourceTree = "<group>"; };
-		229312551D20DB4900169EFA /* Note+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Note+CoreDataProperties.m"; sourceTree = "<group>"; };
-		229312561D20DB4900169EFA /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
-		229312571D20DB4900169EFA /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		2293125A1D227AC500169EFA /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		2298170B1D191AC30009256E /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		2298170C1D191AC30009256E /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
@@ -110,6 +108,12 @@
 		22CE8B2F1D239BAB002A77D0 /* BYTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYTextView.h; sourceTree = "<group>"; };
 		22CE8B301D239BAB002A77D0 /* BYTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYTextView.m; sourceTree = "<group>"; };
 		22CE8B3E1D24F10A002A77D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		22CE8B561D29FD0C002A77D0 /* Note+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Note+CoreDataProperties.h"; sourceTree = "<group>"; };
+		22CE8B571D29FD0C002A77D0 /* Note+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Note+CoreDataProperties.m"; sourceTree = "<group>"; };
+		22CE8B581D29FD0C002A77D0 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
+		22CE8B591D29FD0C002A77D0 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
+		22CE8B5C1D2A07C9002A77D0 /* storehouse.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = storehouse.plist; sourceTree = "<group>"; };
+		22CE8B621D2A1535002A77D0 /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		22CFB4D51CF4374300C38ED7 /* BYNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BYNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22CFB4D91CF4374300C38ED7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		22CFB4DB1CF4374300C38ED7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -208,6 +212,7 @@
 				228165BA1D050A6D00A29D54 /* ProfileSliderMenu.m */,
 				2281660A1D0522F700A29D54 /* ProfileSliderMenuButton.h */,
 				2281660B1D0522F700A29D54 /* ProfileSliderMenuButton.m */,
+				22CE8B621D2A1535002A77D0 /* View.xib */,
 			);
 			name = ProfileSliderMenu;
 			sourceTree = "<group>";
@@ -215,6 +220,7 @@
 		228165FB1D05179800A29D54 /* BYFlowCollection */ = {
 			isa = PBXGroup;
 			children = (
+				22CE8B5C1D2A07C9002A77D0 /* storehouse.plist */,
 				228165FC1D05179800A29D54 /* BYNCELLSIZE.h */,
 				228165FD1D05179800A29D54 /* BYNCollectionCell.h */,
 				228165FE1D05179800A29D54 /* BYNCollectionCell.m */,
@@ -292,10 +298,10 @@
 		228166DF1D0D4A8B00A29D54 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				229312541D20DB4900169EFA /* Note+CoreDataProperties.h */,
-				229312551D20DB4900169EFA /* Note+CoreDataProperties.m */,
-				229312561D20DB4900169EFA /* Note.h */,
-				229312571D20DB4900169EFA /* Note.m */,
+				22CE8B561D29FD0C002A77D0 /* Note+CoreDataProperties.h */,
+				22CE8B571D29FD0C002A77D0 /* Note+CoreDataProperties.m */,
+				22CE8B581D29FD0C002A77D0 /* Note.h */,
+				22CE8B591D29FD0C002A77D0 /* Note.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -536,7 +542,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22CE8B631D2A1535002A77D0 /* View.xib in Resources */,
 				22CFB4E81CF4374300C38ED7 /* LaunchScreen.storyboard in Resources */,
+				22CE8B5D1D2A07C9002A77D0 /* storehouse.plist in Resources */,
 				22601E241CF476B000E2150A /* 12.JPG in Resources */,
 				229311C11D1CBE7400169EFA /* Launch.storyboard in Resources */,
 				22CE8B3F1D24F10A002A77D0 /* Assets.xcassets in Resources */,
@@ -619,18 +627,17 @@
 			files = (
 				227DF2941D032206004DDC15 /* MainNavigation.m in Sources */,
 				22174CAB1D0EC8CF00DBA117 /* CoreDataManager.m in Sources */,
+				22CE8B5A1D29FD0C002A77D0 /* Note+CoreDataProperties.m in Sources */,
 				22CE8B311D239BAB002A77D0 /* BYTextView.m in Sources */,
 				228166041D05179800A29D54 /* BYNCollectionFlowLayout.m in Sources */,
 				228166DC1D0D4A4F00A29D54 /* EditNoteViewController.m in Sources */,
 				2281660C1D0522F700A29D54 /* ProfileSliderMenuButton.m in Sources */,
-				229312581D20DB4900169EFA /* Note+CoreDataProperties.m in Sources */,
 				22A3F30B1D1A1B1E00D6624D /* LaunchViewController.m in Sources */,
 				228166051D05179800A29D54 /* BYNCollectionFlowView.m in Sources */,
 				2298170D1D191AC30009256E /* SearchViewController.m in Sources */,
 				2280ACA11D1807A600430126 /* UIView+YYAdd.m in Sources */,
 				228166031D05179800A29D54 /* BYNCollectionCell.m in Sources */,
 				22174CA31D0E8FFA00DBA117 /* Data.xcdatamodeld in Sources */,
-				229312591D20DB4900169EFA /* Note.m in Sources */,
 				222859B81D17CAA500B3C53B /* ToDoButton.m in Sources */,
 				22CFB4E01CF4374300C38ED7 /* ViewController.m in Sources */,
 				22CFB4DD1CF4374300C38ED7 /* AppDelegate.m in Sources */,
@@ -639,6 +646,7 @@
 				228165BB1D050A6D00A29D54 /* ProfileSliderMenu.m in Sources */,
 				22174CA81D0EC4B500DBA117 /* BottomView.m in Sources */,
 				229311C51D1CBEDA00169EFA /* PasswordViewController.m in Sources */,
+				22CE8B5B1D29FD0C002A77D0 /* Note.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

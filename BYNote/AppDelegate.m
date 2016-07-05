@@ -10,6 +10,7 @@
 #import "LaunchViewController.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 #import <ENSDK.h>
+#import "SyncNoteManager.h"
 
 @interface AppDelegate ()
 
@@ -24,8 +25,8 @@
     NSString *SANDBOX_HOST = ENSessionHostSandbox;
     
     // To get an API key, visit http://dev.evernote.com/documentation/cloud/
-    NSString *CONSUMER_KEY = @"epapa";
-    NSString *CONSUMER_SECRET = @"e8b10439a76fa73d";
+    NSString *CONSUMER_KEY = @"epapa-8122";
+    NSString *CONSUMER_SECRET = @"4318a7b84cfcc837";
     
     [ENSession setSharedSessionConsumerKey:CONSUMER_KEY
                             consumerSecret:CONSUMER_SECRET
@@ -35,6 +36,11 @@
     _window = [[UIWindow alloc] init];
     _window.rootViewController = launchVC;
     [self.window makeKeyAndVisible];
+    
+    if ([[ENSession sharedSession] isAuthenticated]) {
+        
+        [SyncNoteManager shareManager];
+    }
     
     return YES;
 }

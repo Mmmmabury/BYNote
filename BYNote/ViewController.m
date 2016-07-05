@@ -22,6 +22,7 @@
 #import "PasswordViewController.h"
 #import "UIView+YYAdd.h"
 #import "CoreDataManager.h"
+#import "SyncNoteManager.h"
 
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
@@ -54,6 +55,24 @@
 - (void) viewDidAppear:(BOOL)animated{
     
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    NSString *pasteboard = [[NSUserDefaults standardUserDefaults] objectForKey:@"pasteboard"];
+    if(pasteboard && [pasteboard boolValue]){
+        
+        UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
+        NSString *pasteString = pasteBoard.string;
+        if (pasteString && pasteString.length > 0) {
+            
+            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Edit" bundle:[NSBundle mainBundle]];
+            EditNoteViewController *editNote = [sb instantiateViewControllerWithIdentifier:@"editViewController"];
+            editNote.string = pasteString;
+            static dispatch_once_t onceToken;
+            dispatch_once(&onceToken, ^{
+                
+                [self presentViewController:editNote animated:YES completion:nil];
+                pasteBoard.string = @"";
+            });
+        }
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -212,6 +231,7 @@
             NSLog(@"印象笔记绑定成功");
             [sender setStatus:SliderButtonActive];
             [sender setTitle:NSLocalizedString(@"logout", nil) forState:UIControlStateNormal];
+            [SyncNoteManager shareManager];
         }
     }];
 }

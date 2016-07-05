@@ -62,11 +62,6 @@ typedef enum buttonName{
     [self createTextView];
     [self createBottomView];
     _context = [[CoreDataManager shareCoreDataManager] managedObjectContext];
-    if (_note) {
-        
-//        [self loadContent];
-    }
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardHide:) name:UIKeyboardWillHideNotification object:nil];
     
@@ -81,6 +76,21 @@ typedef enum buttonName{
     _weekLabel.textColor = [UIColor colorWithRed:0.2507 green:0.247 blue:0.2544 alpha:0.8];
     _dateLabel.textColor = [UIColor colorWithRed:0.2507 green:0.247 blue:0.2544 alpha:0.8];
     _weekLabel.text = NSLocalizedString(@"Sat", nil);
+    
+    NSDate *date = nil;
+    if (_note) {
+        
+        date = _note.create_date;
+    }else{
+        
+        date = [NSDate date];
+    }
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *s = [formatter stringFromDate:date];
+    _dateLabel.text = s;
+    [formatter setDateFormat:@"EEEE"];
+    _weekLabel.text = [formatter stringFromDate:date];
 }
 
 - (BOOL)prefersStatusBarHidden{
@@ -98,7 +108,11 @@ typedef enum buttonName{
     _textView.left += 10.0f;
     _textView.height -= 60.0f;
 
-
+    if (_string) {
+        
+        _textView.text = _string;
+        _textView.selectedRange = NSMakeRange(0, _string.length);
+    }
     [self.view addSubview:_textView];
     [_textView becomeFirstResponder];
 }
@@ -198,6 +212,7 @@ typedef enum buttonName{
 - (void) saveContent{
     
     [_textView saveContent];
+
     [self dismissViewControllerAnimated:YES completion:nil];
 //    SyncNoteManager *manager = [[SyncNoteManager alloc] init];
 //    [manager createNoteInAppNotebook];
@@ -254,8 +269,5 @@ typedef enum buttonName{
     _textView.attributedText = text;
     _textView.typingAttributes = @{NSFontAttributeName : [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE]};
 }
-
-
-
 
 @end

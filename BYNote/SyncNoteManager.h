@@ -7,8 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Note.h"
 
 @interface SyncNoteManager : NSObject
 
-- (void) createNoteInAppNotebook;
++ (instancetype)shareManager;
+
+- (void)updateNote:(Note *)bynote;
+- (void) createNoteInAppNotebook: (Note *) note;
 @end

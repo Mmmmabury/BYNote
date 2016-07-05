@@ -39,10 +39,25 @@
     return vc;
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    
+    [_passwordFieldView resignFirstResponder];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self initSubViews];
+    _hitText.font = [UIFont fontWithName:@"Heiti SC" size:20.0f];
+    if (_statues == ClosePasswordLock) {
+        
+        _hitText.text = @"验证密码来关闭密码锁";
+    }
+}
+
+- (BOOL)prefersStatusBarHidden{
+    
+    return YES;
 }
 
 - (void) viewWillAppear:(BOOL)animated{
@@ -56,16 +71,21 @@
     self.navigationController.navigationBarHidden = NO;
     _passwordFieldView.hidden = YES;
     _passwordFieldView.delegate = self;
-    CGFloat width = (SCREEN_WIDTH - 20) / PASSWORD_NUMBER;
-    _passwordImageView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, width)];
+    CGFloat width = (SCREEN_WIDTH - 4) / PASSWORD_NUMBER;
+    _passwordImageView = [[UIView alloc] initWithFrame:CGRectMake(2, 0, SCREEN_WIDTH - 4, width)];
     _passwordImageView.center = CGPointMake(_passwordImageView.center.x, self.view.center.y);
+    _passwordImageView.top -= 50.0f;
     for (int i = 0; i < PASSWORD_NUMBER; i++) {
         
-        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(10 + i * width, 0, width, width)];
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(i * width, 0, width, width)];
+        button.frame = CGRectInset(button.frame, 2, 2);
         button.userInteractionEnabled = NO;
+        button.layer.borderColor = [UIColor blackColor].CGColor;
+        button.layer.borderWidth = 1.0f;
+        button.layer.cornerRadius = 4.0f;
         button.tag = 100 + i;
-        [button setImage:[UIImage imageNamed:@"123.JPG"] forState:UIControlStateNormal];
-        [button setImage:[UIImage imageNamed:@"12.JPG"] forState:UIControlStateSelected];
+        [button setImage:[UIImage imageNamed:@"black-square"] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:@"black-square-2"] forState:UIControlStateSelected];
         button.selected = NO;
         [_passwordImageView addSubview:button];
     }
@@ -112,6 +132,9 @@
         // 开启密码锁
         
          result = [self openLock];
+    }else if (_statues == VerifyPasswordLock){
+        
+        result = [self authPassword];
     }
     if (result) {
         
@@ -173,6 +196,23 @@
     }
 }
 
+- (BOOL) authPassword{
+    
+    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
+    if ([password isEqualToString:_passwordFieldView.text]) {
+        
+        if (_completedBlock) {
+            
+            _completedBlock();
+        }
+    }else{
+        
+        _hitText.text = @"密码输入错误";
+        return NO;
+    }
+    return YES;
+}
+
 - (void) clearPassword{
     
     _passwordFieldView.text = @"";
@@ -181,5 +221,10 @@
         UIButton *button = [_passwordImageView viewWithTag:100 + i];
         button.selected = !button.selected;
     }
+}
+
+- (IBAction)closeButton:(UIButton *)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end

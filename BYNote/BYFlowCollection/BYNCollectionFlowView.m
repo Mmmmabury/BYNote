@@ -13,8 +13,12 @@
 #import "EditNoteViewController.h"
 #import "CoreDataManager.h"
 #import "Note.h"
+#import "SyncNoteManager.h"
 #import "ViewController.h"
+#import <MJRefresh.h>
 #import <YYText.h>
+
+
 
 @interface BYNCollectionFlowView()<UICollectionViewDelegate, UICollectionViewDataSource>
 {
@@ -48,17 +52,44 @@
         [self registerClass:[BYNCollectionCell class] forCellWithReuseIdentifier:@"cell"];
         self.delegate = self;
         self.dataSource = self;
+        __weak typeof(self) weakSelf = self;
+        self.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+           
+            [weakSelf updateNotes];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [weakSelf.mj_header endRefreshing];
+            });
+        }];
         
         self.backgroundColor = [UIColor clearColor];
         self.showsVerticalScrollIndicator = NO;
-//        self.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT * 64);
     }
     return self;
 }
 
+- (void)updateNotes{
+    
+    NSManagedObjectContext *context = [[CoreDataManager shareCoreDataManager] managedObjectContext];
+    NSFetchRequest *fetch = [[NSFetchRequest alloc] initWithEntityName:@"Note"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"changed = YES"];
+    
+    fetch.predicate = predicate;
+    NSArray *a = [context executeFetchRequest:fetch error:nil];
+    for (Note *n in a) {
+        
+        if (!n.guid) {
+            
+            [[SyncNoteManager shareManager] createNoteInAppNotebook:n];
+        }else{
+            
+            [[SyncNoteManager shareManager] updateNote:n];
+        }
+    }
+}
+
 - (void)reloadData{
     
-//    _localNotes = nil;
     [self loadData];
     _flowLayout.frames = [_frames copy];
     [super reloadData];
@@ -68,32 +99,6 @@
  */
 - (void) loadData{
     
-    // 获取笔记
-//    NSManagedObjectContext *context = [[CoreDataManager shareCoreDataManager] managedObjectContext];
-//    NSFetchRequest *fetch = [[NSFetchRequest alloc] initWithEntityName:@"Note"];
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"content like '*'", @""];
-//    
-//    fetch.predicate = predicate;
-//     _localNotes = [context executeFetchRequest:fetch error:nil];
-    
-    
-    self.texts = @[@"卡片理五 A 409\n李四117\n八格牙路\n填完",
-                   @"buhaosdaifjaewiohfdkasjeroifdnsagij",
-                   @"buhaosdaifjaewiohfdkasjeroifdnsagij",
-                   @"buhaosdaifjaewiohfdkasjeroifdnsagij",
-                   @"buhaosdaifjaewiohfdkasjeroifdnsagij",
-                   @"buhaosdaifjaewiohfdkasjeroifdnsagij",
-                   @"buhaosdaifjaewiohfdkasjeroifdnsagij",
-                   @"buhaosdaifjaewiohfdkasjeroifdnsagij",
-                   @"hehesdajfasihsnjcasdf",
-                   @"ajeinfdadfdaksjjekgfas",
-                   @"dsaiesjfakl;sdtfgajdlfk"];
-//    self.colors = @[[UIColor colorWithRed:0.0 green:0.5373 blue:0.9137 alpha:1.0],
-//                    [UIColor colorWithRed:0.1686 green:0.3098 blue:0.6078 alpha:1.0],
-//                    [UIColor colorWithRed:0.8353 green:0.2824 blue:0.1647 alpha:1.0],
-//                    [UIColor colorWithRed:0.0863 green:0.6314 blue:0.1059 alpha:1.0],
-//                    [UIColor colorWithRed:0.2588 green:0.698 blue:0.9373 alpha:1.0],
-//                    [UIColor colorWithRed:0.3294 green:0.1686 blue:0.698 alpha:1.0]];
     self.colors = @[[UIColor colorWithRed:0.8672 green:0.8672 blue:0.8672 alpha:1.0]];
     [self calculateFrames];
 }
@@ -181,6 +186,10 @@
     _offsetY = scrollView.contentOffset.y;
 }
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
+}
+
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
     
 //    NSLog(@"%.2f", scrollView.contentOffset.y);
@@ -192,9 +201,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:FLOWVIEW_UP_SCROLL_NOTI object:nil];
     }else{
         
-#ifdef DEBUG
         NSLog(@"视图向下滑动");
-#endif
         [[NSNotificationCenter defaultCenter] postNotificationName:FLOWVIEW_DOWN_SCROLL_NOTI object:nil];
     }
 }
@@ -202,7 +209,7 @@
 - (ViewController *)superViewController{
  
     UIResponder *nextResponder = self.nextResponder;
-    while (nextResponder && ![nextResponder isMemberOfClass:[ViewController class]]) {
+    while (nextResponder && ![nextResponder isKindOfClass:[ViewController class]]) {
         
         nextResponder = nextResponder.nextResponder;
     }
@@ -211,13 +218,25 @@
 
 - (void)deleteItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths{
     
-    NSManagedObjectContext *context = [[CoreDataManager shareCoreDataManager] managedObjectContext];
-    for (NSIndexPath *indexPath in indexPaths) {
+    __weak typeof(self) weakSelf = self;
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"将要删除这条笔记" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
-        Note *note = _localNotes[indexPath.item];
-        [context deleteObject:note];
-    }
-    [[CoreDataManager shareCoreDataManager] saveContext];
+        NSManagedObjectContext *context = [[CoreDataManager shareCoreDataManager] managedObjectContext];
+        for (NSIndexPath *indexPath in indexPaths) {
+            
+            Note *note = _localNotes[indexPath.item];
+            [context deleteObject:note];
+        }
+        [[CoreDataManager shareCoreDataManager] saveContext];
+        [[weakSelf superViewController] loadNotes];
+        [weakSelf reloadData];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:action];
+    [alert addAction:cancelAction];
+    [[self superViewController] presentViewController:alert animated:YES completion:nil];
 }
+
 
 @end

@@ -9,6 +9,7 @@
 #import "BYTextView.h"
 #import "ToDoButton.h"
 #import "CoreDataManager.h"
+#import "SyncNoteManager.h"
 
 #define THE_FONT [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE]
 
@@ -76,8 +77,6 @@
    
     NSAttributedString *ms = [[NSAttributedString alloc] initWithString:_content attributes:@{NSFontAttributeName: THE_FONT}];
     self.attributedText = [self parserContent:ms];
-    NSDate *createData = _note.create_data;
-    NSDateFormatter *formatter = 
 }
 
 - (NSAttributedString *) parserContent: (NSAttributedString *) str{
@@ -227,11 +226,11 @@ shouldChangeTextInRange:(NSRange)range
         
         NSLog(@"Note 实例不存在，新建 Note 实例");
         _note = [NSEntityDescription insertNewObjectForEntityForName:@"Note" inManagedObjectContext:context];
-        _note.create_data = now;
+        _note.create_date = now;
     }
     _note.content = self.text;
     _note.changed = @YES;
-    _note.update_data = now;
+    _note.update_date = now;
     _todoButtonList = [self.todoButtonList copy];
     NSMutableArray *status = [[NSMutableArray alloc] init];
     // 保存 todobutton 的状态

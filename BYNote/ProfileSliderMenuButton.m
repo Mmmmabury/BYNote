@@ -40,7 +40,7 @@
             break;
         case SliderButtonNormal:
             
-            [self setBackgroundColor:[UIColor lightGrayColor]];
+            [self setBackgroundColor:[UIColor blueColor]];
             break;
         default:
             break;

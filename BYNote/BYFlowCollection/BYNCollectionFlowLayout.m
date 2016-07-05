@@ -65,6 +65,7 @@
     
     CGFloat height = 0;
     CGFloat maxHeight = 0;
+    NSInteger rowNum = 0;
     for (NSArray *row in self.frames) {
         
         for (NSValue *v in row) {
@@ -75,10 +76,11 @@
         if (height > maxHeight) {
             
             maxHeight = height;
+            rowNum = row.count;
         }
         height = 0;
     }
-    maxHeight += itemInset * (self.frames.count ) + 10;
+    maxHeight += itemInset * (rowNum + 1) + 0;
     if (maxHeight < SCREEN_HEIGHT) {
         
         maxHeight = SCREEN_HEIGHT;

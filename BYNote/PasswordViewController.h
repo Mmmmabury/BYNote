@@ -12,7 +12,8 @@
 typedef enum PasswordControllerStatues{
     
     OpenPasswordLock,
-    ClosePasswordLock
+    ClosePasswordLock,
+    VerifyPasswordLock
 }PasswordControllerStatues;
 typedef void(^completed)(void);
 

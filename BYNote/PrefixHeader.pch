@@ -14,13 +14,13 @@
 
 
 #ifndef DEBUG
-    #define DEBUG 1
+    #define DEBUG
 #endif
 
 #ifdef DEBUG
-//#define NSLog(FORMAT, ...) fprintf(stderr,"%s\n", [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+#define NSLog(FORMAT, ...) fprintf(stderr,"%s\n", [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
 #else
-//#define NSLog(...)
+#define NSLog(...)
 #endif
 
 //

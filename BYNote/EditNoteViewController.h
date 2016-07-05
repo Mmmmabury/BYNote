@@ -12,4 +12,5 @@
 
 @interface EditNoteViewController : UIViewController
 @property (strong, nonatomic) Note *note;
+@property (assign, nonatomic) NSString *string;
 @end
