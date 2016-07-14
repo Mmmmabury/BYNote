@@ -92,6 +92,7 @@
     
     NSIndexPath *indexPath = [[self collectionView] indexPathForCell:self];
     [[self collectionView] deleteItemsAtIndexPaths:@[indexPath]];
+    self.topView.transform = CGAffineTransformIdentity;
 }
 
 // 显示可选的按钮
@@ -151,6 +152,8 @@
     [self initFrames];
     self.textView.frame = _textFrame;
     self.timeLabel.frame = _timeFrame;
+    self.topView.frame = self.bounds;
+    self.optionView.height = self.height;
 }
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor{

@@ -19,6 +19,8 @@
 }
 @property (strong, nonatomic) NSArray *notebookList;
 @property (strong, nonatomic) NSString *notebookGuid;
+@property (copy, nonatomic) syncBlock completedHandle;
+@property (copy, nonatomic) syncErrorBlock errorHandle;
 @end
 @implementation SyncNoteManager
 
@@ -103,11 +105,16 @@ static SyncNoteManager *instance;
 }
 
 # pragma mark 创建更新笔记
-- (void) createNoteInAppNotebook: (Note *) note{
+- (void) createNoteInAppNotebook: (Note *) note
+             withCompletedHandle:(syncBlock)completedHandle
+                  andErrorHandle:(syncErrorBlock)errorHandle{
     
+    _errorHandle = errorHandle;
+    _completedHandle = completedHandle;
     if(![[ENSession sharedSession] isAuthenticated]){
         
         NSLog(@"没有登录，请登录");
+        errorHandle(100);
         return;
     }
     if (!_notebookGuid) {
@@ -159,11 +166,16 @@ static SyncNoteManager *instance;
 
 }
 
-- (void)updateNote:(Note *)bynote{
+- (void)updateNote:(Note *)bynote
+withCompletedHandle:(syncBlock)completedHandle
+    andErrorHandle:(syncErrorBlock)errorHandle{
     
+    _errorHandle = errorHandle;
+    _completedHandle = completedHandle;
     if(![[ENSession sharedSession] isAuthenticated]){
         
         NSLog(@"没有登录，请登录");
+        errorHandle(100);
         return;
     }
     _note = bynote;

@@ -19,7 +19,8 @@
     self.frame = frame;
     if (self) {
         
-        [self setTitle:title forState:UIControlStateNormal];
+        NSAttributedString *attrTitle = [[NSAttributedString alloc]initWithString:title attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.0f], NSForegroundColorAttributeName:[UIColor whiteColor]}];
+        [self setAttributedTitle:attrTitle forState:UIControlStateNormal];
         [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.status = SliderButtonNormal;
     }

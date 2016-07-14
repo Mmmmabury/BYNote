@@ -14,4 +14,7 @@
 @interface BYNCollectionFlowView : UICollectionView
 
 @property (nonatomic, strong) NSArray *localNotes;
+@property (assign, nonatomic) NSInteger type;
+
+- (instancetype)initWithFrame:(CGRect)frame andType:(NSInteger)type;
 @end

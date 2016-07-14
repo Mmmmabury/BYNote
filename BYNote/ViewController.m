@@ -143,7 +143,7 @@
     blurView.frame = self.view.bounds;
     [self.view addSubview:blurView];
     
-    _collectionView = [[BYNCollectionFlowView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - 20)];
+    _collectionView = [[BYNCollectionFlowView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - 20) andType:0];
     [self.view addSubview:_collectionView];
     [self loadNotes];
     

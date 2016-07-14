@@ -41,7 +41,7 @@
  *
  *  @return self
  */
-- (instancetype)initWithFrame:(CGRect)frame{
+- (instancetype)initWithFrame:(CGRect)frame andType:(NSInteger)type{
     
     [self loadData];
     _flowLayout = [[BYNCollectionFlowLayout alloc] initWithItemFrames:[self.frames copy]];
@@ -52,15 +52,18 @@
         [self registerClass:[BYNCollectionCell class] forCellWithReuseIdentifier:@"cell"];
         self.delegate = self;
         self.dataSource = self;
-        __weak typeof(self) weakSelf = self;
-        self.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-           
-            [weakSelf updateNotes];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (type != -1) {
+            
+            __weak typeof(self) weakSelf = self;
+            self.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
                 
-                [weakSelf.mj_header endRefreshing];
-            });
-        }];
+                [weakSelf updateNotes];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    
+                    [weakSelf.mj_header endRefreshing];
+                });
+            }];
+        }
         
         self.backgroundColor = [UIColor clearColor];
         self.showsVerticalScrollIndicator = NO;
@@ -76,14 +79,33 @@
     
     fetch.predicate = predicate;
     NSArray *a = [context executeFetchRequest:fetch error:nil];
+    __weak typeof(self) weakSelf = self;
     for (Note *n in a) {
         
         if (!n.guid) {
             
-            [[SyncNoteManager shareManager] createNoteInAppNotebook:n];
+            [[SyncNoteManager shareManager] createNoteInAppNotebook:n withCompletedHandle:nil andErrorHandle:^(NSInteger errorCode) {
+                
+                if (errorCode == 100) {
+                    
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请先链接到印象笔记" preferredStyle: UIAlertControllerStyleAlert];
+                    UIAlertAction *action = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:nil];
+                    [alert addAction:action];
+                    [[weakSelf superViewController] presentViewController:alert animated:YES completion:nil];
+                }
+            }];
         }else{
             
-            [[SyncNoteManager shareManager] updateNote:n];
+            [[SyncNoteManager shareManager] updateNote:n withCompletedHandle:nil andErrorHandle:^(NSInteger errorCode) {
+                
+                if (errorCode == 100) {
+                    
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请先链接到印象笔记" preferredStyle: UIAlertControllerStyleAlert];
+                    UIAlertAction *action = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:nil];
+                    [alert addAction:action];
+                    [[weakSelf superViewController] presentViewController:alert animated:YES completion:nil];
+                }
+            }];
         }
     }
 }
@@ -209,7 +231,8 @@
 - (ViewController *)superViewController{
  
     UIResponder *nextResponder = self.nextResponder;
-    while (nextResponder && ![nextResponder isKindOfClass:[ViewController class]]) {
+    //
+    while (nextResponder && ![nextResponder isKindOfClass:[UIViewController class]]) {
         
         nextResponder = nextResponder.nextResponder;
     }

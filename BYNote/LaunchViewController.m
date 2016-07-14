@@ -44,20 +44,22 @@
     }
     flag = NO;
     NSString *authBio = [[NSUserDefaults standardUserDefaults] objectForKey:@"authenticationWithBiometrics"];
+    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
     if (authBio && [authBio boolValue]) {
         
         [self authB];
-    }
-    // passwordLock
-    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
-    if (password && password.length == 4) {
-        
+    }else if (password && password.length == 4) {
+            
         PasswordViewController *vc = [PasswordViewController pwLockWithCompletedBlock:^{
             
                 [self buttonAc:nil];
         } andStatus:VerifyPasswordLock];
         [self presentViewController:vc animated:YES completion:nil];
+    }else{
+        
+        [NSTimer scheduledTimerWithTimeInterval:0.2f target:self selector:@selector(buttonAc:) userInfo:nil repeats:NO];
     }
+    
 }
 
 - (IBAction)buttonAc:(UIButton *)sender {

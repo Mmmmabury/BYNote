@@ -9,10 +9,21 @@
 #import <Foundation/Foundation.h>
 #import "Note.h"
 
+typedef void(^syncBlock)(void);
+typedef void(^syncErrorBlock)(NSInteger errorCode);
+/*
+code 100 未登录
+*/
+
 @interface SyncNoteManager : NSObject
 
 + (instancetype)shareManager;
 
-- (void)updateNote:(Note *)bynote;
-- (void) createNoteInAppNotebook: (Note *) note;
+- (void)updateNote:(Note *)bynote
+withCompletedHandle:(syncBlock)completedHandle
+    andErrorHandle:(syncErrorBlock)errorHandle;
+
+- (void) createNoteInAppNotebook: (Note *) note
+             withCompletedHandle:(syncBlock)completedHandle
+                  andErrorHandle:(syncErrorBlock)errorHandle;
 @end

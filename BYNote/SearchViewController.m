@@ -39,7 +39,7 @@
     _searchBar.placeholder = NSLocalizedString(@"searchBarPlaceHolder", nil);
     [self.view addSubview:_searchBar];
     
-    _flowView = [[BYNCollectionFlowView alloc] initWithFrame:CGRectMake(0, 114, SCREEN_WIDTH, SCREEN_HEIGHT - 114)];
+    _flowView = [[BYNCollectionFlowView alloc] initWithFrame:CGRectMake(0, 114, SCREEN_WIDTH, SCREEN_HEIGHT - 114) andType:-1];
     [self.view addSubview:_flowView];
 }
 
